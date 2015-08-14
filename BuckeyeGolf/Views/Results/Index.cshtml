@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@foreach (var week in ViewBag.WeeklyResults)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Week #@week.WeekNbr</h2>
+            <p>Scores created on @week.ScoreCreateDate.ToString("d")</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <p>Player:</p>
+        </div>
+        <div class="col-md-4">
+            <p>Score:</p>
+        </div>
+        <div class="col-md-4">
+            <p>Points:</p>
+        </div>
+    </div>
+    foreach (var playerRnd in week.PlayerRounds)
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <p>@playerRnd.Name</p>
+            </div>
+            <div class="col-md-4">
+                <p>@playerRnd.TotalScore</p>
+            </div>
+            <div class="col-md-4">
+                <p>@playerRnd.TotalPoints</p>
+            </div>
+        </div>
+    }
+    <hr/>
+}

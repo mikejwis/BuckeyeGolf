@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace BuckeyeGolf.ViewModels
+{
+    public class WeekResultsViewModel
+    {
+        public int WeekNbr { get; set; }
+        public List<PlayerRoundViewModel> PlayerRounds { get; set; }
+        public DateTime ScoreCreateDate { get; set; }
+    }
+
+    public class PlayerRoundViewModel
+    {
+        public string Name { get; set; }
+        public int TotalScore { get; set; }
+        public double TotalPoints { get; set; }
+    }
+}

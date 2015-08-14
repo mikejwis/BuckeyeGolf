@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@foreach (var week in ViewBag.WeeklyMatchups)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Matchups for Week #@week.WeekNbr</h2>
+        </div>
+    </div>
+    foreach (var match in week.Matchups)
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <p>@match.Player1Name (@match.Player1Handicap)</p>
+            </div>
+            <div class="col-md-4">
+                <p>vs</p>
+            </div>
+            <div class="col-md-4">
+                <p>@match.Player2Name (@match.Player2Handicap)</p>
+            </div>
+        </div>
+    }
+    <hr />
+}
+

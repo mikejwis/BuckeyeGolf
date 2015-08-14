@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Player</h2>
+    </div>
+    <div class="col-md-3">
+        <h2>Total Points</h2>
+    </div>
+    <div class="col-md-3">
+        <h2>Season Avg Score</h2>
+    </div>
+    <div class="col-md-3">
+        <h2>Current Handicap</h2>
+    </div>
+</div>
+    @foreach (var player in ViewBag.PlayerList)
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <p>@player.Name</p>
+            </div>
+            <div class="col-md-3">
+                <p>@player.TotalPoints</p>
+            </div>
+            <div class="col-md-3">
+                <p>@player.ScoreAvg</p>
+            </div>
+            <div class="col-md-3">
+                <p>@player.CurrentHandicap</p>
+            </div>
+        </div>
+    }
+        
