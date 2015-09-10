@@ -11,6 +11,9 @@ namespace BuckeyeGolf.Models
         [Key]
         public Guid PlayerId { get; set; }
         public virtual ICollection<RoundModel> Rounds { get; set; }
+        [Required]
+        [MaxLength(100)]
+        [MinLength(2)]
         public string Name { get; set; }
     }
 }

@@ -7,41 +7,71 @@
 @using (Html.BeginForm("Add", "Results", FormMethod.Post))
 {
     @Html.AntiForgeryToken();
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Add Results for Week #@ViewBag.WeekNbr @Html.HiddenFor(m => m.WeekId)</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <h3>Player</h3>
-        </div>
-        <div class="col-md-4">
-            <h3>Score</h3>
-        </div>
-        <div class="col-md-4">
-            <h3>Points Earned</h3>
-        </div>
-    </div>
 
-    for (int i = 0; i < Model.PlayerRounds.Count(); i++)
+    if (ViewBag.Empty==true)
+    {
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>All rounds have been played.  Please add matchups for the week before adding results.</h3>
+                </div>
+            </div>
+    }
+    else 
     {
         <div class="row">
-            <div class="col-md-4">
-                <p>@Html.DisplayFor(m=>m.PlayerRounds[i].PlayerName) @Html.HiddenFor(m=>m.PlayerRounds[i].PlayerId)</p>
+            <div class="col-md-12">
+                <h2>Add Results for Week #@ViewBag.WeekNbr @Html.HiddenFor(m => m.WeekId)</h2>
             </div>
-            <div class="col-md-4">
-                <p>@Html.TextBoxFor(m => m.PlayerRounds[i].Score)</p>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <h3>Player</h3>
             </div>
-            <div class="col-md-4">
-                <p>@Html.TextBoxFor(m=>m.PlayerRounds[i].Points)</p>
+            <div class="col-md-2">
+                <h3>Score</h3>
+            </div>
+            <div class="col-md-2">
+                <h3>Points Earned</h3>
+            </div>
+            <div class="col-md-2">
+                <h3>Birdies</h3>
+            </div>
+            <div class="col-md-2">
+                <h3>Pars</h3>
+            </div>
+            <div class="col-md-2">
+                <h3>Bogeys</h3>
+            </div>
+        </div>
+    
+        for (int i = 0; i < Model.PlayerRounds.Count(); i++)
+        {
+            <div class="row">
+                <div class="col-md-2">
+                    <p>@Html.DisplayFor(m=>m.PlayerRounds[i].PlayerName) @Html.HiddenFor(m=>m.PlayerRounds[i].PlayerId)</p>
+                </div>
+                <div class="col-md-2">
+                    <p>@Html.TextBoxFor(m => m.PlayerRounds[i].Score, new { size="2", maxlength="3" })</p>
+                </div>
+                <div class="col-md-2">
+                    <p>@Html.TextBoxFor(m => m.PlayerRounds[i].Points, new { size = "2", maxlength = "4" })</p>
+                </div>
+                <div class="col-md-2">
+                    <p>@Html.TextBoxFor(m => m.PlayerRounds[i].Birdies, new { size = "2", maxlength = "2" })</p>
+                </div>
+                <div class="col-md-2">
+                    <p>@Html.TextBoxFor(m => m.PlayerRounds[i].Pars, new { size = "2", maxlength = "2" })</p>
+                </div>
+                <div class="col-md-2">
+                    <p>@Html.TextBoxFor(m => m.PlayerRounds[i].Bogeys, new { size = "2", maxlength = "2" })</p>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-12">
+                <p></p>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
     }
-    <div class="row">
-        <div class="col-md-12">
-            <p></p>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </div>
 }

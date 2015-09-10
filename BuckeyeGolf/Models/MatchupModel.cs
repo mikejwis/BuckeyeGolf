@@ -10,8 +10,11 @@ namespace BuckeyeGolf.Models
     {
         [Key]
         public Guid MatchupId { get; set; }
+        [Required]
         public Guid Player1 { get; set; }
+        [Required]
         public Guid Player2 { get; set; }
+        [Required]
         public Guid WeekId { get; set; }
     }
 }

@@ -1,37 +1,35 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
 <div class="row">
-    <div class="col-md-3">
-        <h2>Player</h2>
-    </div>
-    <div class="col-md-3">
-        <h2>Total Points</h2>
-    </div>
-    <div class="col-md-3">
-        <h2>Season Avg Score</h2>
-    </div>
-    <div class="col-md-3">
-        <h2>Current Handicap</h2>
+    <div class="col-md-12">
+        <h3>Leaderboard through <b>@Model.WeeksPlayed</b> weeks of play:</h3>
+        <p>&nbsp;</p>
     </div>
 </div>
-    @foreach (var player in ViewBag.PlayerList)
-    {
-        <div class="row">
-            <div class="col-md-3">
-                <p>@player.Name</p>
-            </div>
-            <div class="col-md-3">
-                <p>@player.TotalPoints</p>
-            </div>
-            <div class="col-md-3">
-                <p>@player.ScoreAvg</p>
-            </div>
-            <div class="col-md-3">
-                <p>@player.CurrentHandicap</p>
-            </div>
-        </div>
-    }
-        
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Player</th>
+             <th>Total Points</th>
+             <th>Season Avg Score</th>
+             <th>Current Handicap</th>
+             <th>Total Birds</th>
+             <th>Total Pars</th>
+             <th>Total Bogeys</th>
+        </tr>
+    </thead>
+            @foreach (var player in Model.PlayerSummary)
+            {
+                <tr>
+                    <td>@player.Name</td>  
+                    <td>@player.TotalPoints</td>
+                    <td>@player.ScoreAvg</td>
+                    <td>@player.CurrentHandicap</td>
+                    <td>@player.Birds</td>
+                    <td>@player.Pars</td>
+                    <td>@player.Bogeys</td>
+                </tr>
+            }
+    </table>

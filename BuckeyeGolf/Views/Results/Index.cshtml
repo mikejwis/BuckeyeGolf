@@ -1,7 +1,8 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
+
+
 
 @foreach (var week in ViewBag.WeeklyResults)
 {
@@ -11,30 +12,40 @@
             <p>Scores created on @week.ScoreCreateDate.ToString("d")</p>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <p>Player:</p>
-        </div>
-        <div class="col-md-4">
-            <p>Score:</p>
-        </div>
-        <div class="col-md-4">
-            <p>Points:</p>
-        </div>
-    </div>
-    foreach (var playerRnd in week.PlayerRounds)
-    {
-        <div class="row">
-            <div class="col-md-4">
-                <p>@playerRnd.Name</p>
-            </div>
-            <div class="col-md-4">
-                <p>@playerRnd.TotalScore</p>
-            </div>
-            <div class="col-md-4">
-                <p>@playerRnd.TotalPoints</p>
-            </div>
-        </div>
-    }
-    <hr/>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Player</th>
+            <th>Score</th>
+            <th>Points</th>
+            <th>Birds</th>
+            <th>Pars</th>
+            <th>Bogeys</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var playerRnd in week.PlayerRounds)
+        {
+        <tr>
+            <td>@playerRnd.Name</td>
+            <td>
+                @playerRnd.TotalScore
+            </td>
+            <td>
+                @playerRnd.TotalPoints
+            </td>
+            <td>
+                @playerRnd.Birdies
+            </td>
+            <td>
+                @playerRnd.Pars
+            </td>
+            <td>
+                @playerRnd.Bogeys
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
 }

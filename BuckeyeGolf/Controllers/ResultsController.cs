@@ -1,4 +1,5 @@
 ﻿using BuckeyeGolf.Models;
+using BuckeyeGolf.Repos;
 using BuckeyeGolf.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,28 +15,34 @@ namespace BuckeyeGolf.Controllers
         public ActionResult Index()
         {
             var weekColl = new List<WeekResultsViewModel>();
-            using (var dbContext = new GolfDbContext())
-            {
-                var weeks = dbContext.Weeks.Where(w=>w.BeenPlayed==true).ToList();
-                foreach (var week in weeks)
-                {
-                    var weekResultsVM = new WeekResultsViewModel();
-                    weekResultsVM.PlayerRounds = new List<PlayerRoundViewModel>();
-                    weekResultsVM.ScoreCreateDate = week.ScoreCreateDate;
-                    weekResultsVM.WeekNbr = week.WeekNbr;
-                    var rounds = dbContext.Rounds.Where(r => r.WeekId.CompareTo(week.WeekId) == 0).ToList();
-                    foreach(var round in rounds)
-                    {
-                        var player = dbContext.Players.Single(p => p.PlayerId.CompareTo(round.PlayerRefId) == 0);
-                        var playerRoundVM = new PlayerRoundViewModel();
-                        playerRoundVM.TotalPoints = round.TotalPoints;
-                        playerRoundVM.TotalScore = round.TotalScore;
-                        playerRoundVM.Name = player.Name;
-                        weekResultsVM.PlayerRounds.Add(playerRoundVM);
-                    }
-                    weekColl.Add(weekResultsVM);
-                }
-            }
+
+			using(var repoProvider = new RepoProvider())
+			{
+
+				foreach(var week in repoProvider.WeekRepo.GetPlayedWeeks())
+				{
+					var weekResultsVM = new WeekResultsViewModel() { 
+						WeekNbr = week.WeekNbr,
+						ScoreCreateDate = week.ScoreCreateDate, 
+						PlayerRounds = new List<PlayerRoundViewModel>() };
+
+					foreach (var round in repoProvider.RoundRepo.GetWeeklyRounds(week.WeekId))
+					{
+						var player = repoProvider.PlayerRepo.Get(round.PlayerRefId);
+						var playerRoundVM = new PlayerRoundViewModel() {
+							TotalPoints = round.TotalPoints,
+							TotalScore = round.TotalScore,
+							Name = player.Name,
+							Birdies = round.BirdieCnt,
+							Pars = round.ParCnt,
+							Bogeys = round.BogeyCnt
+						};
+								
+						weekResultsVM.PlayerRounds.Add(playerRoundVM);
+					}
+					weekColl.Add(weekResultsVM);
+				}
+			}
             ViewBag.WeeklyResults = weekColl.OrderByDescending(w => w.ScoreCreateDate);
             return View();
         }
@@ -43,20 +50,23 @@ namespace BuckeyeGolf.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            AddRoundWeekViewModel vm = new AddRoundWeekViewModel();
+            AddRoundWeekViewModel vm = new AddRoundWeekViewModel() { PlayerRounds = new List<AddRoundViewModel>() };
+            ViewBag.Empty = true;
 
-            using(var context = new GolfDbContext())
+            using(var repoProvider = new RepoProvider())
             {
-                var weekList = context.Weeks.Where(w => w.BeenPlayed == false).ToList();
-                var minWeekNbr = weekList.Min(m=>m.WeekNbr);
-                var week = weekList.Single(w => w.WeekNbr == minWeekNbr);
-                vm.WeekNbr = week.WeekNbr;
-                ViewBag.WeekNbr = week.WeekNbr;
-                vm.WeekId = week.WeekId;
-                vm.PlayerRounds = new List<AddRoundViewModel>();
-                foreach (var playerItem in context.Players)
+                var week = repoProvider.WeekRepo.GetFirstUnplayedWeek();
+                if(week != null)
                 {
-                    vm.PlayerRounds.Add(new AddRoundViewModel() { PlayerId = playerItem.PlayerId, PlayerName = playerItem.Name });
+                    ViewBag.Empty = false;
+                    vm.WeekNbr = week.WeekNbr;
+                    vm.WeekId = week.WeekId;
+                    ViewBag.WeekNbr = week.WeekNbr;
+
+                    foreach (var player in repoProvider.PlayerRepo.GetAll())
+                    {
+                        vm.PlayerRounds.Add(new AddRoundViewModel() { PlayerId = player.PlayerId, PlayerName = player.Name });
+                    }
                 }
             }
             return View(vm);
@@ -68,22 +78,23 @@ namespace BuckeyeGolf.Controllers
         {
             if(ModelState.IsValid)
             {
-                using(var context = new GolfDbContext())
+                using(var repoProvider = new RepoProvider())
                 {
-                    var week = context.Weeks.Single(w=>w.WeekId.CompareTo(vm.WeekId)==0);
+                    var week = repoProvider.WeekRepo.Get(vm.WeekId);
                     week.BeenPlayed = true;
                     week.ScoreCreateDate = DateTime.Now;
-                    foreach(var roundItem in vm.PlayerRounds)
+                    foreach (var roundItem in vm.PlayerRounds)
                     {
-                        var newRound = new RoundModel();
-                        newRound.PlayerRefId = roundItem.PlayerId;
-                        newRound.RoundId = Guid.NewGuid();
-                        newRound.WeekId = vm.WeekId;
-                        newRound.TotalPoints = roundItem.Points;
-                        newRound.TotalScore = roundItem.Score;
-                        context.Rounds.Add(newRound);
+                        var newRound = new RoundModel() {
+                            PlayerRefId = roundItem.PlayerId,
+                            RoundId = Guid.NewGuid(),
+                            WeekId = vm.WeekId,
+                            TotalPoints = roundItem.Points,
+                            TotalScore = roundItem.Score,
+                        };
+                        repoProvider.RoundRepo.Add(newRound);
                     }
-                    context.SaveChanges();
+                    repoProvider.SaveAllRepoChanges();
                 }
                 return RedirectToAction("Index");
             }

@@ -10,6 +10,7 @@ namespace BuckeyeGolf.Models
     {
         [Key]
         public Guid WeekId { get; set; }
+        [Required]
         public int WeekNbr { get; set; }
        // public DateTime WeekDate { get; set; }
         public DateTime ScoreCreateDate { get; set; }

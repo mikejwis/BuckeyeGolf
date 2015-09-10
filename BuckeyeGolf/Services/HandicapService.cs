@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BuckeyeGolf.Models;
+using BuckeyeGolf.Repos;
 
 namespace BuckeyeGolf.Services
 {
@@ -17,15 +18,14 @@ namespace BuckeyeGolf.Services
             var retVal = 0;
             var handicapConfigSetting = int.Parse(HttpContext.Current.Application["HandicapWeeks"].ToString());
 
-            using(var context = new GolfDbContext())
+            using(var repoProvider = new RepoProvider())
             {
-                var weeks = context.Weeks.Where(w=>w.BeenPlayed == true).OrderByDescending(w=>w.WeekNbr).ToList();
+                var weeks = repoProvider.WeekRepo.GetPlayedWeeks().OrderByDescending(w => w.WeekNbr).ToList();
                 var runningTotal = 0;
                 var nbrRoundsWithScore = 0;
-                for(int i=0; i<handicapConfigSetting && i<weeks.Count(); i++)
+                for (int i = 0; i < handicapConfigSetting && i < weeks.Count(); i++)
                 {
-                    var weekId = weeks[i].WeekId;
-                    var round = context.Rounds.Single(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.WeekId.CompareTo(weekId) == 0);
+                    var round = repoProvider.RoundRepo.GetWeeklyRound(playerId, weeks[i].WeekId);
                     runningTotal = runningTotal + round.TotalScore;
                     if (round.TotalScore != 0) nbrRoundsWithScore++;
                 }

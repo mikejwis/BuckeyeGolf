@@ -19,5 +19,8 @@ namespace BuckeyeGolf.ViewModels
         public string PlayerName { get; set; }
         public double Points { get; set; }
         public int Score { get; set; }
+        public int Birdies { get; set; }
+        public int Pars { get; set; }
+        public int Bogeys { get; set; }
     }
 }

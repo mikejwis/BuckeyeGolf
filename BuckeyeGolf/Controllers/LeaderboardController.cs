@@ -1,4 +1,5 @@
 ﻿using BuckeyeGolf.Models;
+using BuckeyeGolf.Repos;
 using BuckeyeGolf.Services;
 using BuckeyeGolf.ViewModels;
 using System;
@@ -11,26 +12,29 @@ namespace BuckeyeGolf.Controllers
 {
     public class LeaderboardController : Controller
     {
-        // GET: Leaderboard
         public ActionResult Index()
         {
+            var playerSummaryVM = new LeaderboardViewModel();
             var playerColl = new List<PlayerLeaderboardViewModel>();
-            using (var dbContext = new GolfDbContext())
+            
+            using(var repoProvider = new RepoProvider())
             {
-                var players = dbContext.Players.ToList();
-                foreach(var player in players)
+                playerSummaryVM.WeeksPlayed = repoProvider.WeekRepo.GetPlayedWeeks().Count();
+                foreach (var player in repoProvider.PlayerRepo.GetAll())
                 {
-                    var playerVM = new PlayerLeaderboardViewModel();
-                    var tmpAvg = dbContext.Rounds.Where(r => r.PlayerRefId.CompareTo(player.PlayerId) == 0 && r.TotalScore != 0).Average(r => r.TotalScore);
-                    playerVM.ScoreAvg = Math.Round(tmpAvg, 2);
-                    playerVM.TotalPoints = dbContext.Rounds.Where(r => r.PlayerRefId.CompareTo(player.PlayerId) == 0).Sum(r => r.TotalPoints);
-                    playerVM.Name = player.Name;
+                    var playerVM = new PlayerLeaderboardViewModel() { Name = player.Name };
                     playerVM.CurrentHandicap = ServiceProvider.HandicapInstance.CalculateHandicap(player.PlayerId);
+                    playerVM.ScoreAvg = repoProvider.RoundRepo.GetPlayerScoreAverage(player.PlayerId);
+                    playerVM.TotalPoints = repoProvider.RoundRepo.GetPlayerTotalPoints(player.PlayerId);
+                    playerVM.Birds = repoProvider.RoundRepo.GetPlayerBirieTotal(player.PlayerId);
+                    playerVM.Pars = repoProvider.RoundRepo.GetPlayerParTotal(player.PlayerId);
+                    playerVM.Bogeys = repoProvider.RoundRepo.GetPlayerBogeyTotal(player.PlayerId);
+
                     playerColl.Add(playerVM);
                 }
             }
-            ViewBag.PlayerList = playerColl.OrderByDescending(t => t.TotalPoints);
-            return View();
+            playerSummaryVM.PlayerSummary = playerColl.OrderByDescending(t => t.TotalPoints).ToList();
+            return View(playerSummaryVM);
         }
     }
 }
