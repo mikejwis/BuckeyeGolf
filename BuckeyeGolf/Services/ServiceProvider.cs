@@ -15,7 +15,13 @@ namespace BuckeyeGolf.Services
         {
             get
             {
-                if (_handicapInstance == null) _handicapInstance = new HandicapService();
+                if (_handicapInstance == null)
+                {
+                    var handicapWeekSettings = int.Parse(HttpContext.Current.Application["HandicapWeeks"].ToString());
+                    var roundAdj = double.Parse(HttpContext.Current.Application["HandicapRoundAdj"].ToString());
+                    var roundPar = int.Parse(HttpContext.Current.Application["RoundPar"].ToString());
+                    _handicapInstance = new HandicapService(handicapWeekSettings, roundAdj, roundPar);
+                }
                 return _handicapInstance;
             }
         }

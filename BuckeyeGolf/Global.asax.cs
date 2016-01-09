@@ -26,6 +26,8 @@ namespace BuckeyeGolf
             var dbContext = new GolfDbContext();
             var configSettings = new ConfigRepository(dbContext).Get();
             Application.Add("HandicapWeeks", configSettings.HandicapWeekCount);
+            Application.Add("HandicapRoundAdj", configSettings.RoundAdjustment);
+            Application.Add("RoundPar", configSettings.RoundPar);
         }
     }
 }

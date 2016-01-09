@@ -117,7 +117,7 @@ namespace BuckeyeGolf.Models
             repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w4.WeekId, Player1 = p6.PlayerId, Player2 = p8.PlayerId });
             
             //Configuration
-            var configObj = new ConfigurationModel() { LeagueId = Guid.NewGuid(), HandicapWeekCount = 3 };
+            var configObj = new ConfigurationModel() { LeagueId = Guid.NewGuid(), HandicapWeekCount = 99, RoundPar=35, RoundAdjustment = 0.90 };
             repoProvider.ConfigRepo.Add(configObj);
 
             repoProvider.SaveAllRepoChanges();
