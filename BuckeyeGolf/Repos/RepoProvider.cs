@@ -9,6 +9,7 @@ namespace BuckeyeGolf.Repos
     public class RepoProvider : IDisposable
     {
         private ConfigRepository _configRepo = null;
+        private CourseRepository _courseRepo = null;
         private MatchupRepository _matchupRepo = null;
         private PlayerRepository _playerRepo = null;
         private RoundRepository _roundRepo = null;
@@ -34,6 +35,16 @@ namespace BuckeyeGolf.Repos
                 return _configRepo;
             }
             set { _configRepo = value; }
+        }
+
+        public CourseRepository CourseRepo
+        {
+            get
+            {
+                if (_courseRepo == null) _courseRepo = new CourseRepository(_context);
+                return _courseRepo;
+            }
+            set { _courseRepo = value; }
         }
 
         public MatchupRepository MatchupRepo

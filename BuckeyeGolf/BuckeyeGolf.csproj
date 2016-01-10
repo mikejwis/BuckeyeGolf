@@ -157,9 +157,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ConfigurationModel.cs" />
+    <Compile Include="Models\CourseModel.cs" />
     <Compile Include="Models\GolfDbContext.cs" />
     <Compile Include="Models\MatchupModel.cs" />
     <Compile Include="Models\PlayerModel.cs" />
+    <Compile Include="Repos\CourseRepository.cs" />
+    <Compile Include="Services\ScoringService.cs" />
     <Compile Include="ViewModels\RoundDataViewModel.cs" />
     <Compile Include="Models\RoundModel.cs" />
     <Compile Include="Models\WeekModel.cs" />

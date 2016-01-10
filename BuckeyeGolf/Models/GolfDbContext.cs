@@ -1,5 +1,6 @@
 ﻿using BuckeyeGolf.Repos;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -119,6 +120,10 @@ namespace BuckeyeGolf.Models
             //Configuration
             var configObj = new ConfigurationModel() { LeagueId = Guid.NewGuid(), HandicapWeekCount = 99, RoundPar=35, RoundAdjustment = 0.90 };
             repoProvider.ConfigRepo.Add(configObj);
+
+            //Course
+            var courseObj = new CourseModel() { CourseId = Guid.NewGuid(), FrontPars = new ArrayList() { 4,4,4,5,4,4,4,3,3 }, BackPars = new ArrayList() { 4,3,4,4,4,4,5,3,4 } };
+            repoProvider.CourseRepo.Add(courseObj);
 
             repoProvider.SaveAllRepoChanges();
         }

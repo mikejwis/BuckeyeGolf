@@ -8,8 +8,21 @@ namespace BuckeyeGolf.Services
     public class ServiceProvider
     {
         private static HandicapService _handicapInstance;
+        private static ScoringService _scoringInstance;
 
         private ServiceProvider() { }
+
+        public static ScoringService ScoringInstance
+        {
+            get
+            {
+                if(_scoringInstance == null)
+                {
+                    _scoringInstance = new ScoringService();
+                }
+                return _scoringInstance;
+            }
+        }
 
         public static HandicapService HandicapInstance
         {
