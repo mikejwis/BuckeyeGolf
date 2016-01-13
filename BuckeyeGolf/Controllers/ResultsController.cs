@@ -1,5 +1,6 @@
 ﻿using BuckeyeGolf.Models;
 using BuckeyeGolf.Repos;
+using BuckeyeGolf.Services;
 using BuckeyeGolf.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -65,8 +66,15 @@ namespace BuckeyeGolf.Controllers
 
                     foreach (var player in repoProvider.PlayerRepo.GetAll())
                     {
-                        vm.PlayerRounds.Add(new AddRoundViewModel() { PlayerId = player.PlayerId, PlayerName = player.Name });
+                        var roundScores = new List<int>() { 0,0,0,0,0,0,0,0,0 };
+                        vm.PlayerRounds.Add(new AddRoundViewModel() { PlayerId = player.PlayerId, PlayerName = player.Name, Scores = roundScores });
                     }
+
+                    var frontBackList = new List<SelectListItem>();
+                    frontBackList.Add(new SelectListItem() { Text = "", Value = "" });
+                    frontBackList.Add(new SelectListItem() { Text = "Front", Value = "Front" });
+                    frontBackList.Add(new SelectListItem() { Text = "Back", Value = "Back" });
+                    ViewBag.FrontBackList = frontBackList;
                 }
             }
             return View(vm);
@@ -83,22 +91,75 @@ namespace BuckeyeGolf.Controllers
                     var week = repoProvider.WeekRepo.Get(vm.WeekId);
                     week.BeenPlayed = true;
                     week.ScoreCreateDate = DateTime.Now;
-                    foreach (var roundItem in vm.PlayerRounds)
+
+                    bool front = vm.FrontBack.Equals("Front");
+                    var course = repoProvider.CourseRepo.Get();
+                    //var pars = front ? course.FrontPars : course.BackPars;
+                    var pars = front ? repoProvider.ParRepo.GetFrontPars(course.CourseId) :
+                        repoProvider.ParRepo.GetBackPars(course.CourseId);
+                    var parList = pars.Select(p=>p.ParValue);
+
+                    var matchups = repoProvider.MatchupRepo.GetAllWeeklyMatchups(vm.WeekId);
+                    foreach(var matchup in matchups)
                     {
-                        var newRound = new RoundModel() {
-                            PlayerRefId = roundItem.PlayerId,
+                        var postedRoundPlayer1 = vm.PlayerRounds.First(r => r.PlayerId.CompareTo(matchup.Player1) == 0);
+                        var postedRoundPlayer2 = vm.PlayerRounds.First(r => r.PlayerId.CompareTo(matchup.Player2) == 0);
+                        var p1Handicap = ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player1);
+                        var p2Handicap = ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player2);
+                        List<double> scoringResults = ServiceProvider.ScoringInstance.ScoreMatchup(parList, postedRoundPlayer1.Scores, postedRoundPlayer2.Scores, p1Handicap, p2Handicap );
+                       
+                        var p1NewRound = new RoundModel() {
+                            PlayerRefId = postedRoundPlayer1.PlayerId,
                             RoundId = Guid.NewGuid(),
                             WeekId = vm.WeekId,
-                            TotalPoints = roundItem.Points,
-                            TotalScore = roundItem.Score,
+                            Scores = extractScores(postedRoundPlayer1.Scores),
+                            Front = front,
+                            //TotalScore = ?
+                            TotalPoints = scoringResults[0]
                         };
-                        repoProvider.RoundRepo.Add(newRound);
+                        var p2NewRound = new RoundModel()
+                        {
+                            PlayerRefId = postedRoundPlayer2.PlayerId,
+                            RoundId = Guid.NewGuid(),
+                            WeekId = vm.WeekId,
+                            Scores = extractScores(postedRoundPlayer2.Scores),
+                            Front = front,
+                            //TotalScore = ?
+                            TotalPoints = scoringResults[1]
+                        };
+                        repoProvider.RoundRepo.Add(p1NewRound);
+                        repoProvider.RoundRepo.Add(p2NewRound);
                     }
+
+                    //foreach (var roundItem in vm.PlayerRounds)
+                    //{
+                    //    //call scoring service here
+                    //    var newRound = new RoundModel() {
+                    //        PlayerRefId = roundItem.PlayerId,
+                    //        RoundId = Guid.NewGuid(),
+                    //        WeekId = vm.WeekId,
+                    //        Scores = roundItem.Scores,
+                    //        Front = front
+                    //        //TotalPoints = roundItem.Points,
+                    //        //TotalScore = roundItem.Score,
+                    //    };
+                    //    repoProvider.RoundRepo.Add(newRound);
+                    //}
                     repoProvider.SaveAllRepoChanges();
                 }
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Add");
+        }
+
+        private List<Score> extractScores(List<int> vmScores)
+        {
+            List<Score> retVal = new List<Score>();
+            for(int i=0; i < vmScores.Count();i++)
+            {
+                retVal.Add(new Score() { Id=i, ScoreValue = vmScores.ElementAt(i)});
+            }
+            return retVal;
         }
     }
 }

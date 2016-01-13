@@ -8,7 +8,7 @@ namespace BuckeyeGolf.Services
 {
     public class ScoringService
     {
-        public List<double> ScoreMatchup(List<int> pars, List<int> player1Round, List<int> player2Round, int player1Handicap, int player2Handicap)
+        public List<double> ScoreMatchup(IEnumerable<int> pars, List<int> player1Round, List<int> player2Round, int player1Handicap, int player2Handicap)
         {
             List<double> points = new List<double>() { 0.0, 0.0 };  
 
@@ -25,12 +25,12 @@ namespace BuckeyeGolf.Services
             return points;
         }
 
-        private double determineRoundPoints(List<int> pars, List<int> roundScores)
+        private double determineRoundPoints(IEnumerable<int> pars, List<int> roundScores)
         {
             double points = 0.0;
             for(int i=0; i < roundScores.Count(); i++)
             {
-                var diff = pars[i] - roundScores[i];
+                var diff = pars.ElementAt(i) - roundScores[i];
                 if(diff == 0) { points += 1.0; }
                 if(diff == 1) { points += 3.0; }
                 if(diff == -1) { points += 0.5; }

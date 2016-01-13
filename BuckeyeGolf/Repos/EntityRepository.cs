@@ -34,5 +34,10 @@ namespace BuckeyeGolf.Repos
             DataSet.Add(entity);
         }
 
+        public void AddRange(List<T> entityList)
+        {
+            DataSet.AddRange(entityList);
+        }
+
     }
 }

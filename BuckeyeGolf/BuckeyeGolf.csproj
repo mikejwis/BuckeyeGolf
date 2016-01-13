@@ -162,6 +162,7 @@
     <Compile Include="Models\MatchupModel.cs" />
     <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Repos\CourseRepository.cs" />
+    <Compile Include="Repos\ParRespository.cs" />
     <Compile Include="Services\ScoringService.cs" />
     <Compile Include="ViewModels\RoundDataViewModel.cs" />
     <Compile Include="Models\RoundModel.cs" />

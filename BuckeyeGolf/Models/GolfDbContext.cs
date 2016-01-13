@@ -16,6 +16,9 @@ namespace BuckeyeGolf.Models
         protected DbSet<WeekModel> Weeks { get; set; }
         protected DbSet<MatchupModel> Matchups { get; set; }
         protected DbSet<ConfigurationModel> Config { get; set; }
+        protected DbSet<CourseModel> Courses { get; set; }
+        protected DbSet<Par> CoursePars { get; set; }
+        protected DbSet<Score> PlayerScores { get; set; }
          
 
         public GolfDbContext() : base("name=GolfDB")
@@ -122,8 +125,34 @@ namespace BuckeyeGolf.Models
             repoProvider.ConfigRepo.Add(configObj);
 
             //Course
-            var courseObj = new CourseModel() { CourseId = Guid.NewGuid(), FrontPars = new ArrayList() { 4,4,4,5,4,4,4,3,3 }, BackPars = new ArrayList() { 4,3,4,4,4,4,5,3,4 } };
+            var courseId = Guid.NewGuid();
+            //Front Pars: 4, 4, 4, 5, 4, 4, 4, 3, 3 
+            //Back Pars: 4, 3, 4, 4, 4, 4, 5, 3, 4
+            var frontPars = new List<Par>() { new Par(){ Id=0,ParValue=4, CourseRefId=courseId, Front=true},
+                            new Par(){ Id=1,ParValue=4, CourseRefId=courseId, Front=true },
+                            new Par(){ Id=2,ParValue=4, CourseRefId=courseId, Front=true },
+                            new Par(){ Id=3,ParValue=5, CourseRefId=courseId, Front=true },
+                            new Par(){ Id=4,ParValue=4, CourseRefId=courseId, Front=true },
+                            new Par(){ Id=5,ParValue=4, CourseRefId=courseId, Front=true },
+                            new Par(){ Id=6,ParValue=4, CourseRefId=courseId, Front=true },
+                            new Par(){ Id=7,ParValue=3, CourseRefId=courseId, Front=true },
+                            new Par(){ Id=8,ParValue=3, CourseRefId=courseId, Front=true }
+            };
+            var backPars = new List<Par>() { 
+                new Par() { Id=9, ParValue=4, CourseRefId=courseId, Front=false},
+                new Par() { Id=10, ParValue=3, CourseRefId=courseId, Front=false},
+                new Par() { Id=11, ParValue=4, CourseRefId=courseId, Front=false},
+                new Par() { Id=12, ParValue=4, CourseRefId=courseId, Front=false},
+                new Par() { Id=13, ParValue=4, CourseRefId=courseId, Front=false},
+                new Par() { Id=14, ParValue=4, CourseRefId=courseId, Front=false},
+                new Par() { Id=15, ParValue=5, CourseRefId=courseId, Front=false},
+                new Par() { Id=16, ParValue=3, CourseRefId=courseId, Front=false},
+                new Par() { Id=17, ParValue=4, CourseRefId=courseId, Front=false}
+            };
+            var courseObj = new CourseModel() { CourseId = courseId, FrontPars = frontPars, BackPars = backPars };
             repoProvider.CourseRepo.Add(courseObj);
+            repoProvider.ParRepo.AddRange(courseObj.FrontPars);
+            repoProvider.ParRepo.AddRange(courseObj.BackPars);
 
             repoProvider.SaveAllRepoChanges();
         }

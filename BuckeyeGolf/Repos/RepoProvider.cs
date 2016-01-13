@@ -14,6 +14,7 @@ namespace BuckeyeGolf.Repos
         private PlayerRepository _playerRepo = null;
         private RoundRepository _roundRepo = null;
         private WeekRepository _weekRepo = null;
+        private ParRespository _parRepo = null;
 
         private GolfDbContext _context = null;
 
@@ -86,6 +87,17 @@ namespace BuckeyeGolf.Repos
             }
             set { _weekRepo = value; }
         }
+
+        public ParRespository ParRepo
+        {
+            get
+            {
+                if (_parRepo == null) _parRepo = new ParRespository(_context);
+                return _parRepo;
+            }
+            set { _parRepo = value; }
+        }
+
 
         public void SaveAllRepoChanges()
         {
