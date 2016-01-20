@@ -28,8 +28,8 @@ namespace BuckeyeGolf.Controllers
                         var p2 = repoProvider.PlayerRepo.Get(matchup.Player2);
 
                         var matchupVM = new MatchupViewModel() { Player1Name = p1.Name, Player2Name = p2.Name };
-                        matchupVM.Player1Handicap = ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player1);
-                        matchupVM.Player2Handicap = ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player2);
+                        matchupVM.Player1Handicap = getHandicap(repoProvider, week, matchup.Player1);
+                        matchupVM.Player2Handicap = getHandicap(repoProvider, week, matchup.Player2);
                         matchupWeekVM.Matchups.Add(matchupVM);
                     }
                     weekColl.Add(matchupWeekVM);
@@ -38,6 +38,20 @@ namespace BuckeyeGolf.Controllers
 
             ViewBag.WeeklyMatchups = weekColl.OrderByDescending(w => w.WeekNbr);
             return View();
+        }
+
+        private int getHandicap(RepoProvider repoProvider, WeekModel week, Guid playerId)
+        {
+            var result = 0;
+            if(week.BeenPlayed)
+            {
+                result = repoProvider.RoundRepo.GetWeeklyRound(playerId, week.WeekId).Handicap;
+            }
+            else
+            {
+                result = ServiceProvider.HandicapInstance.CalculateHandicap(playerId);
+            }
+            return result;
         }
 
         public ActionResult Edit()

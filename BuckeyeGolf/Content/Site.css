@@ -41,3 +41,7 @@ textarea {
 .strippingRows:nth-of-type(odd){
     background: #e0e0e0;
 }
+
+.scoreInput{
+    width: 2.5em;
+}

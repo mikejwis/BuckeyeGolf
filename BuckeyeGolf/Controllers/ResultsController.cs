@@ -94,7 +94,7 @@ namespace BuckeyeGolf.Controllers
 
                     bool front = vm.FrontBack.Equals("Front");
                     var course = repoProvider.CourseRepo.Get();
-                    //var pars = front ? course.FrontPars : course.BackPars;
+
                     var pars = front ? repoProvider.ParRepo.GetFrontPars(course.CourseId) :
                         repoProvider.ParRepo.GetBackPars(course.CourseId);
                     var parList = pars.Select(p=>p.ParValue);
@@ -114,7 +114,8 @@ namespace BuckeyeGolf.Controllers
                             WeekId = vm.WeekId,
                             Scores = extractScores(postedRoundPlayer1.Scores),
                             Front = front,
-                            //TotalScore = ?
+                            Handicap = p1Handicap,
+                            TotalScore = ServiceProvider.ScoringInstance.RoundTotalScore(postedRoundPlayer1.Scores),
                             TotalPoints = scoringResults[0]
                         };
                         var p2NewRound = new RoundModel()
@@ -124,27 +125,13 @@ namespace BuckeyeGolf.Controllers
                             WeekId = vm.WeekId,
                             Scores = extractScores(postedRoundPlayer2.Scores),
                             Front = front,
-                            //TotalScore = ?
+                            Handicap = p2Handicap,
+                            TotalScore = ServiceProvider.ScoringInstance.RoundTotalScore(postedRoundPlayer2.Scores),
                             TotalPoints = scoringResults[1]
                         };
                         repoProvider.RoundRepo.Add(p1NewRound);
                         repoProvider.RoundRepo.Add(p2NewRound);
                     }
-
-                    //foreach (var roundItem in vm.PlayerRounds)
-                    //{
-                    //    //call scoring service here
-                    //    var newRound = new RoundModel() {
-                    //        PlayerRefId = roundItem.PlayerId,
-                    //        RoundId = Guid.NewGuid(),
-                    //        WeekId = vm.WeekId,
-                    //        Scores = roundItem.Scores,
-                    //        Front = front
-                    //        //TotalPoints = roundItem.Points,
-                    //        //TotalScore = roundItem.Score,
-                    //    };
-                    //    repoProvider.RoundRepo.Add(newRound);
-                    //}
                     repoProvider.SaveAllRepoChanges();
                 }
                 return RedirectToAction("Index");

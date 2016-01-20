@@ -25,6 +25,13 @@ namespace BuckeyeGolf.Services
             return points;
         }
 
+        public int RoundTotalScore(List<int> scores)
+        {
+            var total = 0;
+            scores.ForEach(r => total += r);
+            return total;
+        }
+
         private double determineRoundPoints(IEnumerable<int> pars, List<int> roundScores)
         {
             double points = 0.0;
@@ -42,11 +49,9 @@ namespace BuckeyeGolf.Services
         private List<double> determineMatchupPoints(List<int> player1Scores, List<int> player2Scores, int player1Handicap, int player2Handicap)
         {
             List<double> points = new List<double>() { 0.0, 0.0 };
-            var p1RoundTotal = 0;
-            player1Scores.ForEach(r => p1RoundTotal += r);
+            var p1RoundTotal = RoundTotalScore(player1Scores);
             p1RoundTotal -= player1Handicap;
-            var p2RoundTotal = 0;
-            player2Scores.ForEach(r => p2RoundTotal += r);
+            var p2RoundTotal = RoundTotalScore(player2Scores);
             p2RoundTotal -= player2Handicap;
 
             if (p1RoundTotal == p2RoundTotal)
