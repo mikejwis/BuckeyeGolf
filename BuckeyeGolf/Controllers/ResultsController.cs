@@ -70,10 +70,9 @@ namespace BuckeyeGolf.Controllers
                         vm.PlayerRounds.Add(new AddRoundViewModel() { PlayerId = player.PlayerId, PlayerName = player.Name, Scores = roundScores });
                     }
 
-                    var frontBackList = new List<SelectListItem>();
-                    frontBackList.Add(new SelectListItem() { Text = "", Value = "" });
-                    frontBackList.Add(new SelectListItem() { Text = "Front", Value = "Front" });
-                    frontBackList.Add(new SelectListItem() { Text = "Back", Value = "Back" });
+                    var frontBackList = new List<string>();
+                    frontBackList.Add("Front");
+                    frontBackList.Add("Back");
                     ViewBag.FrontBackList = frontBackList;
                 }
             }

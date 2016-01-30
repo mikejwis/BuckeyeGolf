@@ -27,7 +27,8 @@
                 <p>Front/Back:</p>
             </div>
             <div class="col-md-10">
-                <p>@Html.DropDownListFor(m => m.FrontBack, ViewBag.FrontBackList as IEnumerable<SelectListItem>)</p>
+                <p><span>@Html.RadioButtonFor(m => m.FrontBack, "Front") @ViewBag.FrontBackList[0]</span>&nbsp;&nbsp;
+                    <span>@Html.RadioButtonFor(m => m.FrontBack, "Back") @ViewBag.FrontBackList[1]</span>
             </div>
         </div>
 

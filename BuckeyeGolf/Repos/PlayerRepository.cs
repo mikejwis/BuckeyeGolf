@@ -16,5 +16,10 @@ namespace BuckeyeGolf.Repos
         {
             return DataSet.Single(p => p.PlayerId.CompareTo(id) == 0);
         }
+
+        public PlayerModel Get(string name)
+        {
+            return DataSet.Single(p => p.Name.Trim().Equals(name));
+        }
     }
 }

@@ -150,6 +150,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="Controllers\MatchupsController.cs" />
+    <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\RoundsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Repos\CourseRepository.cs" />
     <Compile Include="Repos\ParRespository.cs" />
     <Compile Include="Services\ScoringService.cs" />
+    <Compile Include="ViewModels\PlayercardViewModel.cs" />
     <Compile Include="ViewModels\RoundDataViewModel.cs" />
     <Compile Include="Models\RoundModel.cs" />
     <Compile Include="Models\WeekModel.cs" />
@@ -249,6 +251,7 @@
     <Content Include="Views\Matchups\Index.cshtml" />
     <Content Include="Views\Results\Add.cshtml" />
     <Content Include="Views\Results\Index.cshtml" />
+    <Content Include="Views\Players\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
