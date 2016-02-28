@@ -165,6 +165,8 @@
     <Compile Include="Repos\CourseRepository.cs" />
     <Compile Include="Repos\ParRespository.cs" />
     <Compile Include="Services\ScoringService.cs" />
+    <Compile Include="ValidationAttributes\DuplicateNameValidationAttribute.cs" />
+    <Compile Include="ViewModels\AddPlayersViewModel.cs" />
     <Compile Include="ViewModels\PlayercardViewModel.cs" />
     <Compile Include="ViewModels\RoundDataViewModel.cs" />
     <Compile Include="Models\RoundModel.cs" />
@@ -252,6 +254,7 @@
     <Content Include="Views\Results\Add.cshtml" />
     <Content Include="Views\Results\Index.cshtml" />
     <Content Include="Views\Players\Index.cshtml" />
+    <Content Include="Views\Players\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

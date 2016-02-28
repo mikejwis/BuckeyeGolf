@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+}
+@model BuckeyeGolf.ViewModels.AddPlayersViewModel
+@using (Html.BeginForm("Add", "Players", FormMethod.Post))
+{
+    @Html.AntiForgeryToken();
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Add Players for the League</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <p>Player Name</p>
+        </div>
+        <div class="col-md-10">
+            <p>@Html.TextBoxFor(m => m.Name)</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <p>Starting Handicap</p>
+        </div>
+        <div class="col-md-10">
+            <p>@Html.TextBoxFor(m => m.StartingHandicap, new { @type = "number", @min = "0", @max = "99" })</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p></p>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+}
+

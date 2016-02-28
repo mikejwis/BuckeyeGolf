@@ -19,7 +19,7 @@ namespace BuckeyeGolf.Repos
 
         public PlayerModel Get(string name)
         {
-            return DataSet.Single(p => p.Name.Trim().Equals(name));
+            return DataSet.SingleOrDefault(p => p.Name.Trim().Equals(name));
         }
     }
 }
