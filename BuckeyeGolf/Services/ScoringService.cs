@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuckeyeGolf.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +9,25 @@ namespace BuckeyeGolf.Services
 {
     public class ScoringService
     {
-        public List<double> ScoreMatchup(IEnumerable<int> pars, List<int> player1Round, List<int> player2Round, int player1Handicap, int player2Handicap)
+        public List<ScoringResultModel> ScoreMatchup(IEnumerable<int> pars, List<int> player1Round, List<int> player2Round, int player1Handicap, int player2Handicap)
         {
-            List<double> points = new List<double>() { 0.0, 0.0 };  
+            var result1 = new ScoringResultModel() { Points = 0.0, Birdies = 0, Pars = 0, Bogeys = 0, Eagles = 0};
+            var result2 = new ScoringResultModel() { Points = 0.0, Birdies = 0, Pars = 0, Bogeys = 0, Eagles = 0 };
+            List<ScoringResultModel> results = new List<ScoringResultModel>();
+            results.Add(result1);
+            results.Add(result2);
 
-            points[0] += determineRoundPoints(pars, player1Round);
-            points[1] += determineRoundPoints(pars, player2Round);
+            results[0].Points += determineRoundPoints(pars, player1Round, result1);
+            results[1].Points += determineRoundPoints(pars, player2Round, result2);
 
-            points[0] += determineAttendancePoints(player1Round);
-            points[1] += determineAttendancePoints(player2Round);
+            results[0].Points += determineAttendancePoints(player1Round);
+            results[1].Points += determineAttendancePoints(player2Round);
 
             List<double> matchupPoints = determineMatchupPoints(player1Round, player2Round, player1Handicap, player2Handicap);
-            points[0] += matchupPoints[0];
-            points[1] += matchupPoints[1];
+            results[0].Points += matchupPoints[0];
+            results[1].Points += matchupPoints[1];
 
-            return points;
+            return results;
         }
 
         public int RoundTotalScore(List<int> scores)
@@ -32,16 +37,16 @@ namespace BuckeyeGolf.Services
             return total;
         }
 
-        private double determineRoundPoints(IEnumerable<int> pars, List<int> roundScores)
+        private double determineRoundPoints(IEnumerable<int> pars, List<int> roundScores, ScoringResultModel resultObj)
         {
             double points = 0.0;
             for(int i=0; i < roundScores.Count(); i++)
             {
                 var diff = pars.ElementAt(i) - roundScores[i];
-                if(diff == 0) { points += 1.0; }
-                if(diff == 1) { points += 3.0; }
-                if(diff == -1) { points += 0.5; }
-                if(diff == 2) { points += 5.0; }
+                if (diff == 0) { points += 1.0; resultObj.Pars++; }
+                if (diff == 1) { points += 3.0; resultObj.Birdies++; }
+                if (diff == -1) { points += 0.5; resultObj.Bogeys++; }
+                if (diff == 2) { points += 5.0; resultObj.Eagles++; }
             }
             return points;
         }

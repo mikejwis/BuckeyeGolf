@@ -105,7 +105,7 @@ namespace BuckeyeGolf.Controllers
                         var postedRoundPlayer2 = vm.PlayerRounds.First(r => r.PlayerId.CompareTo(matchup.Player2) == 0);
                         var p1Handicap = ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player1);
                         var p2Handicap = ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player2);
-                        List<double> scoringResults = ServiceProvider.ScoringInstance.ScoreMatchup(parList, postedRoundPlayer1.Scores, postedRoundPlayer2.Scores, p1Handicap, p2Handicap );
+                        List<ScoringResultModel> scoringResults = ServiceProvider.ScoringInstance.ScoreMatchup(parList, postedRoundPlayer1.Scores, postedRoundPlayer2.Scores, p1Handicap, p2Handicap );
                        
                         var p1NewRound = new RoundModel() {
                             PlayerRefId = postedRoundPlayer1.PlayerId,
@@ -115,7 +115,11 @@ namespace BuckeyeGolf.Controllers
                             Front = front,
                             Handicap = p1Handicap,
                             TotalScore = ServiceProvider.ScoringInstance.RoundTotalScore(postedRoundPlayer1.Scores),
-                            TotalPoints = scoringResults[0]
+                            TotalPoints = scoringResults[0].Points,
+                            BirdieCnt = scoringResults[0].Birdies,
+                            ParCnt = scoringResults[0].Pars,
+                            EagleCnt = scoringResults[0].Eagles,
+                            BogeyCnt = scoringResults[0].Bogeys
                         };
                         var p2NewRound = new RoundModel()
                         {
@@ -126,7 +130,11 @@ namespace BuckeyeGolf.Controllers
                             Front = front,
                             Handicap = p2Handicap,
                             TotalScore = ServiceProvider.ScoringInstance.RoundTotalScore(postedRoundPlayer2.Scores),
-                            TotalPoints = scoringResults[1]
+                            TotalPoints = scoringResults[1].Points,
+                            BirdieCnt = scoringResults[1].Birdies,
+                            ParCnt = scoringResults[1].Pars,
+                            EagleCnt = scoringResults[1].Eagles,
+                            BogeyCnt = scoringResults[1].Bogeys
                         };
                         repoProvider.RoundRepo.Add(p1NewRound);
                         repoProvider.RoundRepo.Add(p2NewRound);

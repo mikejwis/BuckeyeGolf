@@ -15,6 +15,7 @@ namespace BuckeyeGolf.ViewModels
         [DuplicateNameValidation(ErrorMessage="Player with this name already exists")]
         public string Name { get; set; }
         [Required]
+        [Range(0,99)]
         public int StartingHandicap { get; set; }
     }
 }
