@@ -39,7 +39,7 @@ namespace BuckeyeGolf.Controllers
             {
                 using (var repoProvider = new RepoProvider())
                 {
-                    var newPlayer = new PlayerModel() { Name = vm.Name, PlayerId = Guid.NewGuid(), Rounds = new List<RoundModel>(), StartingHandicap = vm.StartingHandicap };
+                    var newPlayer = new PlayerModel() { Name = vm.Name, PlayerId = Guid.NewGuid(), Rounds = new List<RoundModel>(), HandicapRound1 = vm.HandicapR1Score, HandicapRound2 = vm.HandicapR2Score };
                     repoProvider.PlayerRepo.Add(newPlayer);
                     repoProvider.SaveAllRepoChanges();
                 }

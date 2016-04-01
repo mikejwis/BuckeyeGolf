@@ -33,14 +33,18 @@ namespace BuckeyeGolf.Services
                 var weeks = repoProvider.WeekRepo.GetPlayedWeeks().OrderByDescending(w => w.WeekNbr).ToList();
                 var runningTotal = 0.0;
                 var nbrRoundsWithScore = 0;
+                var player = repoProvider.PlayerRepo.Get(playerId);
                 for (int i = 0; i < _handicapWeeks && i < weeks.Count(); i++)
                 {
                     var round = repoProvider.RoundRepo.GetWeeklyRound(playerId, weeks[i].WeekId);
                     runningTotal += (round.TotalScore * _roundAdjustment);
                     if (round.TotalScore != 0) nbrRoundsWithScore++;
                 }
-                
-                if(nbrRoundsWithScore > 0)
+                runningTotal += (player.HandicapRound1 * _roundAdjustment);
+                nbrRoundsWithScore++;
+                runningTotal += (player.HandicapRound2 * _roundAdjustment);
+                nbrRoundsWithScore++;
+                if(nbrRoundsWithScore > 0 && runningTotal > 0.0)
                 {
                     double avg = runningTotal / nbrRoundsWithScore;
                     retVal = (int)Math.Round(avg, 0, MidpointRounding.AwayFromZero) - _roundPar;
@@ -48,6 +52,5 @@ namespace BuckeyeGolf.Services
             }
             return retVal;
         }
-
     }
 }

@@ -7,28 +7,36 @@
 {
     @Html.AntiForgeryToken();
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
             <h2>Add Players for the League</h2>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-xs-5 col-sm-3">
             <p>Player Name</p>
         </div>
-        <div class="col-md-10">
+        <div class="col-xs-5 col-sm-9">
             <p>@Html.TextBoxFor(m => m.Name)</p>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2">
-            <p>Starting Handicap</p>
+        <div class="col-xs-5 col-sm-3">
+            <p>Handicap Round1 Score</p>
         </div>
-        <div class="col-md-10">
-            <p>@Html.TextBoxFor(m => m.StartingHandicap, new { @type = "number", @min = "0", @max = "99" })</p>
+        <div class="col-xs-5 col-sm-9">
+            <p>@Html.TextBoxFor(m => m.HandicapR1Score, new { @type = "number", @min = "0", @max = "99", @class = "scoreInput" })</p>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-5 col-sm-3">
+            <p>Handicap Round2 Score</p>
+        </div>
+        <div class="col-xs-5 col-sm-9">
+            <p>@Html.TextBoxFor(m => m.HandicapR2Score, new { @type = "number", @min = "0", @max = "99", @class = "scoreInput" })</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
             <p></p>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

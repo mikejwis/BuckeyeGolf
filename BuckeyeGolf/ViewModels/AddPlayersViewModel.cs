@@ -16,6 +16,7 @@ namespace BuckeyeGolf.ViewModels
         public string Name { get; set; }
         [Required]
         [Range(0,99)]
-        public int StartingHandicap { get; set; }
+        public int HandicapR1Score { get; set; }
+        public int HandicapR2Score { get; set; }
     }
 }

@@ -16,6 +16,10 @@ namespace BuckeyeGolf.Models
         [MinLength(2)]
         public string Name { get; set; }
         [Required]
-        public int StartingHandicap { get; set; }
+        [Range(0, 99)]
+        public int HandicapRound1 { get; set; }
+        [Required]
+        [Range(0, 99)]
+        public int HandicapRound2 { get; set; }
     }
 }
