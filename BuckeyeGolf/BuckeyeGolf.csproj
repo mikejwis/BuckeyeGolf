@@ -252,8 +252,8 @@
     <Content Include="Views\Matchups\Index.cshtml" />
     <Content Include="Views\Results\Add.cshtml" />
     <Content Include="Views\Results\Index.cshtml" />
-    <Content Include="Views\Players\Index.cshtml" />
     <Content Include="Views\Players\Add.cshtml" />
+    <Content Include="Views\Players\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

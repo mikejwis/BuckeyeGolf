@@ -1,0 +1,28 @@
+﻿@model BuckeyeGolf.ViewModels.PlayercardViewModel
+
+@if (string.IsNullOrEmpty(Model.Name)) {
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="playerList">
+                <h3>League Golfers</h3>
+                <ul>
+                    @foreach (var playerName in Model.Players)
+                    {
+                        <li><a href="/Players?id=@playerName">@playerName</a></li>
+                    }
+                </ul>
+            </p>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="playerList">
+                <h3>@Model.Name</h3>
+            </p>
+        </div>
+    </div>
+}
+

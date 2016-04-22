@@ -1,5 +1,6 @@
 ﻿using BuckeyeGolf.Models;
 using BuckeyeGolf.Repos;
+using BuckeyeGolf.Services;
 using BuckeyeGolf.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,22 @@ namespace BuckeyeGolf.Controllers
 {
     public class PlayersController : Controller
     {
-        // GET: Players
-        public ActionResult Index(string playerName)
+        [HttpGet]
+        public ActionResult Index(string id)
         {
             PlayercardViewModel vm = new PlayercardViewModel();
             using (var repoProvider = new RepoProvider())
             {
-                var player = repoProvider.PlayerRepo.Get(playerName);
-                vm.Name = player.Name;
+                vm.Players = repoProvider.PlayerRepo.GetAll().Select(p => p.Name);
+                if(!string.IsNullOrEmpty(id))
+                {
+                    var player = repoProvider.PlayerRepo.Get(id);
+                    vm.Name = player.Name;
+                    vm.Handicap = ServiceProvider.HandicapInstance.CalculateHandicap(player.PlayerId);
+                    vm.AvgScore = repoProvider.RoundRepo.GetPlayerScoreAverage(player.PlayerId);
+                    vm.SeasonLow = repoProvider.RoundRepo.GetPlayerLowRound(player.PlayerId);
+                    vm.SeasonHigh = repoProvider.RoundRepo.GetPlayerHighRound(player.PlayerId);
+                }
             }
 
             return View(vm);
@@ -28,6 +37,10 @@ namespace BuckeyeGolf.Controllers
         public ActionResult Add()
         {
             AddPlayersViewModel vm = new AddPlayersViewModel();
+            using (var repoProvider = new RepoProvider())
+            {
+                vm.Players = repoProvider.PlayerRepo.GetAll().Select(p=>p.Name);
+            }
             return View(vm);
         }
 

@@ -18,5 +18,6 @@ namespace BuckeyeGolf.ViewModels
         [Range(0,99)]
         public int HandicapR1Score { get; set; }
         public int HandicapR2Score { get; set; }
+        public IEnumerable<string> Players { get; set; }
     }
 }

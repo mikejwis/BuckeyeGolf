@@ -18,6 +18,7 @@ namespace BuckeyeGolf.ViewModels
         public int Losses { get; set; }
         public int Ties { get; set; }
         public List<int> Scores { get; set; }
+        public IEnumerable<string> Players { get; set; }
 
     }
 }

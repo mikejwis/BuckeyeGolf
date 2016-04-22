@@ -45,3 +45,7 @@ textarea {
 .scoreInput{
     width: 2.5em;
 }
+
+.playerList{
+    margin-top: 25px;
+}

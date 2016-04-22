@@ -38,5 +38,19 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <p class="playerList">
+                Existing Players
+                <ul>
+                    @foreach (var playerName in Model.Players)
+                    {
+                        <li>@playerName</li>
+                    }
+                </ul>
+            </p>
+        </div>
+    </div>
 }
+
 

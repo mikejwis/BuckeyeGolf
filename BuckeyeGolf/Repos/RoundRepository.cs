@@ -23,6 +23,16 @@ namespace BuckeyeGolf.Repos
             return Math.Round(tmpAvg, 2);
         }
 
+        public int GetPlayerLowRound(Guid playerId)
+        {
+            return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.TotalScore != 0).Min(r => r.TotalScore);
+        }
+
+        public int GetPlayerHighRound(Guid playerId)
+        {
+            return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.TotalScore != 0).Max(r => r.TotalScore);
+        }
+
         public double GetPlayerTotalPoints(Guid playerId)
         {
             return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0).Sum(r => r.TotalPoints);
