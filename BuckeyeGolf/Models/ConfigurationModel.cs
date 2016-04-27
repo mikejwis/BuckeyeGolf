@@ -11,7 +11,8 @@ namespace BuckeyeGolf.Models
         [Key]
         public Guid LeagueId { get; set; }
         public int HandicapWeekCount { get; set; }
-        public int RoundPar { get; set; }
+        public int RoundParFront { get; set; }
+        public int RoundParBack { get; set; }
         public double RoundAdjustment { get; set; }
     }
 }

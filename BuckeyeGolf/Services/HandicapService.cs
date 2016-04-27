@@ -12,13 +12,15 @@ namespace BuckeyeGolf.Services
     {
         private int _handicapWeeks;
         private double _roundAdjustment;
-        private int _roundPar;
+        private int _roundParFront;
+        private int _roundParBack;
 
-        public HandicapService(int handicapWeeks, double roundAdjustment, int roundPar)
+        public HandicapService(int handicapWeeks, double roundAdjustment, int roundParFront, int roundParBack)
         {
             _handicapWeeks = handicapWeeks;
             _roundAdjustment = roundAdjustment;
-            _roundPar = roundPar;
+            _roundParFront = roundParFront;
+            _roundParBack = roundParBack;
         }
 
         public int CalculateHandicap(Guid playerId)
@@ -33,21 +35,52 @@ namespace BuckeyeGolf.Services
                 var weeks = repoProvider.WeekRepo.GetPlayedWeeks().OrderByDescending(w => w.WeekNbr).ToList();
                 var runningTotal = 0.0;
                 var nbrRoundsWithScore = 0;
+                var parTotal = 0;
+                var overParTotal = 0.0;
                 var player = repoProvider.PlayerRepo.Get(playerId);
                 for (int i = 0; i < _handicapWeeks && i < weeks.Count(); i++)
                 {
                     var round = repoProvider.RoundRepo.GetWeeklyRound(playerId, weeks[i].WeekId);
                     runningTotal += (round.TotalScore * _roundAdjustment);
-                    if (round.TotalScore != 0) nbrRoundsWithScore++;
+                    if (round.TotalScore != 0)
+                    {
+                        nbrRoundsWithScore++;
+                        var thisPar = round.Front?_roundParFront:_roundParBack;
+                        parTotal += thisPar;
+                        var diff = (round.TotalScore - thisPar) * _roundAdjustment;
+                        overParTotal += diff;
+                    }
                 }
-                runningTotal += (player.HandicapRound1 * _roundAdjustment);
-                nbrRoundsWithScore++;
-                runningTotal += (player.HandicapRound2 * _roundAdjustment);
-                nbrRoundsWithScore++;
+                if (player.HandicapRound1 > 0)
+                {
+                    runningTotal += (player.HandicapRound1 * _roundAdjustment);
+                    nbrRoundsWithScore++;
+                    parTotal += _roundParFront;
+                    var diff = (player.HandicapRound1 - _roundParFront) * _roundAdjustment;
+                    overParTotal += diff;
+                }
+                if (player.HandicapRound2 > 0)
+                {
+                    runningTotal += (player.HandicapRound2 * _roundAdjustment);
+                    nbrRoundsWithScore++;
+                    parTotal += _roundParBack;
+                    var diff = (player.HandicapRound2 - _roundParBack) * _roundAdjustment;
+                    overParTotal += diff;
+                }
                 if(nbrRoundsWithScore > 0 && runningTotal > 0.0)
                 {
-                    double avg = runningTotal / nbrRoundsWithScore;
-                    retVal = (int)Math.Round(avg, 0, MidpointRounding.AwayFromZero) - _roundPar;
+                    //Third Scoring Method
+                    double avg = overParTotal / nbrRoundsWithScore;
+
+                    //Second Version
+                    //double totalOverPar = runningTotal - parTotal;
+                    //double avg = totalOverPar / nbrRoundsWithScore;
+                    
+                    retVal = (int)Math.Round(avg, 0, MidpointRounding.AwayFromZero);
+                    
+                    //First version
+                    //double avg = runningTotal / nbrRoundsWithScore;
+                    //retVal = (int)Math.Round(avg, 0, MidpointRounding.AwayFromZero) - _roundPar;
                 }
             }
             return retVal;
