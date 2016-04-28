@@ -19,7 +19,9 @@ namespace BuckeyeGolf.Repos
 
         public int GetHighestWeekNumber()
         {
-            return DataSet.Max(w => w.WeekNbr);
+            var retVal = 0;
+            if (DataSet.Count() > 0) retVal = DataSet.Max(w => w.WeekNbr);
+            return retVal;
         }
 
         public List<WeekModel> GetPlayedWeeks()
