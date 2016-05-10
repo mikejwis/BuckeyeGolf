@@ -207,6 +207,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="BuckeyeGolf.pubxml" />
     <None Include="Properties\PublishProfiles\BuckeyeGolf.pubxml" />
     <Content Include="GraphTest.html" />
     <Content Include="Scripts\angular-mocks.js" />

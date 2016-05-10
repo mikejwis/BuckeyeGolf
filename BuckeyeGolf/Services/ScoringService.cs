@@ -58,18 +58,27 @@ namespace BuckeyeGolf.Services
             p1RoundTotal -= player1Handicap;
             var p2RoundTotal = RoundTotalScore(player2Scores);
             p2RoundTotal -= player2Handicap;
-
-            if (p1RoundTotal == p2RoundTotal)
-            {
-                points[0] = 2.0;
-                points[1] = 2.0;
-            }
-            if(p1RoundTotal > p2RoundTotal)
+            if(p1RoundTotal == 0 && p2RoundTotal!=0)
             {
                 points[0] = 1.0;
                 points[1] = 4.0;
             }
-            if(p1RoundTotal < p2RoundTotal)
+            if (p2RoundTotal == 0 && p1RoundTotal != 0)
+            {
+                points[0] = 4.0;
+                points[1] = 1.0;
+            }
+            if ((p1RoundTotal == p2RoundTotal) && p1RoundTotal!=0 && p2RoundTotal!=0)
+            {
+                points[0] = 2.0;
+                points[1] = 2.0;
+            }
+            if((p1RoundTotal > p2RoundTotal) && p2RoundTotal!=0)
+            {
+                points[0] = 1.0;
+                points[1] = 4.0;
+            }
+            if((p1RoundTotal < p2RoundTotal) && p1RoundTotal!=0)
             {
                 points[0] = 4.0;
                 points[1] = 1.0;
