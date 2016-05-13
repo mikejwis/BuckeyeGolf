@@ -8,13 +8,19 @@
 
     function Matchups(dataservice, $scope, $state, $stateParams) {
         var vm = this;
-        vm.list = [];
+        vm.data = {};
+        vm.newMatchups = [];
 
         Activate();
 
         function Activate() {
-            dataservice.getMatchups().then(function (data) {
-                vm.list = data;
+            dataservice.getMatchups().then(function (result) {
+                vm.data = result;
+                var nbrOfMatchups = result.players.length / 2;
+                for(var i =0; i<nbrOfMatchups;i++)
+                {
+                    vm.newMatchups.push({});
+                }
             //    toastr.info(data,"Data Received");
             });
         }

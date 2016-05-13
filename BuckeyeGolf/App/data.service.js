@@ -16,12 +16,19 @@
             getPlayer: getPlayer
         };
 
-//        var cachedItems = [];
-//        var alreadyDownloaded = false;
+        var cachedMatchups = [];
+        var matchupsDownloaded = false;
         return service;
 
         function getLeaderboard() {
             var d = $q.defer();
+            $http.get('/api/Leaderboard').then(function (results) {
+                d.resolve(results.data);
+            }, function (error) {
+                toastr.error(error, 'Error');
+                d.reject(error);
+            });
+            /*
             var results = {'weeksPlayed':1,'playerSummary':[
                 {
                     'name': 'Keith',
@@ -132,23 +139,20 @@
                     'bogeys':0
                 }
             ]};
-            d.resolve(results);
+            d.resolve(results);*/
             return d.promise;
         }
 
         function getResults() {
-            //var d = $q.defer();
-            //$http.get('/api/TestData').then(function (results) {
-            //    d.resolve(results.data);
-            //}, function (error) {
-            //    toastr.error(error, 'Error');
-            //    d.reject(error);
-            //});
-
-            //return d.promise;
-
             var d = $q.defer();
-            var results = [{'weekNbr':1, 'scoreCreateDate':'5/10/2016','playerRounds':[
+            $http.get('/api/Results').then(function (results) {
+                d.resolve(results.data);
+            }, function (error) {
+                toastr.error(error, 'Error');
+                d.reject(error);
+            });
+
+            /*var results = [{'weekNbr':1, 'scoreCreateDate':'5/10/2016','playerRounds':[
                 {
                     'name':'Keith',
                     'totalScore':43,
@@ -246,12 +250,25 @@
                     'bogeys':2
                 }
             ]}];
-            d.resolve(results);
+            d.resolve(results);*/
             return d.promise;
         }
 
         function getMatchups() {
             var d = $q.defer();
+            if (matchupsDownloaded) {
+                d.resolve(cachedMatchups);
+            } else {
+                $http.get('/api/Matchups').then(function (results) {
+                    cachedMatchups = results.data;
+                    matchupsDownloaded = true;
+                    d.resolve(results.data);
+                }, function (error) {
+                    toastr.error(error, 'Error');
+                    d.reject(error);
+                });
+            }
+            /*
             var results = [{'weekNbr': 2, 'matchups':
                             [{
                                 'player1Name': 'Mike',
@@ -327,7 +344,8 @@
                                 'player2Handicap':22
                             }] 
                         }];
-            d.resolve(results);
+            
+            d.resolve(results);*/
             return d.promise;
         }
 

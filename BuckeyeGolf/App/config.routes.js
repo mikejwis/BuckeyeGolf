@@ -21,6 +21,11 @@
                     templateUrl: "/templates/matchups.html",
                     controller: "Matchups as vm"
                 });
+                $stateProvider.state("addMatchups", {
+                    url: "/matchups/add",
+                    templateUrl: "/templates/addmatchups.html",
+                    controller: "Matchups as vm"
+                });
                 $stateProvider.state("results", {
                     url: "/results",
                     templateUrl: "/templates/results.html",

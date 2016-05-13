@@ -168,6 +168,7 @@
     <Compile Include="Services\ScoringService.cs" />
     <Compile Include="ValidationAttributes\DuplicateNameValidationAttribute.cs" />
     <Compile Include="ViewModels\AddPlayersViewModel.cs" />
+    <Compile Include="ViewModels\BasicPlayerViewModel.cs" />
     <Compile Include="ViewModels\PlayercardViewModel.cs" />
     <Compile Include="ViewModels\RoundDataViewModel.cs" />
     <Compile Include="Models\RoundModel.cs" />
@@ -216,7 +217,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="BuckeyeGolf.pubxml" />
+    <None Include="BuckeyeGolf.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\BuckeyeGolf.pubxml" />
     <Content Include="GraphTest.html" />
     <Content Include="Index.html" />
@@ -245,6 +248,7 @@
     <Content Include="src\controller.Profile.js" />
     <Content Include="src\factory.Chart.js" />
     <Content Include="src\module.golfApp.js" />
+    <Content Include="Templates\addmatchups.html" />
     <Content Include="Templates\home.html" />
     <Content Include="Templates\leaderboard.html" />
     <Content Include="Templates\matchups.html" />

@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+
 namespace BuckeyeGolf.ViewModels
 {
-
+    public class MatchupSummaryViewModel
+    {
+        public int NextWeek { get; set; }
+        public List<BasicPlayerViewModel> Players { get; set; }
+        public List<MatchupWeekViewModel> Weeks { get; set; }
+    }
     public class MatchupWeekViewModel
     {
         public int WeekNbr { get; set; }
