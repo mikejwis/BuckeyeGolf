@@ -55,9 +55,10 @@ namespace BuckeyeGolf.Services
         {
             List<double> points = new List<double>() { 0.0, 0.0 };
             var p1RoundTotal = RoundTotalScore(player1Scores);
-            p1RoundTotal -= player1Handicap;
+            if (p1RoundTotal != 0) p1RoundTotal -= player1Handicap;
             var p2RoundTotal = RoundTotalScore(player2Scores);
-            p2RoundTotal -= player2Handicap;
+            if (p2RoundTotal != 0) p2RoundTotal -= player2Handicap;
+
             if(p1RoundTotal == 0 && p2RoundTotal!=0)
             {
                 points[0] = 1.0;

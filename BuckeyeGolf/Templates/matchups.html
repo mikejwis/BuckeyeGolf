@@ -1,0 +1,17 @@
+﻿<div ng-repeat="week in vm.list">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Matchups for Week #{{week.weekNbr}}</h2>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <tr ng-repeat="matchup in week.matchups">
+            <td>{{matchup.player1Name}} ({{matchup.player1Handicap}})</td>
+            <td>vs</td>
+            <td>{{matchup.player2Name}} ({{matchup.player2Handicap}})</td>
+        </tr>
+    </table>
+</div>
+
+
+

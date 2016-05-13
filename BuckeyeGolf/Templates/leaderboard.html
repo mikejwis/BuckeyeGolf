@@ -1,0 +1,29 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h3>Leaderboard through <b>{{vm.data.weeksPlayed}}</b> week(s) of play:</h3>
+        <p>&nbsp;</p>
+    </div>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Player</th>
+            <th>Total Points</th>
+            <th>Season Avg Score</th>
+            <th>Current Handicap</th>
+            <th>Total Birds</th>
+            <th>Total Pars</th>
+            <th>Total Bogeys</th>
+        </tr>
+    </thead>
+    <tr ng-repeat="player in vm.data.playerSummary">
+        <td>{{player.name}}</td>
+        <td>{{player.totalPoints}}</td>
+        <td>{{player.scoreAvg}}</td>
+        <td>{{player.currentHandicap}}</td>
+        <td>{{player.birds}}</td>
+        <td>{{player.pars}}</td>
+        <td>{{player.bogeys}}</td>
+    </tr>
+</table>
+

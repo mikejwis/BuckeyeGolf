@@ -10,9 +10,10 @@ namespace BuckeyeGolf.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            return Redirect("/Index.html");
+            //ViewBag.Title = "Home Page";
 
-            return View();
+            //return View();
         }
     }
 }

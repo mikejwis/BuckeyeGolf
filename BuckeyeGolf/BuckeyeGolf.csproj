@@ -189,6 +189,15 @@
     <Compile Include="ViewModels\WeekResultsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\app.constants.js" />
+    <Content Include="App\app.module.js" />
+    <Content Include="App\config.exceptions.js" />
+    <Content Include="App\config.routes.js" />
+    <Content Include="App\data.service.js" />
+    <Content Include="App\home.controller.js" />
+    <Content Include="App\leaderboard.controller.js" />
+    <Content Include="App\matchups.controller.js" />
+    <Content Include="App\results.controller.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -210,6 +219,7 @@
     <None Include="BuckeyeGolf.pubxml" />
     <None Include="Properties\PublishProfiles\BuckeyeGolf.pubxml" />
     <Content Include="GraphTest.html" />
+    <Content Include="Index.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -235,6 +245,10 @@
     <Content Include="src\controller.Profile.js" />
     <Content Include="src\factory.Chart.js" />
     <Content Include="src\module.golfApp.js" />
+    <Content Include="Templates\home.html" />
+    <Content Include="Templates\leaderboard.html" />
+    <Content Include="Templates\matchups.html" />
+    <Content Include="Templates\results.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
