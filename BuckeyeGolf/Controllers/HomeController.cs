@@ -10,10 +10,8 @@ namespace BuckeyeGolf.Controllers
     {
         public ActionResult Index()
         {
+            //Note, can probably change this now to return the view so that the url is prettier
             return Redirect("/Index.html");
-            //ViewBag.Title = "Home Page";
-
-            //return View();
         }
     }
 }

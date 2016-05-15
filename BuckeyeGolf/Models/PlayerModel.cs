@@ -21,6 +21,5 @@ namespace BuckeyeGolf.Models
         [Required]
         [Range(0, 99)]
         public int HandicapRound2 { get; set; }
-        public bool CoolFlag { get; set; }
     }
 }

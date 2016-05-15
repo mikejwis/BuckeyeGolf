@@ -12,9 +12,7 @@ namespace BuckeyeGolf.Models
         public Guid WeekId { get; set; }
         [Required]
         public int WeekNbr { get; set; }
-       // public DateTime WeekDate { get; set; }
         public DateTime ScoreCreateDate { get; set; }
         public bool BeenPlayed { get; set; }
-        //public ICollection<MatchupModel> Matchups { get; set; }
     }
 }

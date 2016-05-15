@@ -14,8 +14,6 @@ namespace BuckeyeGolf.ViewModels
         public int Birds { get; set; }
         public int Pars { get; set; }
         public int Bogeys { get; set; }
- //       public int BackScrAvg { get; set; }
- //       public int FrontScrAvg { get; set; }
     }
 
     public class LeaderboardViewModel
