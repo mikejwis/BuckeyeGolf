@@ -19,6 +19,16 @@ namespace BuckeyeGolf.Controllers
         {
             MatchupSummaryViewModel vm = new MatchupSummaryViewModel();
             List<MatchupWeekViewModel> weekColl = new List<MatchupWeekViewModel>();
+            
+            var w3Matchups = new List<MatchupViewModel>();
+            var w3 = new MatchupWeekViewModel() { WeekNbr = 3, Matchups = w3Matchups };
+            w3Matchups.Add(new MatchupViewModel() { Player1Name = "Mark", Player1Handicap = 13, Player2Name = "Todd", Player2Handicap = 14 });
+            w3Matchups.Add(new MatchupViewModel() { Player1Name = "Len", Player1Handicap = 9, Player2Name = "Kevin", Player2Handicap = 15 });
+            w3Matchups.Add(new MatchupViewModel() { Player1Name = "Tom S", Player1Handicap = 12, Player2Name = "Brandon", Player2Handicap = 19 });
+            w3Matchups.Add(new MatchupViewModel() { Player1Name = "Keith", Player1Handicap = 11, Player2Name = "Emil", Player2Handicap = 30 });
+            w3Matchups.Add(new MatchupViewModel() { Player1Name = "Bill", Player1Handicap = 21, Player2Name = "Mike", Player2Handicap = 18 });
+            w3Matchups.Add(new MatchupViewModel() { Player1Name = "Jack", Player1Handicap = 17, Player2Name = "David", Player2Handicap = 11 });
+            weekColl.Add(w3);
 
             var w2Matchups = new List<MatchupViewModel>();
             var w2 = new MatchupWeekViewModel() { WeekNbr = 2, Matchups = w2Matchups };

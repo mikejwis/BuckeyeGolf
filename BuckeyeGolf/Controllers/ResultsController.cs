@@ -18,6 +18,22 @@ namespace BuckeyeGolf.Controllers
         public IEnumerable<WeekResultsViewModel> Get()
         {
             var weekColl = new List<WeekResultsViewModel>();
+
+            var w2Rounds = new List<PlayerRoundViewModel>();
+            w2Rounds.Add(new PlayerRoundViewModel() { Name = "Mike", TotalScore = 55, TotalPoints = 9.5, Birdies = 1, Pars = 0, Bogeys = 1 });
+            w2Rounds.Add(new PlayerRoundViewModel() { Name = "Keith", TotalScore = 53, TotalPoints = 6, Birdies = 0, Pars = 2, Bogeys = 2 });
+            w2Rounds.Add(new PlayerRoundViewModel() { Name = "Kevin", TotalScore = 51, TotalPoints = 8, Birdies = 0, Pars = 1, Bogeys = 2 });
+            w2Rounds.Add(new PlayerRoundViewModel() { Name = "Bill", TotalScore = 61, TotalPoints = 3.5, Birdies = 0, Pars = 0, Bogeys = 1 });
+            w2Rounds.Add(new PlayerRoundViewModel() { Name = "Tom S", TotalScore = 53, TotalPoints = 6.5, Birdies = 0, Pars = 0, Bogeys = 1 });
+            w2Rounds.Add(new PlayerRoundViewModel() { Name = "Emil", TotalScore = 66, TotalPoints = 7, Birdies = 0, Pars = 0, Bogeys = 2 });
+            w2Rounds.Add(new PlayerRoundViewModel() { Name = "Mark", TotalScore = 48, TotalPoints = 9, Birdies = 0, Pars = 1, Bogeys = 4 });
+            w2Rounds.Add(new PlayerRoundViewModel() { Name = "Jack", TotalScore = 59, TotalPoints = 4, Birdies = 0, Pars = 0, Bogeys = 2 });
+            w2Rounds.Add(new PlayerRoundViewModel() { Name = "Todd", TotalScore = 57, TotalPoints = 4.5, Birdies = 0, Pars = 1, Bogeys = 1 });
+            w2Rounds.Add(new PlayerRoundViewModel() { Name = "Len", TotalScore = 47, TotalPoints = 9.5, Birdies = 0, Pars = 2, Bogeys = 3 });
+            w2Rounds.Add(new PlayerRoundViewModel() { Name = "David", TotalScore = 51, TotalPoints = 5, Birdies = 0, Pars = 1, Bogeys = 2 });
+            w2Rounds.Add(new PlayerRoundViewModel() { Name = "Brandon", TotalScore = 57, TotalPoints = 3.5, Birdies = 0, Pars = 0, Bogeys = 1 });
+            weekColl.Add(new WeekResultsViewModel() { WeekNbr = 2, ScoreCreateDate = new DateTime(2016, 5, 16), PlayerRounds = w2Rounds });
+           
             var w1Rounds = new List<PlayerRoundViewModel>();
             w1Rounds.Add(new PlayerRoundViewModel() { Name = "Keith", TotalScore = 43, TotalPoints = 12.5, Birdies = 1, Pars = 1, Bogeys = 5 });
             w1Rounds.Add(new PlayerRoundViewModel() { Name = "Mark", TotalScore = 50, TotalPoints = 9.5, Birdies = 0, Pars = 2, Bogeys = 3 });
