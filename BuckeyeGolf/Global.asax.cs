@@ -22,13 +22,14 @@ namespace BuckeyeGolf
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            //var dbContext = new GolfDbContext();
-            //var configSettings = new ConfigRepository(dbContext).Get();
-           // Application.Add("HandicapWeeks", configSettings.HandicapWeekCount);
-            //Application.Add("HandicapRoundAdj", configSettings.RoundAdjustment);
-            //Application.Add("RoundParFront", configSettings.RoundParFront);
-            //Application.Add("RoundParBack", configSettings.RoundParBack);
+            /*
+            var dbContext = new GolfDbContext();
+            var configSettings = new ConfigRepository(dbContext).Get();
+            Application.Add("HandicapWeeks", configSettings.HandicapWeekCount);
+            Application.Add("HandicapRoundAdj", configSettings.RoundAdjustment);
+            Application.Add("RoundParFront", configSettings.RoundParFront);
+            Application.Add("RoundParBack", configSettings.RoundParBack);
+            */
         }
     }
 }
