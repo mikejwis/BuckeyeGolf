@@ -16,20 +16,20 @@ namespace BuckeyeGolf
     {
         protected void Application_Start()
         {
-            //Database.SetInitializer<GolfDbContext>(new GolfLeagueInitializer());
+            Database.SetInitializer<GolfDbContext>(new GolfLeagueInitializer());
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            /*
+            
             var dbContext = new GolfDbContext();
             var configSettings = new ConfigRepository(dbContext).Get();
             Application.Add("HandicapWeeks", configSettings.HandicapWeekCount);
             Application.Add("HandicapRoundAdj", configSettings.RoundAdjustment);
             Application.Add("RoundParFront", configSettings.RoundParFront);
             Application.Add("RoundParBack", configSettings.RoundParBack);
-            */
+
         }
     }
 }
