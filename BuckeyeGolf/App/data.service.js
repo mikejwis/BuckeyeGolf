@@ -49,7 +49,8 @@
             } else {
                 $http.get('/api/Matchups').then(function (results) {
                     cachedMatchups = results.data;
-                    matchupsDownloaded = true;
+                    //turning off for now until caching invalidation implemented
+                    //matchupsDownloaded = true;
                     d.resolve(results.data);
                 }, function (error) {
                     toastr.error(error, 'Error');

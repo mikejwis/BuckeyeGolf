@@ -19,7 +19,17 @@ namespace BuckeyeGolf.Controllers
         {
             MatchupSummaryViewModel vm = new MatchupSummaryViewModel();
             List<MatchupWeekViewModel> weekColl = new List<MatchupWeekViewModel>();
-            
+
+            var w4Matchups = new List<MatchupViewModel>();
+            var w4 = new MatchupWeekViewModel() { WeekNbr = 4, Matchups = w4Matchups };
+            w4Matchups.Add(new MatchupViewModel() { Player1Name = "Len", Player1Handicap = 9, Player2Name = "Mark", Player2Handicap = 13 });
+            w4Matchups.Add(new MatchupViewModel() { Player1Name = "Bill", Player1Handicap = 20, Player2Name = "Keith", Player2Handicap = 11 });
+            w4Matchups.Add(new MatchupViewModel() { Player1Name = "Tom S", Player1Handicap = 13, Player2Name = "Mike", Player2Handicap = 19 });
+            w4Matchups.Add(new MatchupViewModel() { Player1Name = "Brandon", Player1Handicap = 19, Player2Name = "Kevin", Player2Handicap = 15 });
+            w4Matchups.Add(new MatchupViewModel() { Player1Name = "Todd", Player1Handicap = 15, Player2Name = "David", Player2Handicap = 12 });
+            w4Matchups.Add(new MatchupViewModel() { Player1Name = "Jack", Player1Handicap = 18, Player2Name = "Emil", Player2Handicap = 30 });
+            weekColl.Add(w4);
+
             var w3Matchups = new List<MatchupViewModel>();
             var w3 = new MatchupWeekViewModel() { WeekNbr = 3, Matchups = w3Matchups };
             w3Matchups.Add(new MatchupViewModel() { Player1Name = "Mark", Player1Handicap = 13, Player2Name = "Todd", Player2Handicap = 14 });
@@ -115,60 +125,5 @@ namespace BuckeyeGolf.Controllers
             }
             return result;
         }
-        /*
-                public ActionResult Edit()
-                {
-                    return View();
-                }
-
-                [System.Web.Mvc.HttpGet]
-                public ActionResult Add()
-                {
-                    using (var repoProvider = new RepoProvider())
-                    {
-                        var players = repoProvider.PlayerRepo.GetAll();
-                        var playerCnt = players.Count();
-                        ViewBag.NbrOfMatchups = Math.Round(playerCnt / 2.0, 0, MidpointRounding.AwayFromZero);
-                        var highestWeekNbr = repoProvider.WeekRepo.GetHighestWeekNumber();
-                        ViewBag.NewWeekNbr = ++highestWeekNbr;
-
-                        var playerList = new List<SelectListItem>();
-                        playerList.Add(new SelectListItem() { Text = "", Value = "" });
-
-                        foreach (var player in players)
-                        {
-                            playerList.Add(new SelectListItem() { Text = player.Name, Value = player.PlayerId.ToString() });
-                        }
-                        ViewBag.PlayerSelectList = playerList;
-
-
-                    }
-                    AddPlayerMatchupViewModel vm = new AddPlayerMatchupViewModel() { WeekNbr = ViewBag.NewWeekNbr, Player1Id = new List<Guid>(), Player2Id = new List<Guid>() };
-                    return View(vm);
-                }
-
-                [ValidateAntiForgeryToken]
-                [System.Web.Mvc.HttpPost]
-                public ActionResult Add(AddPlayerMatchupViewModel vm)
-                {
-                    if (ModelState.IsValid && vm.Player1Id.Count() > 0 && vm.Player2Id.Count() > 0)
-                    {
-                        //Todo:Validate that each player is selected only once.
-                        using (var repoProvider = new RepoProvider())
-                        {
-                            WeekModel weekObj = new WeekModel() { WeekId = Guid.NewGuid(), BeenPlayed = false, WeekNbr = vm.WeekNbr, ScoreCreateDate = DateTime.Now };
-                            repoProvider.WeekRepo.Add(weekObj);
-                            for (int i = 0; i < vm.Player1Id.Count; i++)
-                            {
-                                MatchupModel matchupObj = new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = weekObj.WeekId, Player1 = vm.Player1Id[i], Player2 = vm.Player2Id[i] };
-                                repoProvider.MatchupRepo.Add(matchupObj);
-                            }
-                            repoProvider.SaveAllRepoChanges();
-                        }
-                        return RedirectToAction("Index");
-                    }
-                    return RedirectToAction("Add");
-                }
-              */
     }
 }

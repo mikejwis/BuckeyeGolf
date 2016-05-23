@@ -21,6 +21,7 @@ namespace BuckeyeGolf.Models
         public int BogeyCnt { get; set; }
         public int ParCnt { get; set; }
         public int BirdieCnt { get; set; }
+        public bool SeasonFirstHalf { get; set; }
         public int Handicap { get; set; }
         [Required]
         public Guid PlayerRefId { get; set; }

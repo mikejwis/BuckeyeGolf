@@ -147,6 +147,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AddMatchupController.cs" />
+    <Compile Include="Controllers\AddResultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="Controllers\MatchupsController.cs" />
@@ -273,6 +275,8 @@
     <Content Include="Views\Results\Index.cshtml" />
     <Content Include="Views\Players\Add.cshtml" />
     <Content Include="Views\Players\Index.cshtml" />
+    <Content Include="Views\AddResult\Index.cshtml" />
+    <Content Include="Views\AddMatchup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -295,7 +299,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50404</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

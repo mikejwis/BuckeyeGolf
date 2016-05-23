@@ -12,6 +12,8 @@ namespace BuckeyeGolf.ViewModels
         public Guid WeekId { get; set; }
         [Required]
         public string FrontBack { get; set; }
+        [Required]
+        public string FirstHalf { get; set; }
         public List<AddRoundViewModel> PlayerRounds { get; set; }
     }
 

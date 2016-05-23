@@ -23,11 +23,13 @@ namespace BuckeyeGolf.Models
 
         public GolfDbContext() : base("name=GolfDB")
         {
+            this.Database.CommandTimeout = 120;
         }
     }
 
     public class GolfLeagueInitializer : CreateDatabaseIfNotExists<GolfDbContext>
     {
+        //CreateDatabaseIfNotExists
         protected override void Seed(GolfDbContext context)
         {
             var repoProvider = new RepoProvider(context);
