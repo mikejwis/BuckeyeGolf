@@ -1,5 +1,6 @@
 ﻿using BuckeyeGolf.Models;
 using BuckeyeGolf.Repos;
+using BuckeyeGolf.Services;
 using BuckeyeGolf.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,34 @@ namespace BuckeyeGolf.Controllers
 {
     public class AddMatchupController : Controller
     {
+
+        [System.Web.Mvc.HttpGet]
+        public ActionResult All()
+        {
+            var weekColl = new List<MatchupWeekViewModel>();
+
+            using (var repoProvider = new RepoProvider())
+            {
+                foreach (var week in repoProvider.WeekRepo.GetAll())
+                {
+                    var matchupWeekVM = new MatchupWeekViewModel() { WeekNbr = week.WeekNbr, Matchups = new List<MatchupViewModel>() };
+                    foreach (var matchup in repoProvider.MatchupRepo.GetAllWeeklyMatchups(week.WeekId))
+                    {
+                        var p1 = repoProvider.PlayerRepo.Get(matchup.Player1);
+                        var p2 = repoProvider.PlayerRepo.Get(matchup.Player2);
+
+                        var matchupVM = new MatchupViewModel() { Player1Name = p1.Name, Player2Name = p2.Name };
+                        matchupVM.Player1Handicap = ServiceProvider.HandicapInstance.GetHandicap(repoProvider, week, matchup.Player1);
+                        matchupVM.Player2Handicap = ServiceProvider.HandicapInstance.GetHandicap(repoProvider, week, matchup.Player2);
+                        matchupWeekVM.Matchups.Add(matchupVM);
+                    }
+                    weekColl.Add(matchupWeekVM);
+                }
+            }
+
+            ViewBag.WeeklyMatchups = weekColl.OrderByDescending(w => w.WeekNbr);
+            return View();
+        }
 
         [System.Web.Mvc.HttpGet]
         public ActionResult Index()
@@ -56,10 +85,9 @@ namespace BuckeyeGolf.Controllers
                     }
                     repoProvider.SaveAllRepoChanges();
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("View");
             }
-            return RedirectToAction("Add");
+            return RedirectToAction("Index");
         }
-      
     }
 }

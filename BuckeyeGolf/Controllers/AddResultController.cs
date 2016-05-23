@@ -12,6 +12,45 @@ namespace BuckeyeGolf.Controllers
 {
     public class AddResultController : Controller
     {
+
+        public ActionResult All()
+        {
+            var weekColl = new List<WeekResultsViewModel>();
+
+            using (var repoProvider = new RepoProvider())
+            {
+
+                foreach (var week in repoProvider.WeekRepo.GetPlayedWeeks())
+                {
+                    var weekResultsVM = new WeekResultsViewModel()
+                    {
+                        WeekNbr = week.WeekNbr,
+                        ScoreCreateDate = week.ScoreCreateDate,
+                        PlayerRounds = new List<PlayerRoundViewModel>()
+                    };
+
+                    foreach (var round in repoProvider.RoundRepo.GetWeeklyRounds(week.WeekId))
+                    {
+                        var player = repoProvider.PlayerRepo.Get(round.PlayerRefId);
+                        var playerRoundVM = new PlayerRoundViewModel()
+                        {
+                            TotalPoints = round.TotalPoints,
+                            TotalScore = round.TotalScore,
+                            Name = player.Name,
+                            Birdies = round.BirdieCnt,
+                            Pars = round.ParCnt,
+                            Bogeys = round.BogeyCnt
+                        };
+
+                        weekResultsVM.PlayerRounds.Add(playerRoundVM);
+                    }
+                    weekColl.Add(weekResultsVM);
+                }
+            }
+            ViewBag.WeeklyResults = weekColl.OrderByDescending(w => w.ScoreCreateDate);
+            return View();
+        }
+
         // GET: AddResult
         [HttpGet]
         public ActionResult Index()
@@ -110,9 +149,9 @@ namespace BuckeyeGolf.Controllers
                     }
                     repoProvider.SaveAllRepoChanges();
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("View");
             }
-            return RedirectToAction("Add");
+            return RedirectToAction("Index");
         }
         
 

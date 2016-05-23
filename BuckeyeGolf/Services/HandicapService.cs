@@ -23,6 +23,20 @@ namespace BuckeyeGolf.Services
             _roundParBack = roundParBack;
         }
 
+        public int GetHandicap(RepoProvider repoProvider, WeekModel week, Guid playerId)
+        {
+            var result = 0;
+            if (week.BeenPlayed)
+            {
+                result = repoProvider.RoundRepo.GetWeeklyRound(playerId, week.WeekId).Handicap;
+            }
+            else
+            {
+                result = ServiceProvider.HandicapInstance.CalculateHandicap(playerId);
+            }
+            return result;
+        }
+
         public int CalculateHandicap(Guid playerId)
         {
             //HttpContext.Current.Application.Lock();

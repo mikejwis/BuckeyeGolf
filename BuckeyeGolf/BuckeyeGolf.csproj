@@ -270,9 +270,9 @@
     <Content Include="Views\Leaderboard\Index.cshtml" />
     <Content Include="Views\Matchups\Add.cshtml" />
     <Content Include="Views\Matchups\Edit.cshtml" />
-    <Content Include="Views\Matchups\Index.cshtml" />
+    <Content Include="Views\AddMatchup\All.cshtml" />
     <Content Include="Views\Results\Add.cshtml" />
-    <Content Include="Views\Results\Index.cshtml" />
+    <Content Include="Views\AddResult\All.cshtml" />
     <Content Include="Views\Players\Add.cshtml" />
     <Content Include="Views\Players\Index.cshtml" />
     <Content Include="Views\AddResult\Index.cshtml" />
