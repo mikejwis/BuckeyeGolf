@@ -9,6 +9,16 @@ namespace BuckeyeGolf.Services
 {
     public class ScoringService
     {
+        public List<Score> ExtractScores(List<int> vmScores)
+        {
+            List<Score> retVal = new List<Score>();
+            for (int i = 0; i < vmScores.Count(); i++)
+            {
+                retVal.Add(new Score() { Id = i, ScoreValue = vmScores.ElementAt(i) });
+            }
+            return retVal;
+        }
+
         public List<ScoringResultModel> ScoreMatchup(IEnumerable<int> pars, List<int> player1Round, List<int> player2Round, int player1Handicap, int player2Handicap)
         {
             var result1 = new ScoringResultModel() { Points = 0.0, Birdies = 0, Pars = 0, Bogeys = 0, Eagles = 0};

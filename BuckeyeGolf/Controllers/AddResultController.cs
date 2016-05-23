@@ -117,7 +117,7 @@ namespace BuckeyeGolf.Controllers
                             PlayerRefId = postedRoundPlayer1.PlayerId,
                             RoundId = Guid.NewGuid(),
                             WeekId = vm.WeekId,
-                            Scores = extractScores(postedRoundPlayer1.Scores),
+                            Scores = ServiceProvider.ScoringInstance.ExtractScores(postedRoundPlayer1.Scores),
                             Front = front,
                             SeasonFirstHalf = half,
                             Handicap = p1Handicap,
@@ -133,7 +133,7 @@ namespace BuckeyeGolf.Controllers
                             PlayerRefId = postedRoundPlayer2.PlayerId,
                             RoundId = Guid.NewGuid(),
                             WeekId = vm.WeekId,
-                            Scores = extractScores(postedRoundPlayer2.Scores),
+                            Scores = ServiceProvider.ScoringInstance.ExtractScores(postedRoundPlayer2.Scores),
                             Front = front,
                             SeasonFirstHalf = half,
                             Handicap = p2Handicap,
@@ -293,15 +293,5 @@ namespace BuckeyeGolf.Controllers
                     return RedirectToAction("Add");
                 }
         */
-        private List<Score> extractScores(List<int> vmScores)
-        {
-            List<Score> retVal = new List<Score>();
-            for (int i = 0; i < vmScores.Count(); i++)
-            {
-                retVal.Add(new Score() { Id = i, ScoreValue = vmScores.ElementAt(i) });
-            }
-            return retVal;
-        }
-
     }
 }
