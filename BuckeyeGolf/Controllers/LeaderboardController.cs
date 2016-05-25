@@ -15,6 +15,12 @@ namespace BuckeyeGolf.Controllers
         //GET api/Leaderboard
         public LeaderboardViewModel Get()
         {
+            //return getModelData();
+            return getSeedData();
+        }
+
+        private LeaderboardViewModel getSeedData()
+        {
             var playerVM = new LeaderboardViewModel();
             playerVM.WeeksPlayed = 3;
             playerVM.PlayerSummary = new List<PlayerLeaderboardViewModel>();
@@ -45,30 +51,30 @@ namespace BuckeyeGolf.Controllers
             return playerVM;
         }
 
-        /*        public ActionResult Index()
-                {
-                    var playerSummaryVM = new LeaderboardViewModel();
-                    var playerColl = new List<PlayerLeaderboardViewModel>();
-            
-                    using(var repoProvider = new RepoProvider())
-                    {
-                        playerSummaryVM.WeeksPlayed = repoProvider.WeekRepo.GetPlayedWeeks().Count();
-                        foreach (var player in repoProvider.PlayerRepo.GetAll())
-                        {
-                            var playerVM = new PlayerLeaderboardViewModel() { Name = player.Name };
-                            playerVM.CurrentHandicap = ServiceProvider.HandicapInstance.CalculateHandicap(player.PlayerId);
-                            playerVM.ScoreAvg = repoProvider.RoundRepo.GetPlayerScoreAverage(player.PlayerId);
-                            playerVM.TotalPoints = repoProvider.RoundRepo.GetPlayerTotalPoints(player.PlayerId);
-                            playerVM.Birds = repoProvider.RoundRepo.GetPlayerBirieTotal(player.PlayerId);
-                            playerVM.Pars = repoProvider.RoundRepo.GetPlayerParTotal(player.PlayerId);
-                            playerVM.Bogeys = repoProvider.RoundRepo.GetPlayerBogeyTotal(player.PlayerId);
+        private LeaderboardViewModel getModelData()
+        {
+            var playerSummaryVM = new LeaderboardViewModel();
+            var playerColl = new List<PlayerLeaderboardViewModel>();
 
-                            playerColl.Add(playerVM);
-                        }
-                    }
-                    playerSummaryVM.PlayerSummary = playerColl.OrderByDescending(t => t.TotalPoints).ToList();
-                    return View(playerSummaryVM);
+            using (var repoProvider = new RepoProvider())
+            {
+                playerSummaryVM.WeeksPlayed = repoProvider.WeekRepo.GetPlayedWeeks().Count();
+                foreach (var player in repoProvider.PlayerRepo.GetAll())
+                {
+                    var playerVM = new PlayerLeaderboardViewModel() { Name = player.Name };
+                    playerVM.CurrentHandicap = ServiceProvider.HandicapInstance.CalculateHandicap(player.PlayerId);
+                    playerVM.ScoreAvg = repoProvider.RoundRepo.GetPlayerScoreAverage(player.PlayerId);
+                    playerVM.TotalPoints = repoProvider.RoundRepo.GetPlayerTotalPoints(player.PlayerId);
+                    playerVM.Birds = repoProvider.RoundRepo.GetPlayerBirieTotal(player.PlayerId);
+                    playerVM.Pars = repoProvider.RoundRepo.GetPlayerParTotal(player.PlayerId);
+                    playerVM.Bogeys = repoProvider.RoundRepo.GetPlayerBogeyTotal(player.PlayerId);
+
+                    playerColl.Add(playerVM);
                 }
-         */
+            }
+            playerSummaryVM.PlayerSummary = playerColl.OrderByDescending(t => t.TotalPoints).ToList();
+            return playerSummaryVM;
+        }
+
     }
 }

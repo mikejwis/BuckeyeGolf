@@ -16,6 +16,12 @@ namespace BuckeyeGolf.Controllers
         //GET api/Matchups
         public MatchupSummaryViewModel Get()
         {
+            //return getModelData();
+            return getSeedData();
+        }
+
+        private MatchupSummaryViewModel getSeedData()
+        {
             MatchupSummaryViewModel vm = new MatchupSummaryViewModel();
             List<MatchupWeekViewModel> weekColl = new List<MatchupWeekViewModel>();
 
@@ -83,33 +89,42 @@ namespace BuckeyeGolf.Controllers
 
         }
 
-        // GET: Matchups
-        /*        public ActionResult Index()
+        private MatchupSummaryViewModel getModelData()
+        {
+            MatchupSummaryViewModel vm = new MatchupSummaryViewModel();
+            var weekColl = new List<MatchupWeekViewModel>();
+
+            using (var repoProvider = new RepoProvider())
+            {
+                foreach (var week in repoProvider.WeekRepo.GetAll())
                 {
-                    var weekColl = new List<MatchupWeekViewModel>();
-
-                    using (var repoProvider = new RepoProvider())
+                    var matchupWeekVM = new MatchupWeekViewModel() { WeekNbr = week.WeekNbr, Matchups = new List<MatchupViewModel>() };
+                    foreach (var matchup in repoProvider.MatchupRepo.GetAllWeeklyMatchups(week.WeekId))
                     {
-                        foreach (var week in repoProvider.WeekRepo.GetAll())
-                        {
-                            var matchupWeekVM = new MatchupWeekViewModel() { WeekNbr = week.WeekNbr, Matchups = new List<MatchupViewModel>() };
-                            foreach (var matchup in repoProvider.MatchupRepo.GetAllWeeklyMatchups(week.WeekId))
-                            {
-                                var p1 = repoProvider.PlayerRepo.Get(matchup.Player1);
-                                var p2 = repoProvider.PlayerRepo.Get(matchup.Player2);
+                        var p1 = repoProvider.PlayerRepo.Get(matchup.Player1);
+                        var p2 = repoProvider.PlayerRepo.Get(matchup.Player2);
 
-                                var matchupVM = new MatchupViewModel() { Player1Name = p1.Name, Player2Name = p2.Name };
-                                matchupVM.Player1Handicap = ServiceProvider.HandicapInstance.GetHandicap(repoProvider, week, matchup.Player1);
-                                matchupVM.Player2Handicap = ServiceProvider.HandicapInstance.GetHandicap(repoProvider, week, matchup.Player2);
-                                matchupWeekVM.Matchups.Add(matchupVM);
-                            }
-                            weekColl.Add(matchupWeekVM);
-                        }
+                        var matchupVM = new MatchupViewModel() { Player1Name = p1.Name, Player2Name = p2.Name };
+                        matchupVM.Player1Handicap = ServiceProvider.HandicapInstance.GetHandicap(repoProvider, week, matchup.Player1);
+                        matchupVM.Player2Handicap = ServiceProvider.HandicapInstance.GetHandicap(repoProvider, week, matchup.Player2);
+                        matchupWeekVM.Matchups.Add(matchupVM);
                     }
-
-                    ViewBag.WeeklyMatchups = weekColl.OrderByDescending(w => w.WeekNbr);
-                    return View();
+                    weekColl.Add(matchupWeekVM);
                 }
-        */
+
+                var highestWeekNbr = repoProvider.WeekRepo.GetHighestWeekNumber();
+                vm.NextWeek = ++highestWeekNbr;
+                vm.Players = new List<BasicPlayerViewModel>();
+                foreach (var player in repoProvider.PlayerRepo.GetAll())
+                {
+                    vm.Players.Add(new BasicPlayerViewModel() { Name = player.Name, Id = player.PlayerId });
+                }
+            }
+            
+            vm.Weeks = weekColl.OrderByDescending(w=>w.WeekNbr).ToList();
+
+            return vm;
+        }
+
     }
 }

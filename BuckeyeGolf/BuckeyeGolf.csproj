@@ -277,6 +277,7 @@
     <Content Include="Views\Players\Index.cshtml" />
     <Content Include="Views\AddResult\Index.cshtml" />
     <Content Include="Views\AddMatchup\Index.cshtml" />
+    <Content Include="Views\AddResult\Lead.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

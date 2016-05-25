@@ -17,6 +17,12 @@ namespace BuckeyeGolf.Controllers
         //GET api/Results
         public IEnumerable<WeekResultsViewModel> Get()
         {
+            //return getModelData();
+            return getSeedData();
+        }
+
+        private IEnumerable<WeekResultsViewModel> getSeedData()
+        {
             var weekColl = new List<WeekResultsViewModel>();
 
             var w3Rounds = new List<PlayerRoundViewModel>();
@@ -48,7 +54,7 @@ namespace BuckeyeGolf.Controllers
             w2Rounds.Add(new PlayerRoundViewModel() { Name = "David", TotalScore = 51, TotalPoints = 5, Birdies = 0, Pars = 1, Bogeys = 2 });
             w2Rounds.Add(new PlayerRoundViewModel() { Name = "Brandon", TotalScore = 57, TotalPoints = 3.5, Birdies = 0, Pars = 0, Bogeys = 1 });
             weekColl.Add(new WeekResultsViewModel() { WeekNbr = 2, ScoreCreateDate = new DateTime(2016, 5, 16), PlayerRounds = w2Rounds });
-           
+
             var w1Rounds = new List<PlayerRoundViewModel>();
             w1Rounds.Add(new PlayerRoundViewModel() { Name = "Keith", TotalScore = 43, TotalPoints = 12.5, Birdies = 1, Pars = 1, Bogeys = 5 });
             w1Rounds.Add(new PlayerRoundViewModel() { Name = "Mark", TotalScore = 50, TotalPoints = 9.5, Birdies = 0, Pars = 2, Bogeys = 3 });
@@ -66,143 +72,141 @@ namespace BuckeyeGolf.Controllers
             return weekColl.OrderByDescending(w => w.ScoreCreateDate);
         }
 
-        // GET: Results
-        /*        public ActionResult Index()
+        private IEnumerable<WeekResultsViewModel> getModelData()
+        {
+            var weekColl = new List<WeekResultsViewModel>();
+
+            using (var repoProvider = new RepoProvider())
+            {
+
+                foreach (var week in repoProvider.WeekRepo.GetPlayedWeeks())
                 {
-                    var weekColl = new List<WeekResultsViewModel>();
-
-                    using (var repoProvider = new RepoProvider())
+                    var weekResultsVM = new WeekResultsViewModel()
                     {
+                        WeekNbr = week.WeekNbr,
+                        ScoreCreateDate = week.ScoreCreateDate,
+                        PlayerRounds = new List<PlayerRoundViewModel>()
+                    };
 
-                        foreach (var week in repoProvider.WeekRepo.GetPlayedWeeks())
+                    foreach (var round in repoProvider.RoundRepo.GetWeeklyRounds(week.WeekId))
+                    {
+                        var player = repoProvider.PlayerRepo.Get(round.PlayerRefId);
+                        var playerRoundVM = new PlayerRoundViewModel()
                         {
-                            var weekResultsVM = new WeekResultsViewModel()
-                            {
-                                WeekNbr = week.WeekNbr,
-                                ScoreCreateDate = week.ScoreCreateDate,
-                                PlayerRounds = new List<PlayerRoundViewModel>()
-                            };
+                            TotalPoints = round.TotalPoints,
+                            TotalScore = round.TotalScore,
+                            Name = player.Name,
+                            Birdies = round.BirdieCnt,
+                            Pars = round.ParCnt,
+                            Bogeys = round.BogeyCnt
+                        };
 
-                            foreach (var round in repoProvider.RoundRepo.GetWeeklyRounds(week.WeekId))
-                            {
-                                var player = repoProvider.PlayerRepo.Get(round.PlayerRefId);
-                                var playerRoundVM = new PlayerRoundViewModel()
-                                {
-                                    TotalPoints = round.TotalPoints,
-                                    TotalScore = round.TotalScore,
-                                    Name = player.Name,
-                                    Birdies = round.BirdieCnt,
-                                    Pars = round.ParCnt,
-                                    Bogeys = round.BogeyCnt
-                                };
-
-                                weekResultsVM.PlayerRounds.Add(playerRoundVM);
-                            }
-                            weekColl.Add(weekResultsVM);
-                        }
+                        weekResultsVM.PlayerRounds.Add(playerRoundVM);
                     }
-                    ViewBag.WeeklyResults = weekColl.OrderByDescending(w => w.ScoreCreateDate);
-                    return View();
+                    weekColl.Add(weekResultsVM);
                 }
+            }
+            return weekColl.OrderByDescending(w => w.ScoreCreateDate);
+        }
+        /*
+        [HttpGet]
+        public ActionResult Add()
+        {
+            AddRoundWeekViewModel vm = new AddRoundWeekViewModel() { PlayerRounds = new List<AddRoundViewModel>() };
+            ViewBag.Empty = true;
 
-                [HttpGet]
-                public ActionResult Add()
+            using (var repoProvider = new RepoProvider())
+            {
+                var week = repoProvider.WeekRepo.GetFirstUnplayedWeek();
+                if (week != null)
                 {
-                    AddRoundWeekViewModel vm = new AddRoundWeekViewModel() { PlayerRounds = new List<AddRoundViewModel>() };
-                    ViewBag.Empty = true;
+                    ViewBag.Empty = false;
+                    vm.WeekNbr = week.WeekNbr;
+                    vm.WeekId = week.WeekId;
+                    ViewBag.WeekNbr = week.WeekNbr;
 
-                    using (var repoProvider = new RepoProvider())
+                    foreach (var player in repoProvider.PlayerRepo.GetAll())
                     {
-                        var week = repoProvider.WeekRepo.GetFirstUnplayedWeek();
-                        if (week != null)
-                        {
-                            ViewBag.Empty = false;
-                            vm.WeekNbr = week.WeekNbr;
-                            vm.WeekId = week.WeekId;
-                            ViewBag.WeekNbr = week.WeekNbr;
-
-                            foreach (var player in repoProvider.PlayerRepo.GetAll())
-                            {
-                                var roundScores = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-                                vm.PlayerRounds.Add(new AddRoundViewModel() { PlayerId = player.PlayerId, PlayerName = player.Name, Scores = roundScores });
-                            }
-
-                            var frontBackList = new List<string>();
-                            frontBackList.Add("Front");
-                            frontBackList.Add("Back");
-                            ViewBag.FrontBackList = frontBackList;
-                        }
+                        var roundScores = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                        vm.PlayerRounds.Add(new AddRoundViewModel() { PlayerId = player.PlayerId, PlayerName = player.Name, Scores = roundScores });
                     }
-                    return View(vm);
-                }
 
-                [ValidateAntiForgeryToken]
-                [HttpPost]
-                public ActionResult Add(AddRoundWeekViewModel vm)
+                    var frontBackList = new List<string>();
+                    frontBackList.Add("Front");
+                    frontBackList.Add("Back");
+                    ViewBag.FrontBackList = frontBackList;
+                }
+            }
+            return View(vm);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Add(AddRoundWeekViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var repoProvider = new RepoProvider())
                 {
-                    if (ModelState.IsValid)
+                    var week = repoProvider.WeekRepo.Get(vm.WeekId);
+                    week.BeenPlayed = true;
+                    week.ScoreCreateDate = DateTime.Now;
+
+                    bool front = vm.FrontBack.Equals("Front");
+                    var course = repoProvider.CourseRepo.Get();
+
+                    var pars = front ? repoProvider.ParRepo.GetFrontPars(course.CourseId) :
+                        repoProvider.ParRepo.GetBackPars(course.CourseId);
+                    var parList = pars.Select(p => p.ParValue);
+
+                    var matchups = repoProvider.MatchupRepo.GetAllWeeklyMatchups(vm.WeekId);
+                    foreach (var matchup in matchups)
                     {
-                        using (var repoProvider = new RepoProvider())
+                        var postedRoundPlayer1 = vm.PlayerRounds.First(r => r.PlayerId.CompareTo(matchup.Player1) == 0);
+                        var postedRoundPlayer2 = vm.PlayerRounds.First(r => r.PlayerId.CompareTo(matchup.Player2) == 0);
+                        var p1Handicap = ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player1);
+                        var p2Handicap = ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player2);
+                        List<ScoringResultModel> scoringResults = ServiceProvider.ScoringInstance.ScoreMatchup(parList, postedRoundPlayer1.Scores, postedRoundPlayer2.Scores, p1Handicap, p2Handicap);
+
+                        var p1NewRound = new RoundModel()
                         {
-                            var week = repoProvider.WeekRepo.Get(vm.WeekId);
-                            week.BeenPlayed = true;
-                            week.ScoreCreateDate = DateTime.Now;
-
-                            bool front = vm.FrontBack.Equals("Front");
-                            var course = repoProvider.CourseRepo.Get();
-
-                            var pars = front ? repoProvider.ParRepo.GetFrontPars(course.CourseId) :
-                                repoProvider.ParRepo.GetBackPars(course.CourseId);
-                            var parList = pars.Select(p => p.ParValue);
-
-                            var matchups = repoProvider.MatchupRepo.GetAllWeeklyMatchups(vm.WeekId);
-                            foreach (var matchup in matchups)
-                            {
-                                var postedRoundPlayer1 = vm.PlayerRounds.First(r => r.PlayerId.CompareTo(matchup.Player1) == 0);
-                                var postedRoundPlayer2 = vm.PlayerRounds.First(r => r.PlayerId.CompareTo(matchup.Player2) == 0);
-                                var p1Handicap = ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player1);
-                                var p2Handicap = ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player2);
-                                List<ScoringResultModel> scoringResults = ServiceProvider.ScoringInstance.ScoreMatchup(parList, postedRoundPlayer1.Scores, postedRoundPlayer2.Scores, p1Handicap, p2Handicap);
-
-                                var p1NewRound = new RoundModel()
-                                {
-                                    PlayerRefId = postedRoundPlayer1.PlayerId,
-                                    RoundId = Guid.NewGuid(),
-                                    WeekId = vm.WeekId,
-                                    Scores = ServiceProvider.ScoringInstance.ExtractScores(postedRoundPlayer1.Scores),
-                                    Front = front,
-                                    Handicap = p1Handicap,
-                                    TotalScore = ServiceProvider.ScoringInstance.RoundTotalScore(postedRoundPlayer1.Scores),
-                                    TotalPoints = scoringResults[0].Points,
-                                    BirdieCnt = scoringResults[0].Birdies,
-                                    ParCnt = scoringResults[0].Pars,
-                                    EagleCnt = scoringResults[0].Eagles,
-                                    BogeyCnt = scoringResults[0].Bogeys
-                                };
-                                var p2NewRound = new RoundModel()
-                                {
-                                    PlayerRefId = postedRoundPlayer2.PlayerId,
-                                    RoundId = Guid.NewGuid(),
-                                    WeekId = vm.WeekId,
-                                    Scores = ServiceProvider.ScoringInstance.ExtractScores(postedRoundPlayer2.Scores),
-                                    Front = front,
-                                    Handicap = p2Handicap,
-                                    TotalScore = ServiceProvider.ScoringInstance.RoundTotalScore(postedRoundPlayer2.Scores),
-                                    TotalPoints = scoringResults[1].Points,
-                                    BirdieCnt = scoringResults[1].Birdies,
-                                    ParCnt = scoringResults[1].Pars,
-                                    EagleCnt = scoringResults[1].Eagles,
-                                    BogeyCnt = scoringResults[1].Bogeys
-                                };
-                                repoProvider.RoundRepo.Add(p1NewRound);
-                                repoProvider.RoundRepo.Add(p2NewRound);
-                            }
-                            repoProvider.SaveAllRepoChanges();
-                        }
-                        return RedirectToAction("Index");
+                            PlayerRefId = postedRoundPlayer1.PlayerId,
+                            RoundId = Guid.NewGuid(),
+                            WeekId = vm.WeekId,
+                            Scores = ServiceProvider.ScoringInstance.ExtractScores(postedRoundPlayer1.Scores),
+                            Front = front,
+                            Handicap = p1Handicap,
+                            TotalScore = ServiceProvider.ScoringInstance.RoundTotalScore(postedRoundPlayer1.Scores),
+                            TotalPoints = scoringResults[0].Points,
+                            BirdieCnt = scoringResults[0].Birdies,
+                            ParCnt = scoringResults[0].Pars,
+                            EagleCnt = scoringResults[0].Eagles,
+                            BogeyCnt = scoringResults[0].Bogeys
+                        };
+                        var p2NewRound = new RoundModel()
+                        {
+                            PlayerRefId = postedRoundPlayer2.PlayerId,
+                            RoundId = Guid.NewGuid(),
+                            WeekId = vm.WeekId,
+                            Scores = ServiceProvider.ScoringInstance.ExtractScores(postedRoundPlayer2.Scores),
+                            Front = front,
+                            Handicap = p2Handicap,
+                            TotalScore = ServiceProvider.ScoringInstance.RoundTotalScore(postedRoundPlayer2.Scores),
+                            TotalPoints = scoringResults[1].Points,
+                            BirdieCnt = scoringResults[1].Birdies,
+                            ParCnt = scoringResults[1].Pars,
+                            EagleCnt = scoringResults[1].Eagles,
+                            BogeyCnt = scoringResults[1].Bogeys
+                        };
+                        repoProvider.RoundRepo.Add(p1NewRound);
+                        repoProvider.RoundRepo.Add(p2NewRound);
                     }
-                    return RedirectToAction("Add");
+                    repoProvider.SaveAllRepoChanges();
                 }
-        */
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Add");
+        }
+*/
     }
 }

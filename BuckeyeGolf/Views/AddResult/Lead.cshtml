@@ -1,0 +1,33 @@
+﻿
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Leaderboard through <b>@Model.WeeksPlayed</b> weeks of play:</h3>
+        <p>&nbsp;</p>
+    </div>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Player</th>
+            <th>Total Points</th>
+            <th>Season Avg Score</th>
+            <th>Current Handicap</th>
+            <th>Total Birds</th>
+            <th>Total Pars</th>
+            <th>Total Bogeys</th>
+        </tr>
+    </thead>
+    @foreach (var player in Model.PlayerSummary)
+            {
+        <tr>
+            <td>@player.Name</td>
+            <td>@player.TotalPoints</td>
+            <td>@player.ScoreAvg</td>
+            <td>@player.CurrentHandicap</td>
+            <td>@player.Birds</td>
+            <td>@player.Pars</td>
+            <td>@player.Bogeys</td>
+        </tr>
+    }
+</table>
