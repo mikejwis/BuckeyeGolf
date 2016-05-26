@@ -25,7 +25,7 @@
             $http.get('/api/Leaderboard').then(function (results) {
                 d.resolve(results.data);
             }, function (error) {
-                toastr.error(error, 'Error');
+                //toastr.error(error, 'Error');
                 d.reject(error);
             });
             return d.promise;
@@ -36,7 +36,7 @@
             $http.get('/api/Results').then(function (results) {
                 d.resolve(results.data);
             }, function (error) {
-                toastr.error(error, 'Error');
+                //toastr.error(error, 'Error');
                 d.reject(error);
             });
             return d.promise;
@@ -53,7 +53,7 @@
                     //matchupsDownloaded = true;
                     d.resolve(results.data);
                 }, function (error) {
-                    toastr.error(error, 'Error');
+                    //toastr.error(error, 'Error');
                     d.reject(error);
                 });
             }

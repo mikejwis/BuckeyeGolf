@@ -201,11 +201,13 @@
     <Content Include="App\leaderboard.controller.js" />
     <Content Include="App\matchups.controller.js" />
     <Content Include="App\results.controller.js" />
+    <Content Include="App\spinner.service.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Buckeye.gif" />
+    <Content Include="Content\CustomSpinner.css" />
     <Content Include="Error.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

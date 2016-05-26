@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Web;
+using System.Web.Caching;
 using System.Web.Http;
 
 namespace BuckeyeGolf.Controllers
@@ -15,8 +17,14 @@ namespace BuckeyeGolf.Controllers
         //GET api/Leaderboard
         public LeaderboardViewModel Get()
         {
-            //return getModelData();
-            return getSeedData();
+            LeaderboardViewModel leaderboardVM = HttpRuntime.Cache["Leaderboard"] as LeaderboardViewModel;
+            if (leaderboardVM == null)
+            {
+                leaderboardVM = getModelData();
+                HttpRuntime.Cache.Insert("Leaderboard", leaderboardVM, null, DateTime.Now.AddMinutes(60), Cache.NoSlidingExpiration);
+            }
+            return leaderboardVM;
+            //return getSeedData();
         }
 
         private LeaderboardViewModel getSeedData()

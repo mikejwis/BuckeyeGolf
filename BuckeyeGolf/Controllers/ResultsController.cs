@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Net;
+using System.Web.Caching;
 
 namespace BuckeyeGolf.Controllers
 {
@@ -17,8 +18,14 @@ namespace BuckeyeGolf.Controllers
         //GET api/Results
         public IEnumerable<WeekResultsViewModel> Get()
         {
-            //return getModelData();
-            return getSeedData();
+            IEnumerable<WeekResultsViewModel> resultsVM = HttpRuntime.Cache["RoundResults"] as IEnumerable<WeekResultsViewModel>;
+            if (resultsVM == null)
+            {
+                resultsVM = getModelData();
+                HttpRuntime.Cache.Insert("RoundResults", resultsVM, null, DateTime.Now.AddMinutes(60), Cache.NoSlidingExpiration);
+            }
+            return resultsVM;
+            //return getSeedData();
         }
 
         private IEnumerable<WeekResultsViewModel> getSeedData()

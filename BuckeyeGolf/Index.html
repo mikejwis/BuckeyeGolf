@@ -5,10 +5,12 @@
     <title>BuckeyeGolf</title>
     <link href="Content/site.css" rel="stylesheet" />
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/CustomSpinner.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.2/toastr.min.css">
 </head>
 <body>
     <div ng-app="app">
+        <div id="spinner" class="hidden">Loading...</div>
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -53,6 +55,6 @@
     <script src="app/matchups.controller.js"></script>
     <script src="app/results.controller.js"></script>
     <script src="app/data.service.js"></script>
-        
+    <script src="app/spinner.service.js"></script>
 </body>
 </html>

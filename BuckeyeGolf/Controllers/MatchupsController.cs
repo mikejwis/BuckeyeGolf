@@ -8,6 +8,8 @@ using BuckeyeGolf.Repos;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web;
+using System.Web.Caching;
 
 namespace BuckeyeGolf.Controllers
 {
@@ -16,8 +18,14 @@ namespace BuckeyeGolf.Controllers
         //GET api/Matchups
         public MatchupSummaryViewModel Get()
         {
-            //return getModelData();
-            return getSeedData();
+            MatchupSummaryViewModel matchupVM = HttpRuntime.Cache["MatchupSummary"] as MatchupSummaryViewModel;
+            if (matchupVM == null)
+            {
+                matchupVM = getModelData();
+                HttpRuntime.Cache.Insert("MatchupSummary", matchupVM, null, DateTime.Now.AddMinutes(60), Cache.NoSlidingExpiration);
+            }
+            return matchupVM;
+            //return getSeedData();
         }
 
         private MatchupSummaryViewModel getSeedData()

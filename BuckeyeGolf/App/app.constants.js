@@ -3,5 +3,6 @@
 
     angular
         .module('app')
-        .constant('toastr', toastr);
+        .constant('toastr', toastr)
+        .constant('jquery',$);
 })();
