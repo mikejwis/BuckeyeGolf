@@ -53,3 +53,7 @@ textarea {
 .hidden { 
     display: none;
 }
+
+th > a {
+    color: black;
+}

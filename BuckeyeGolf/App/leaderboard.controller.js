@@ -9,6 +9,9 @@
     function Leaderboard(spinnerservice, dataservice, $scope, $state, $stateParams) {
         var vm = this;
         vm.data = {};
+        vm.sortBy = 'totalPoints';
+        vm.sortReverse = true;
+        vm.sortClick = SortClick;
 
         Activate();
 
@@ -22,6 +25,15 @@
                 spinnerservice.stop();
                 toastr.error(err, "Failure on Retrieving Data");
             });
+        }
+
+        function SortClick(newSortBy) {
+            if (vm.sortBy == newSortBy) vm.sortReverse = !vm.sortReverse;
+            else {
+                vm.sortBy = newSortBy;
+                vm.sortReverse = true;
+            }
+            
         }
     }
 })();

@@ -7,6 +7,8 @@ using System.Web;
 
 namespace BuckeyeGolf.Models
 {
+    //public enum MatchupResult { Win, Loss, Tie };
+
     public class RoundModel
     {
         [Key]
@@ -17,11 +19,15 @@ namespace BuckeyeGolf.Models
         public int TotalScore { get; set; }
         public List<Score> Scores { get; set; }
         public double TotalPoints { get; set; }
+        //public int AttendancePoints { get; set; }
+        //public int MatchupPoints { get; set; }
+        //public double ScoringPoints { get; set; }
         public int EagleCnt { get; set; }
         public int BogeyCnt { get; set; }
         public int ParCnt { get; set; }
         public int BirdieCnt { get; set; }
         public bool SeasonFirstHalf { get; set; }
+        //public MatchupResult Result { get; set; }
         public int Handicap { get; set; }
         [Required]
         public Guid PlayerRefId { get; set; }

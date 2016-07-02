@@ -8,15 +8,51 @@
     <thead>
         <tr>
             <th>Player</th>
-            <th>Total Points</th>
-            <th>Season Avg Score</th>
-            <th>Current Handicap</th>
-            <th>Total Birds</th>
-            <th>Total Pars</th>
-            <th>Total Bogeys</th>
+            <th>
+                <a ng-click="vm.sortClick('totalPoints')">
+                    Total Points
+                    <span ng-show="vm.sortBy == 'totalPoints' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="vm.sortBy == 'totalPoints' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                </a>
+            </th>
+            <th>
+                <a ng-click="vm.sortClick('scoreAvg')">
+                    Season Avg Score
+                    <span ng-show="vm.sortBy == 'scoreAvg' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="vm.sortBy == 'scoreAvg' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                </a>
+            </th>
+            <th>
+                <a ng-click="vm.sortClick('currentHandicap')">
+                    Current Handicap
+                    <span ng-show="vm.sortBy == 'currentHandicap' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="vm.sortBy == 'currentHandicap' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                </a>
+            </th>
+            <th>
+                <a ng-click="vm.sortClick('birds')">
+                    Total Birds
+                    <span ng-show="vm.sortBy == 'birds' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="vm.sortBy == 'birds' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                </a>
+            </th>
+            <th>
+                <a ng-click="vm.sortClick('pars')">
+                    Total Pars
+                    <span ng-show="vm.sortBy == 'pars' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="vm.sortBy == 'pars' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                </a>
+            </th>
+            <th>
+                <a ng-click="vm.sortClick('bogeys')">
+                    Total Bogeys
+                    <span ng-show="vm.sortBy == 'bogeys' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                    <span ng-show="vm.sortBy == 'bogeys' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                </a>
+            </th>
         </tr>
     </thead>
-    <tr ng-repeat="player in vm.data.playerSummary">
+    <tr ng-repeat="player in vm.data.playerSummary | orderBy:vm.sortBy:vm.sortReverse">
         <td>{{player.name}}</td>
         <td>{{player.totalPoints}}</td>
         <td>{{player.scoreAvg}}</td>
