@@ -25,6 +25,14 @@ namespace BuckeyeGolf.Repos
             return Math.Round(tmpAvg, 2);
         }
 
+        public double GetPlayerScoreAverage(Guid playerId, bool firstHalf)
+        {
+            var tmpAvg = 0.0;
+            var rounds = DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.TotalScore != 0 && r.SeasonFirstHalf == firstHalf);
+            if (rounds.Count() > 0) tmpAvg = rounds.Average(r => r.TotalScore);
+            return Math.Round(tmpAvg, 2);
+        }
+
         public int GetPlayerLowRound(Guid playerId)
         {
             var tmpLow = 0;
@@ -49,10 +57,26 @@ namespace BuckeyeGolf.Repos
             return totalPts;
         }
 
+        public double GetPlayerTotalPoints(Guid playerId, bool firstHalf)
+        {
+            var totalPts = 0.0;
+            var rounds = DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.SeasonFirstHalf == firstHalf);
+            if (rounds.Count() > 0) totalPts = rounds.Sum(r => r.TotalPoints);
+            return totalPts;
+        }
+
         public int GetPlayerBirieTotal(Guid playerId)
         {
             var total = 0;
             var rounds = DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0);
+            if (rounds.Count() > 0) total = rounds.Sum(r => r.BirdieCnt);
+            return total;
+        }
+
+        public int GetPlayerBirieTotal(Guid playerId, bool firstHalf)
+        {
+            var total = 0;
+            var rounds = DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.SeasonFirstHalf == firstHalf);
             if (rounds.Count() > 0) total = rounds.Sum(r => r.BirdieCnt);
             return total;
         }
@@ -65,6 +89,14 @@ namespace BuckeyeGolf.Repos
             return total;
         }
 
+        public int GetPlayerParTotal(Guid playerId, bool firstHalf)
+        {
+            var total = 0;
+            var rounds = DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.SeasonFirstHalf == firstHalf);
+            if (rounds.Count() > 0) total = rounds.Sum(r => r.ParCnt);
+            return total;
+        }
+
         public int GetPlayerBogeyTotal(Guid playerId)
         {
             var total = 0;
@@ -72,7 +104,15 @@ namespace BuckeyeGolf.Repos
             if (rounds.Count() > 0) total = rounds.Sum(r => r.BogeyCnt);
             return total;
         }
-        
+
+        public int GetPlayerBogeyTotal(Guid playerId, bool firstHalf)
+        {
+            var total = 0;
+            var rounds = DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.SeasonFirstHalf == firstHalf);
+            if (rounds.Count() > 0) total = rounds.Sum(r => r.BogeyCnt);
+            return total;
+        }
+
         public RoundModel GetWeeklyRound(Guid playerId, Guid weekId)
         {
             return DataSet.Single(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.WeekId.CompareTo(weekId) == 0);

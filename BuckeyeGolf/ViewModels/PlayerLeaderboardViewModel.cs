@@ -19,6 +19,7 @@ namespace BuckeyeGolf.ViewModels
     public class LeaderboardViewModel
     {
         public int WeeksPlayed { get; set; }
-        public List<PlayerLeaderboardViewModel> PlayerSummary { get; set; }
+        public List<PlayerLeaderboardViewModel> FirstHalfPlayerSummary { get; set; }
+        public List<PlayerLeaderboardViewModel> SecondHalfPlayerSummary { get; set; }
     }
 }
