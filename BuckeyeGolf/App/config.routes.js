@@ -24,12 +24,17 @@
                 $stateProvider.state("addMatchups", {
                     url: "/matchups/add",
                     templateUrl: "/templates/addmatchups.html",
-                    controller: "Matchups as vm"
+                    controller: "AddMatchups as vm"
                 });
                 $stateProvider.state("results", {
                     url: "/results",
                     templateUrl: "/templates/results.html",
                     controller: "Results as vm"
+                });
+                $stateProvider.state("addResults", {
+                    url: "/results/add",
+                    templateUrl: "/templates/addresults.html",
+                    controller: "AddResults as vm"
                 });
 
                 $urlRouterProvider.otherwise('/');

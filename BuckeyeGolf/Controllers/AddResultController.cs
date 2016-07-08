@@ -5,86 +5,39 @@ using BuckeyeGolf.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace BuckeyeGolf.Controllers
 {
-    public class AddResultController : Controller
+    [System.Web.Http.Route("api/Results/Add")]
+    public class AddResultController : ApiController
     {
 
-        public ActionResult All()
-        {
-            var weekColl = new List<WeekResultsViewModel>();
-
-            using (var repoProvider = new RepoProvider())
-            {
-
-                foreach (var week in repoProvider.WeekRepo.GetPlayedWeeks())
-                {
-                    var weekResultsVM = new WeekResultsViewModel()
-                    {
-                        WeekNbr = week.WeekNbr,
-                        ScoreCreateDate = week.ScoreCreateDate,
-                        PlayerRounds = new List<PlayerRoundViewModel>()
-                    };
-
-                    foreach (var round in repoProvider.RoundRepo.GetWeeklyRounds(week.WeekId))
-                    {
-                        var player = repoProvider.PlayerRepo.Get(round.PlayerRefId);
-                        var playerRoundVM = new PlayerRoundViewModel()
-                        {
-                            TotalPoints = round.TotalPoints,
-                            TotalScore = round.TotalScore,
-                            Name = player.Name,
-                            Birdies = round.BirdieCnt,
-                            Pars = round.ParCnt,
-                            Bogeys = round.BogeyCnt
-                        };
-
-                        weekResultsVM.PlayerRounds.Add(playerRoundVM);
-                    }
-                    weekColl.Add(weekResultsVM);
-                }
-            }
-            ViewBag.WeeklyResults = weekColl.OrderByDescending(w => w.ScoreCreateDate);
-            return View();
-        }
-
-        // GET: AddResult
-        [HttpGet]
-        public ActionResult Index()
+        public AddRoundWeekViewModel Get()
         {
             AddRoundWeekViewModel vm = new AddRoundWeekViewModel() { PlayerRounds = new List<AddRoundViewModel>() };
-            ViewBag.Empty = true;
 
             using (var repoProvider = new RepoProvider())
             {
                 var week = repoProvider.WeekRepo.GetFirstUnplayedWeek();
                 if (week != null)
                 {
-                    ViewBag.Empty = false;
                     vm.WeekNbr = week.WeekNbr;
                     vm.WeekId = week.WeekId;
-                    ViewBag.WeekNbr = week.WeekNbr;
 
                     foreach (var player in repoProvider.PlayerRepo.GetAll())
                     {
                         var roundScores = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
                         vm.PlayerRounds.Add(new AddRoundViewModel() { PlayerId = player.PlayerId, PlayerName = player.Name, Scores = roundScores });
                     }
-
-                    var frontBackList = new List<string>();
-                    frontBackList.Add("Front");
-                    frontBackList.Add("Back");
-                    ViewBag.FrontBackList = frontBackList;
                 }
             }
-            return View(vm);
+            return vm;
         }
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        public ActionResult Index(AddRoundWeekViewModel vm)
+
+        public async Task<IHttpActionResult> Post(AddRoundWeekViewModel vm)
         {
             if (ModelState.IsValid)
             {
@@ -149,9 +102,9 @@ namespace BuckeyeGolf.Controllers
                     }
                     repoProvider.SaveAllRepoChanges();
                 }
-                return RedirectToAction("All");
+                return Ok();
             }
-            return RedirectToAction("Index");
+            return BadRequest();
         }
         
 

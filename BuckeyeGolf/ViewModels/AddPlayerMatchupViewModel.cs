@@ -9,10 +9,8 @@ namespace BuckeyeGolf.ViewModels
     public class AddPlayerMatchupViewModel
     {
         [Required]
-        public int WeekNbr { get; set; }
+        public int NextWeek { get; set; }
         [Required]
-        public List<Guid> Player1Id { get; set; }
-        [Required]
-        public List<Guid> Player2Id { get; set; }
+        public List<BasicPlayerViewModel> Players { get; set; }
     }
 }

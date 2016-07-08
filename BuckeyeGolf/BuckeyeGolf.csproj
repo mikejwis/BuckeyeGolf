@@ -169,6 +169,7 @@
     <Compile Include="Repos\ParRespository.cs" />
     <Compile Include="Services\ScoringService.cs" />
     <Compile Include="ValidationAttributes\DuplicateNameValidationAttribute.cs" />
+    <Compile Include="ViewModels\AddNewPlayerMatchupViewModel.cs" />
     <Compile Include="ViewModels\AddPlayersViewModel.cs" />
     <Compile Include="ViewModels\BasicPlayerViewModel.cs" />
     <Compile Include="ViewModels\PlayercardViewModel.cs" />
@@ -192,6 +193,8 @@
     <Compile Include="ViewModels\WeekResultsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\addmatchups.controller.js" />
+    <Content Include="App\addresults.controller.js" />
     <Content Include="App\app.constants.js" />
     <Content Include="App\app.module.js" />
     <Content Include="App\config.exceptions.js" />
@@ -252,6 +255,7 @@
     <Content Include="src\factory.Chart.js" />
     <Content Include="src\module.golfApp.js" />
     <Content Include="Templates\addmatchups.html" />
+    <Content Include="Templates\addresults.html" />
     <Content Include="Templates\home.html" />
     <Content Include="Templates\leaderboard.html" />
     <Content Include="Templates\matchups.html" />

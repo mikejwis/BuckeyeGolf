@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace BuckeyeGolf.Repos
@@ -102,6 +103,11 @@ namespace BuckeyeGolf.Repos
         public void SaveAllRepoChanges()
         {
             _context.SaveChanges();
+        }
+
+        public async Task SaveAllRepoChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
 
         public void Dispose()

@@ -1,0 +1,58 @@
+﻿
+<form ng-submit="vm.add(vm.data)" name="addResults">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Add Results for Week #{{vm.data.weekNbr}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <p>Front/Back:</p>
+        </div>
+        <div class="col-md-10">
+            <p>
+                <span><input ng-model="vm.data.frontBack" id="FrontBack_front" name="FrontBack" type="radio" value="Front" required /> Front</span>&nbsp;&nbsp;
+                <span><input ng-model="vm.data.frontBack" id="FrontBack_back" name="FrontBack" type="radio" value="Back" required /> Back</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <p>Season Half:</p>
+        </div>
+        <div class="col-md-10">
+            <p>
+                <span><input ng-model="vm.data.firstHalf" id="FirstHalf_first" name="FirstHalf" type="radio" value="First" required /> First</span>&nbsp;&nbsp;
+                <span><input ng-model="vm.data.firstHalf" id="FirstHalf_second" name="FirstHalf" type="radio" value="Second" required /> Second</span>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="result in vm.data.playerRounds">
+                <td>{{result.playerName}}</td>
+                <td ng-repeat="(i, score) in result.scores track by $index">
+                    <input class="scoreInput" type="number" ng-model="result.scores[i]" required />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12">
+            <p></p>
+            <input type="submit" value="Submit" class="btn btn-primary" ng-disabled="!addResults.$valid" />
+        </div>
+    </div>
+</form>
