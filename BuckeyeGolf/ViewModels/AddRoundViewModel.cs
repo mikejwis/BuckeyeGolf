@@ -8,6 +8,7 @@ namespace BuckeyeGolf.ViewModels
 {
     public class AddRoundWeekViewModel
     {
+        public bool HasUnplayedWeeks { get; set; }
         public int WeekNbr { get; set; }
         public Guid WeekId { get; set; }
         [Required]

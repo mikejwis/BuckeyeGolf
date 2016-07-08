@@ -22,8 +22,11 @@ namespace BuckeyeGolf.Controllers
             using (var repoProvider = new RepoProvider())
             {
                 var week = repoProvider.WeekRepo.GetFirstUnplayedWeek();
+                vm.HasUnplayedWeeks = false;
+
                 if (week != null)
                 {
+                    vm.HasUnplayedWeeks = true;
                     vm.WeekNbr = week.WeekNbr;
                     vm.WeekId = week.WeekId;
 

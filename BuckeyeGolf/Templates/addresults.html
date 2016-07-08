@@ -1,5 +1,9 @@
-﻿
-<form ng-submit="vm.add(vm.data)" name="addResults">
+﻿<div class="row" ng-show="vm.data.hasUnplayedWeeks==false">
+    <div class="col-md-12">
+        <h3>All rounds have been played.  Please add matchups for the week before adding results.</h3>
+    </div>
+</div>
+<form ng-submit="vm.add(vm.data)" name="addResults" ng-show="vm.data.hasUnplayedWeeks==true">
     <div class="row">
         <div class="col-md-12">
             <h2>Add Results for Week #{{vm.data.weekNbr}}</h2>
