@@ -42,6 +42,7 @@
                 <th>7</th>
                 <th>8</th>
                 <th>9</th>
+                <th>Total</th>
             </tr>
         </thead>
         <tbody>
@@ -50,6 +51,7 @@
                 <td ng-repeat="(i, score) in result.scores track by $index">
                     <input class="scoreInput" type="number" ng-model="result.scores[i]" required />
                 </td>
+                <td>{{vm.sum(result.scores)}}</td>
             </tr>
         </tbody>
     </table>

@@ -13,6 +13,7 @@
         vm.list = [];
         vm.newViewResults = [];
         vm.add = addNewResults;
+        vm.sum = sumRow;
 
         Activate();
 
@@ -29,6 +30,14 @@
                 spinnerservice.stop();
                 toastr.error(err, "Error");
             });
+        }
+
+        function sumRow(list) {
+            var total = 0;
+            angular.forEach(list, function (item) {
+                total += item;
+            });
+            return total;
         }
 
         function addNewResults(newResults) {
