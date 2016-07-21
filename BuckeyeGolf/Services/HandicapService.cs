@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using BuckeyeGolf.Models;
 using BuckeyeGolf.Repos;
+using System.Threading.Tasks;
 
 namespace BuckeyeGolf.Services
 {
@@ -23,7 +24,7 @@ namespace BuckeyeGolf.Services
             _roundParBack = roundParBack;
         }
 
-        public int GetHandicap(RepoProvider repoProvider, WeekModel week, Guid playerId)
+        public async Task<int> GetHandicap(RepoProvider repoProvider, WeekModel week, Guid playerId)
         {
             var result = 0;
             if (week.BeenPlayed)
@@ -32,12 +33,12 @@ namespace BuckeyeGolf.Services
             }
             else
             {
-                result = ServiceProvider.HandicapInstance.CalculateHandicap(playerId);
+                result = await ServiceProvider.HandicapInstance.CalculateHandicap(playerId);
             }
             return result;
         }
 
-        public int CalculateHandicap(Guid playerId)
+        public async Task<int> CalculateHandicap(Guid playerId)
         {
             //HttpContext.Current.Application.Lock();
             //HttpContext.Current.Application["Name"] = "Value";
@@ -46,12 +47,13 @@ namespace BuckeyeGolf.Services
 
             using(var repoProvider = new RepoProvider())
             {
-                var weeks = repoProvider.WeekRepo.GetPlayedWeeks().OrderByDescending(w => w.WeekNbr).ToList();
+                var weeksUnsorted = repoProvider.WeekRepo.GetPlayedWeeks();
+                var weeks = weeksUnsorted.OrderByDescending(w => w.WeekNbr).ToList();
                 var runningTotal = 0.0;
                 var nbrRoundsWithScore = 0;
                 var parTotal = 0;
                 var overParTotal = 0.0;
-                var player = repoProvider.PlayerRepo.Get(playerId);
+                var player = await repoProvider.PlayerRepo.Get(playerId);
                 for (int i = 0; i < _handicapWeeks && i < weeks.Count(); i++)
                 {
                     var round = repoProvider.RoundRepo.GetWeeklyRound(playerId, weeks[i].WeekId);

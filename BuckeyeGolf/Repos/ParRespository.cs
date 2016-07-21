@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace BuckeyeGolf.Repos
@@ -12,14 +14,14 @@ namespace BuckeyeGolf.Repos
 
         public ParRespository(GolfDbContext context) : base(context) { }
 
-        public List<Par> GetFrontPars(Guid courseId)
+        public async Task<List<Par>> GetFrontPars(Guid courseId)
         {
-            return DataSet.Where(p => p.CourseRefId.CompareTo(courseId) == 0 && p.Front==true).OrderBy(p=>p.Id).ToList();
+            return await DataSet.Where(p => p.CourseRefId.CompareTo(courseId) == 0 && p.Front==true).OrderBy(p=>p.Id).ToListAsync();
         }
 
-        public List<Par> GetBackPars(Guid courseId)
+        public async Task<List<Par>> GetBackPars(Guid courseId)
         {
-            return DataSet.Where(p => p.CourseRefId.CompareTo(courseId) == 0 && p.Front==false).OrderBy(p => p.Id).ToList();
+            return await DataSet.Where(p => p.CourseRefId.CompareTo(courseId) == 0 && p.Front==false).OrderBy(p => p.Id).ToListAsync();
         }
     }
 }

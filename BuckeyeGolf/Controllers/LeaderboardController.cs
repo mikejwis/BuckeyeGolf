@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Http;
@@ -15,51 +16,19 @@ namespace BuckeyeGolf.Controllers
     public class LeaderboardController : ApiController
     {
         //GET api/Leaderboard
-        public LeaderboardViewModel Get()
+        public async Task<LeaderboardViewModel> Get()
         {
             LeaderboardViewModel leaderboardVM = HttpRuntime.Cache["Leaderboard"] as LeaderboardViewModel;
             if (leaderboardVM == null)
             {
-                leaderboardVM = getModelData();
+                leaderboardVM = await getModelData();
                 HttpRuntime.Cache.Insert("Leaderboard", leaderboardVM, null, DateTime.Now.AddMinutes(60), Cache.NoSlidingExpiration);
             }
             return leaderboardVM;
-            //return getSeedData();
         }
 
-        private LeaderboardViewModel getSeedData()
-        {
-            var playerVM = new LeaderboardViewModel();
-            playerVM.WeeksPlayed = 3;
-            playerVM.FirstHalfPlayerSummary = new List<PlayerLeaderboardViewModel>();
-            var p1 = new PlayerLeaderboardViewModel() { Name = "Len", TotalPoints = 28.5, ScoreAvg = 44.67, CurrentHandicap = 9, Birds = 0, Pars = 8, Bogeys = 11 };
-            playerVM.FirstHalfPlayerSummary.Add(p1);
-            var p2 = new PlayerLeaderboardViewModel() { Name = "Keith", TotalPoints = 28.5, ScoreAvg = 47, CurrentHandicap = 11, Birds = 1, Pars = 5, Bogeys = 11 };
-            playerVM.FirstHalfPlayerSummary.Add(p2);
-            var p3 = new PlayerLeaderboardViewModel() { Name = "Mark", TotalPoints = 27.5, ScoreAvg = 49, CurrentHandicap = 13, Birds = 0, Pars = 4, Bogeys = 11 };
-            playerVM.FirstHalfPlayerSummary.Add(p3);
-            var p4 = new PlayerLeaderboardViewModel() { Name = "Kevin", TotalPoints = 25.5, ScoreAvg = 49.67, CurrentHandicap = 15, Birds = 0, Pars = 4, Bogeys = 7 };
-            playerVM.FirstHalfPlayerSummary.Add(p4);
-            var p5 = new PlayerLeaderboardViewModel() { Name = "Todd", TotalPoints = 18, ScoreAvg = 53, CurrentHandicap = 15, Birds = 0, Pars = 2, Bogeys = 8 };
-            playerVM.FirstHalfPlayerSummary.Add(p5);
-            var p6 = new PlayerLeaderboardViewModel() { Name = "Bill", TotalPoints = 17, ScoreAvg = 56.67, CurrentHandicap = 20, Birds = 0, Pars = 2, Bogeys = 4 };
-            playerVM.FirstHalfPlayerSummary.Add(p6);
-            var p7 = new PlayerLeaderboardViewModel() { Name = "Mike", TotalPoints = 16.5, ScoreAvg = 58.67, CurrentHandicap = 19, Birds = 1, Pars = 1, Bogeys = 1 };
-            playerVM.FirstHalfPlayerSummary.Add(p7);
-            var p8 = new PlayerLeaderboardViewModel() { Name = "Tom S", TotalPoints = 16.5, ScoreAvg = 51.33, CurrentHandicap = 13, Birds = 0, Pars = 2, Bogeys = 5 };
-            playerVM.FirstHalfPlayerSummary.Add(p8);
-            var p9 = new PlayerLeaderboardViewModel() { Name = "Brandon", TotalPoints = 16, ScoreAvg = 55.33, CurrentHandicap = 19, Birds = 0, Pars = 1, Bogeys = 4 };
-            playerVM.FirstHalfPlayerSummary.Add(p9);
-            var p10 = new PlayerLeaderboardViewModel() { Name = "David", TotalPoints = 14.5, ScoreAvg = 50, CurrentHandicap = 12, Birds = 0, Pars = 1, Bogeys = 7 };
-            playerVM.FirstHalfPlayerSummary.Add(p10);
-            var p11 = new PlayerLeaderboardViewModel() { Name = "Emil", TotalPoints = 14, ScoreAvg = 69, CurrentHandicap = 30, Birds = 0, Pars = 0, Bogeys = 4 };
-            playerVM.FirstHalfPlayerSummary.Add(p11);
-            var p12 = new PlayerLeaderboardViewModel() { Name = "Jack", TotalPoints = 13, ScoreAvg = 56.67, CurrentHandicap = 18, Birds = 0, Pars = 2, Bogeys = 4 };
-            playerVM.FirstHalfPlayerSummary.Add(p12);
-            return playerVM;
-        }
 
-        private LeaderboardViewModel getModelData()
+        private async Task<LeaderboardViewModel> getModelData()
         {
             var playerSummaryVM = new LeaderboardViewModel();
             var firstHalfPlayerColl = new List<PlayerLeaderboardViewModel>();
@@ -69,10 +38,10 @@ namespace BuckeyeGolf.Controllers
             {
                 playerSummaryVM.WeeksPlayed = repoProvider.WeekRepo.GetPlayedWeeks().Count();
                 //first half
-                foreach (var player in repoProvider.PlayerRepo.GetAll())
+                foreach (var player in await repoProvider.PlayerRepo.GetAll())
                 {
                     var playerVM = new PlayerLeaderboardViewModel() { Name = player.Name };
-                    playerVM.CurrentHandicap = ServiceProvider.HandicapInstance.CalculateHandicap(player.PlayerId);
+                    playerVM.CurrentHandicap = await ServiceProvider.HandicapInstance.CalculateHandicap(player.PlayerId);
                     playerVM.ScoreAvg = repoProvider.RoundRepo.GetPlayerScoreAverage(player.PlayerId, true);
                     playerVM.TotalPoints = repoProvider.RoundRepo.GetPlayerTotalPoints(player.PlayerId, true);
                     playerVM.Birds = repoProvider.RoundRepo.GetPlayerBirieTotal(player.PlayerId, true);
@@ -82,10 +51,10 @@ namespace BuckeyeGolf.Controllers
                     firstHalfPlayerColl.Add(playerVM);
                 }
                 //second half
-                foreach (var player in repoProvider.PlayerRepo.GetAll())
+                foreach (var player in await repoProvider.PlayerRepo.GetAll())
                 {
                     var playerVM = new PlayerLeaderboardViewModel() { Name = player.Name };
-                    playerVM.CurrentHandicap = ServiceProvider.HandicapInstance.CalculateHandicap(player.PlayerId);
+                    playerVM.CurrentHandicap = await ServiceProvider.HandicapInstance.CalculateHandicap(player.PlayerId);
                     playerVM.ScoreAvg = repoProvider.RoundRepo.GetPlayerScoreAverage(player.PlayerId, false);
                     playerVM.TotalPoints = repoProvider.RoundRepo.GetPlayerTotalPoints(player.PlayerId, false);
                     playerVM.Birds = repoProvider.RoundRepo.GetPlayerBirieTotal(player.PlayerId, false);

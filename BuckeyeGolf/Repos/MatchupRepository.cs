@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 using BuckeyeGolf.Models;
+using System.Threading.Tasks;
 
 namespace BuckeyeGolf.Repos
 {
@@ -12,9 +14,9 @@ namespace BuckeyeGolf.Repos
 
         public MatchupRepository(GolfDbContext context) : base(context) { }
 
-        public List<MatchupModel> GetAllWeeklyMatchups(Guid weekId)
+        public async Task<List<MatchupModel>> GetAllWeeklyMatchups(Guid weekId)
         {
-            return DataSet.Where(m => m.WeekId.CompareTo(weekId) == 0).ToList();
+            return await DataSet.Where(m => m.WeekId.CompareTo(weekId) == 0).ToListAsync();
         }
 
     }

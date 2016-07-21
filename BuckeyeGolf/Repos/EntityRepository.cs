@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace BuckeyeGolf.Repos
@@ -24,9 +25,9 @@ namespace BuckeyeGolf.Repos
             DataSet = _context.Set<T>();
         }
 
-        public List<T> GetAll()
+        public async Task<List<T>> GetAll()
         {
-            return DataSet.ToList();
+            return await DataSet.ToListAsync();
         }
 
         public void Add(T entity)

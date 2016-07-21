@@ -5,6 +5,7 @@ using BuckeyeGolf.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -15,7 +16,7 @@ namespace BuckeyeGolf.Controllers
     public class AddResultController : ApiController
     {
 
-        public AddRoundWeekViewModel Get()
+        public async Task<AddRoundWeekViewModel> Get()
         {
             AddRoundWeekViewModel vm = new AddRoundWeekViewModel() { PlayerRounds = new List<AddRoundViewModel>() };
 
@@ -30,7 +31,7 @@ namespace BuckeyeGolf.Controllers
                     vm.WeekNbr = week.WeekNbr;
                     vm.WeekId = week.WeekId;
 
-                    foreach (var player in repoProvider.PlayerRepo.GetAll())
+                    foreach (var player in await repoProvider.PlayerRepo.GetAll())
                     {
                         var roundScores = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
                         vm.PlayerRounds.Add(new AddRoundViewModel() { PlayerId = player.PlayerId, PlayerName = player.Name, Scores = roundScores });
@@ -53,19 +54,19 @@ namespace BuckeyeGolf.Controllers
                     bool front = vm.FrontBack.Equals("Front");
                     var course = repoProvider.CourseRepo.Get();
 
-                    var pars = front ? repoProvider.ParRepo.GetFrontPars(course.CourseId) :
-                        repoProvider.ParRepo.GetBackPars(course.CourseId);
+                    var pars = front ? await repoProvider.ParRepo.GetFrontPars(course.CourseId) :
+                        await repoProvider.ParRepo.GetBackPars(course.CourseId);
                     var parList = pars.Select(p => p.ParValue);
 
                     bool half = vm.FirstHalf.Equals("First");
 
-                    var matchups = repoProvider.MatchupRepo.GetAllWeeklyMatchups(vm.WeekId);
+                    var matchups = await repoProvider.MatchupRepo.GetAllWeeklyMatchups(vm.WeekId);
                     foreach (var matchup in matchups)
                     {
                         var postedRoundPlayer1 = vm.PlayerRounds.First(r => r.PlayerId.CompareTo(matchup.Player1) == 0);
                         var postedRoundPlayer2 = vm.PlayerRounds.First(r => r.PlayerId.CompareTo(matchup.Player2) == 0);
-                        var p1Handicap = ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player1);
-                        var p2Handicap = ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player2);
+                        var p1Handicap = await ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player1);
+                        var p2Handicap = await ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player2);
                         List<ScoringResultModel> scoringResults = ServiceProvider.ScoringInstance.ScoreMatchup(parList, postedRoundPlayer1.Scores, postedRoundPlayer2.Scores, p1Handicap, p2Handicap);
 
                         var p1NewRound = new RoundModel()

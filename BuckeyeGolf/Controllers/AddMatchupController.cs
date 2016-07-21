@@ -14,7 +14,7 @@ namespace BuckeyeGolf.Controllers
     [System.Web.Http.Route("api/Matchups/Add")]
     public class AddMatchupController : ApiController
     {
-        public AddPlayerMatchupViewModel Get()
+        public async Task<AddPlayerMatchupViewModel> Get()
         {
             AddPlayerMatchupViewModel vm = new AddPlayerMatchupViewModel();
 
@@ -23,7 +23,7 @@ namespace BuckeyeGolf.Controllers
                 var highestWeekNbr = repoProvider.WeekRepo.GetHighestWeekNumber();
                 vm.NextWeek = ++highestWeekNbr;
                 vm.Players = new List<BasicPlayerViewModel>();
-                foreach (var player in repoProvider.PlayerRepo.GetAll())
+                foreach (var player in await repoProvider.PlayerRepo.GetAll())
                 {
                     vm.Players.Add(new BasicPlayerViewModel() { Name = player.Name, Id = player.PlayerId });
                 }

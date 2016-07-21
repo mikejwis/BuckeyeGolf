@@ -10,18 +10,19 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web;
 using System.Web.Caching;
+using System.Threading.Tasks;
 
 namespace BuckeyeGolf.Controllers
 {
     public class MatchupsController : ApiController
     {
         //GET api/Matchups
-        public MatchupSummaryViewModel Get()
+        public async Task<MatchupSummaryViewModel> Get()
         {
             MatchupSummaryViewModel matchupVM = HttpRuntime.Cache["MatchupSummary"] as MatchupSummaryViewModel;
             if (matchupVM == null)
             {
-                matchupVM = getModelData();
+                matchupVM = await getModelData();
                 HttpRuntime.Cache.Insert("MatchupSummary", matchupVM, null, DateTime.Now.AddMinutes(60), Cache.NoSlidingExpiration);
             }
             return matchupVM;
@@ -97,24 +98,24 @@ namespace BuckeyeGolf.Controllers
 
         }
 
-        private MatchupSummaryViewModel getModelData()
+        private async Task<MatchupSummaryViewModel> getModelData()
         {
             MatchupSummaryViewModel vm = new MatchupSummaryViewModel();
             var weekColl = new List<MatchupWeekViewModel>();
 
             using (var repoProvider = new RepoProvider())
             {
-                foreach (var week in repoProvider.WeekRepo.GetAll())
+                foreach (var week in await repoProvider.WeekRepo.GetAll())
                 {
                     var matchupWeekVM = new MatchupWeekViewModel() { WeekNbr = week.WeekNbr, Matchups = new List<MatchupViewModel>() };
-                    foreach (var matchup in repoProvider.MatchupRepo.GetAllWeeklyMatchups(week.WeekId))
+                    foreach (var matchup in await repoProvider.MatchupRepo.GetAllWeeklyMatchups(week.WeekId))
                     {
-                        var p1 = repoProvider.PlayerRepo.Get(matchup.Player1);
-                        var p2 = repoProvider.PlayerRepo.Get(matchup.Player2);
+                        var p1 = await repoProvider.PlayerRepo.Get(matchup.Player1);
+                        var p2 = await repoProvider.PlayerRepo.Get(matchup.Player2);
 
                         var matchupVM = new MatchupViewModel() { Player1Name = p1.Name, Player2Name = p2.Name };
-                        matchupVM.Player1Handicap = ServiceProvider.HandicapInstance.GetHandicap(repoProvider, week, matchup.Player1);
-                        matchupVM.Player2Handicap = ServiceProvider.HandicapInstance.GetHandicap(repoProvider, week, matchup.Player2);
+                        matchupVM.Player1Handicap = await ServiceProvider.HandicapInstance.GetHandicap(repoProvider, week, matchup.Player1);
+                        matchupVM.Player2Handicap = await ServiceProvider.HandicapInstance.GetHandicap(repoProvider, week, matchup.Player2);
                         matchupWeekVM.Matchups.Add(matchupVM);
                     }
                     weekColl.Add(matchupWeekVM);
@@ -123,7 +124,7 @@ namespace BuckeyeGolf.Controllers
                 var highestWeekNbr = repoProvider.WeekRepo.GetHighestWeekNumber();
                 vm.NextWeek = ++highestWeekNbr;
                 vm.Players = new List<BasicPlayerViewModel>();
-                foreach (var player in repoProvider.PlayerRepo.GetAll())
+                foreach (var player in await repoProvider.PlayerRepo.GetAll())
                 {
                     vm.Players.Add(new BasicPlayerViewModel() { Name = player.Name, Id = player.PlayerId });
                 }
