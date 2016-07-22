@@ -1,11 +1,11 @@
 ﻿'use strict';
 
 (function () {
-    angular.module('golfApp').factory('chartSvc', chartSvc);
+    angular.module('app').factory('chartservice', chartservice);
 
-    chartSvc.$inject = ['$q'];
+    chartservice.$inject = ['$q'];
 
-    function chartSvc($q) {
+    function chartservice($q) {
         var service = {
             loadChartObjects: loadChartObjects
         };

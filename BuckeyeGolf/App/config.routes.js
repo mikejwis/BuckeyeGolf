@@ -36,6 +36,11 @@
                     templateUrl: "/templates/addresults.html",
                     controller: "AddResults as vm"
                 });
+                $stateProvider.state("player", {
+                    url: "/player/:pid",
+                    templateUrl: "/templates/player.html",
+                    controller: "Player as vm"
+                });
 
                 $urlRouterProvider.otherwise('/');
             }

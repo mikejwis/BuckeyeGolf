@@ -152,7 +152,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="Controllers\MatchupsController.cs" />
-    <Compile Include="Controllers\PlayersController.cs" />
+    <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\RoundsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -190,6 +190,7 @@
     <Compile Include="ViewModels\AddRoundViewModel.cs" />
     <Compile Include="ViewModels\MatchupViewModel.cs" />
     <Compile Include="ViewModels\PlayerLeaderboardViewModel.cs" />
+    <Compile Include="ViewModels\WeeklyRoundViewModel.cs" />
     <Compile Include="ViewModels\WeekResultsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -197,12 +198,15 @@
     <Content Include="App\addresults.controller.js" />
     <Content Include="App\app.constants.js" />
     <Content Include="App\app.module.js" />
+    <Content Include="App\bootstrapLoader.js" />
+    <Content Include="App\chart.service.js" />
     <Content Include="App\config.exceptions.js" />
     <Content Include="App\config.routes.js" />
     <Content Include="App\data.service.js" />
     <Content Include="App\home.controller.js" />
     <Content Include="App\leaderboard.controller.js" />
     <Content Include="App\matchups.controller.js" />
+    <Content Include="App\player.controller.js" />
     <Content Include="App\results.controller.js" />
     <Content Include="App\spinner.service.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -228,7 +232,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\BuckeyeGolf.pubxml" />
-    <Content Include="GraphTest.html" />
     <Content Include="Index.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
@@ -250,15 +253,12 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="src\chartLoader.js" />
-    <Content Include="src\controller.Profile.js" />
-    <Content Include="src\factory.Chart.js" />
-    <Content Include="src\module.golfApp.js" />
     <Content Include="Templates\addmatchups.html" />
     <Content Include="Templates\addresults.html" />
     <Content Include="Templates\home.html" />
     <Content Include="Templates\leaderboard.html" />
     <Content Include="Templates\matchups.html" />
+    <Content Include="Templates\player.html" />
     <Content Include="Templates\results.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -272,10 +272,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Leaderboard\Index.cshtml" />
-    <Content Include="Views\Matchups\Add.cshtml" />
-    <Content Include="Views\Matchups\Edit.cshtml" />
-    <Content Include="Views\Results\Add.cshtml" />
     <Content Include="Views\Players\Add.cshtml" />
     <Content Include="Views\Players\Index.cshtml" />
   </ItemGroup>

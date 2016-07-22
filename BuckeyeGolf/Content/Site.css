@@ -57,3 +57,68 @@ textarea {
 th > a {
     color: black;
 }
+
+.playerTable th{
+    text-align: center;
+}
+
+.playerTable td{
+    text-align: center;
+}
+
+.playerStatItem {
+    margin: 0 0 0 20px;
+    border: 1px solid #adadad;
+    width: 70px;
+    height: 65px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.playerStatCellHead {
+    font-size: 0.9em;
+    vertical-align: middle;
+    border: 1px solid #dbdcdc;
+    background-color: rgb(236, 237, 237);
+    margin: 0;
+    padding: 0;
+}
+
+.playerStatCellBody {
+    font-size: 1.3em;
+    vertical-align: middle;
+    align-content:center;
+    text-align:center;
+    border-top: 1px solid #adadad;
+    margin: 0;
+    padding: 0;
+    padding-top: 8px;
+}
+
+
+.playerStatRow {
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.playerStatCell {
+    float: right;
+}
+
+.playerStatTable {
+    width: 100%;
+}
+
+#chartDiv {
+    margin-bottom: 55px;
+}
+
+@media only screen and (max-width: 488px) {
+    .playerStatItem {
+        display: none;
+    }
+    .playerStatRow {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+}

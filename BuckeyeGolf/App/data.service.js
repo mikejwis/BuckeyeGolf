@@ -15,7 +15,7 @@
             addMatchups: addMatchups,
             addResults: addResults,
             addPlayer: addPlayer,
-            getPlayer: getPlayer
+            getPlayerDetails: getPlayer
         };
 
         var cachedMatchups = [];
@@ -127,8 +127,14 @@
 
         }
 
-        function getPlayer() {
-
+        function getPlayer(getParams) {
+            var d = $q.defer();
+            $http.get('/api/Player/' + getParams).then(function (results) {
+                d.resolve(results.data);
+            }, function (error) {
+                d.reject(error);
+            });
+            return d.promise;
         }
     }
 })();

@@ -1,0 +1,73 @@
+﻿
+<div class="row playerStatRow">
+    <div class="col-md-2">&nbsp;</div>
+    <div class="col-md-8 col-xs-12">
+        <table class="playerStatTable">
+            <tr>
+                <td><h1>{{vm.list.name}}</h1></td>
+                <td class="playerStatCell">
+                    <div class="playerStatItem">
+                        <p class="playerStatCellHead">High Rnd</p>
+                        <p class="playerStatCellBody">{{vm.list.seasonHigh}}</p>
+                    </div>
+                </td>
+                <td class="playerStatCell">
+                    <div class="playerStatItem">
+                        <p class="playerStatCellHead">Low Rnd</p>
+                        <p class="playerStatCellBody">{{vm.list.seasonLow}}</p>
+                    </div>
+                </td>
+
+                <td class="playerStatCell">
+                    <div class="playerStatItem">
+                        <p class="playerStatCellHead">Avg Score</p>
+                        <p class="playerStatCellBody">{{vm.list.avgScore}}</p>
+                    </div>
+                </td>
+                <td class="playerStatCell">
+                    <div class="playerStatItem">
+                        <p class="playerStatCellHead">Handicap</p>
+                        <p class="playerStatCellBody">{{vm.list.handicap}}</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-2">&nbsp;</div>
+</div>
+<div class="row">
+    <div class="col-md-2 hidden-xs hidden-sm"></div>
+    <div class="col-md-8 col-sm-12 hidden-xs">
+        <div id="chartDiv"></div>
+    </div>
+    <div class="col-md-2 hidden-xs hidden-sm"></div>
+</div>
+<div class="row">
+    <div class="col-md-2">&nbsp;</div>
+    <div class="col-md-8 col-xs-12">
+        <table class="table table-striped playerTable">
+            <thead>
+                <tr>
+                    <th>Week</th>
+                    <th>Score</th>
+                    <th>Points</th>
+                    <th>Birds</th>
+                    <th>Pars</th>
+                    <th>Bogeys</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="round in vm.list.weeklyRounds | orderBy:weekNbr:true">
+                    <td>{{round.weekNbr}}</td>
+                    <td>{{round.score}}</td>
+                    <td>{{round.points}}</td>
+                    <td>{{round.birdies}}</td>
+                    <td>{{round.pars}}</td>
+                    <td>{{round.bogeys}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-2">&nbsp;</div>
+</div>
+

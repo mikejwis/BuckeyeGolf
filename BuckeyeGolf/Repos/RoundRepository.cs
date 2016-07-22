@@ -17,6 +17,11 @@ namespace BuckeyeGolf.Repos
             return DataSet.Where(r => r.WeekId.CompareTo(weekId) == 0).ToList();
         }
 
+        public List<RoundModel> GetPlayerRounds(Guid playerId)
+        {
+            return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0).ToList();
+        }
+
         public double GetPlayerScoreAverage(Guid playerId)
         {
             var tmpAvg = 0.0;

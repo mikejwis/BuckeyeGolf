@@ -2,6 +2,6 @@
 
 //Bootstrap angular instead of including in html to allow google charts to load first
 google.setOnLoadCallback(function () {
-    angular.bootstrap(document.body, ['golfApp']);
+    angular.bootstrap(document.body, ['app']);
 });
-google.load('visualization', '1', { packages: ['corechart','line'] });
+google.load('visualization', '1', { packages: ['corechart', 'line'] });
