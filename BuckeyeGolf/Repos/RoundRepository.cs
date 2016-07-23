@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 using BuckeyeGolf.Models;
+using System.Threading.Tasks;
 
 namespace BuckeyeGolf.Repos
 {
@@ -12,14 +14,14 @@ namespace BuckeyeGolf.Repos
 
         public RoundRepository(GolfDbContext context) : base(context) { }
 
-        public List<RoundModel> GetWeeklyRounds(Guid weekId)
+        public async Task<List<RoundModel>> GetWeeklyRounds(Guid weekId)
         {
-            return DataSet.Where(r => r.WeekId.CompareTo(weekId) == 0).ToList();
+            return await DataSet.Where(r => r.WeekId.CompareTo(weekId) == 0).ToListAsync();
         }
 
-        public List<RoundModel> GetPlayerRounds(Guid playerId)
+        public async Task<List<RoundModel>> GetPlayerRounds(Guid playerId)
         {
-            return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0).ToList();
+            return await DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0).ToListAsync();
         }
 
         public double GetPlayerScoreAverage(Guid playerId)

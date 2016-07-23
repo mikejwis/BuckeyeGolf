@@ -47,7 +47,7 @@ namespace BuckeyeGolf.Services
 
             using(var repoProvider = new RepoProvider())
             {
-                var weeksUnsorted = repoProvider.WeekRepo.GetPlayedWeeks();
+                var weeksUnsorted = await repoProvider.WeekRepo.GetPlayedWeeks();
                 var weeks = weeksUnsorted.OrderByDescending(w => w.WeekNbr).ToList();
                 var runningTotal = 0.0;
                 var nbrRoundsWithScore = 0;

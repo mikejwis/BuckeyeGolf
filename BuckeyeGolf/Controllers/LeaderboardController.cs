@@ -36,7 +36,7 @@ namespace BuckeyeGolf.Controllers
 
             using (var repoProvider = new RepoProvider())
             {
-                playerSummaryVM.WeeksPlayed = repoProvider.WeekRepo.GetPlayedWeeks().Count();
+                playerSummaryVM.WeeksPlayed = (await repoProvider.WeekRepo.GetPlayedWeeks()).Count();
                 //first half
                 foreach (var player in await repoProvider.PlayerRepo.GetAll())
                 {

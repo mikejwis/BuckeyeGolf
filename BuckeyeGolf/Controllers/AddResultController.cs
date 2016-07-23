@@ -47,15 +47,14 @@ namespace BuckeyeGolf.Controllers
             {
                 using (var repoProvider = new RepoProvider())
                 {
-                    var week = repoProvider.WeekRepo.Get(vm.WeekId);
+                    var week = await repoProvider.WeekRepo.Get(vm.WeekId);
                     week.BeenPlayed = true;
                     week.ScoreCreateDate = DateTime.Now;
 
                     bool front = vm.FrontBack.Equals("Front");
                     var course = repoProvider.CourseRepo.Get();
-
-                    var pars = front ? await repoProvider.ParRepo.GetFrontPars(course.CourseId) :
-                        await repoProvider.ParRepo.GetBackPars(course.CourseId);
+                    var pars = front ? HttpContext.Current.Application["FrontPars"] as List<Par> :
+                        HttpContext.Current.Application["BackPars"] as List<Par>;
                     var parList = pars.Select(p => p.ParValue);
 
                     bool half = vm.FirstHalf.Equals("First");

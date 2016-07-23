@@ -30,6 +30,13 @@ namespace BuckeyeGolf
             Application.Add("RoundParFront", configSettings.RoundParFront);
             Application.Add("RoundParBack", configSettings.RoundParBack);
 
+            var courseSettings = new CourseRepository(dbContext).Get();
+            var parRepo = new ParRespository(dbContext);
+            var frontPars = parRepo.GetFrontPars(courseSettings.CourseId);
+            var backPars = parRepo.GetBackPars(courseSettings.CourseId);
+            Application.Add("FrontPars", frontPars);
+            Application.Add("BackPars", backPars);
+
         }
     }
 }

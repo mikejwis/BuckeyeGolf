@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 using BuckeyeGolf.Models;
+using System.Threading.Tasks;
 
 namespace BuckeyeGolf.Repos
 {
@@ -12,9 +14,9 @@ namespace BuckeyeGolf.Repos
 
         public WeekRepository(GolfDbContext context) : base(context) { }
 
-        public WeekModel Get(Guid id)
+        public async Task<WeekModel> Get(Guid id)
         {
-            return DataSet.Single(w => w.WeekId.CompareTo(id) == 0);
+            return await DataSet.SingleAsync(w => w.WeekId.CompareTo(id) == 0);
         }
 
         public int GetHighestWeekNumber()
@@ -24,9 +26,9 @@ namespace BuckeyeGolf.Repos
             return retVal;
         }
 
-        public List<WeekModel> GetPlayedWeeks()
+        public async Task<List<WeekModel>> GetPlayedWeeks()
         {
-            return DataSet.Where(w => w.BeenPlayed == true).ToList();
+            return await DataSet.Where(w => w.BeenPlayed == true).ToListAsync();
         }
 
         public List<WeekModel> GetUnplayedWeeks()

@@ -35,7 +35,7 @@ namespace BuckeyeGolf.Controllers
             using (var repoProvider = new RepoProvider())
             {
 
-                foreach (var week in repoProvider.WeekRepo.GetPlayedWeeks())
+                foreach (var week in await repoProvider.WeekRepo.GetPlayedWeeks())
                 {
                     var weekResultsVM = new WeekResultsViewModel()
                     {
@@ -44,7 +44,7 @@ namespace BuckeyeGolf.Controllers
                         PlayerRounds = new List<PlayerRoundViewModel>()
                     };
 
-                    foreach (var round in repoProvider.RoundRepo.GetWeeklyRounds(week.WeekId))
+                    foreach (var round in await repoProvider.RoundRepo.GetWeeklyRounds(week.WeekId))
                     {
                         var player = await repoProvider.PlayerRepo.Get(round.PlayerRefId);
                         var playerRoundVM = new PlayerRoundViewModel()

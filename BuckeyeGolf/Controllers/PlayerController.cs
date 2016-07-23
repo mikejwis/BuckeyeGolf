@@ -46,11 +46,11 @@ namespace BuckeyeGolf.Controllers
                     vm.SeasonHigh = repoProvider.RoundRepo.GetPlayerHighRound(player.PlayerId);
                     vm.WeeklyRounds = new List<WeeklyRoundViewModel>();
 
-                    var pRound = repoProvider.RoundRepo.GetPlayerRounds(pGuid);
+                    var pRound = await repoProvider.RoundRepo.GetPlayerRounds(pGuid);
 
                     foreach (var round in pRound)
                     {
-                        var weekNumber = repoProvider.WeekRepo.Get(round.WeekId).WeekNbr;
+                        var weekModel = await repoProvider.WeekRepo.Get(round.WeekId);
 
                         vm.WeeklyRounds.Add(new WeeklyRoundViewModel()
                         {
@@ -59,7 +59,7 @@ namespace BuckeyeGolf.Controllers
                             Bogeys = round.BogeyCnt,
                             Points = round.TotalPoints,
                             Score = round.TotalScore,
-                            WeekNbr = weekNumber
+                            WeekNbr = weekModel.WeekNbr
                         });
                     }
                     vm.WeeklyRounds = vm.WeeklyRounds.OrderBy(r => r.WeekNbr).ToList();
