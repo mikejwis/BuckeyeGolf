@@ -41,6 +41,11 @@
                     templateUrl: "/templates/player.html",
                     controller: "Player as vm"
                 });
+                $stateProvider.state("random", {
+                    url: "/matchups/random/:weekNbr",
+                    templateUrl: "/templates/random.html",
+                    controller: "Random as vm"
+                });
 
                 $urlRouterProvider.otherwise('/');
             }

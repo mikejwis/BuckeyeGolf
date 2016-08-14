@@ -1,0 +1,22 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h3>Random Matchup without duplicates starting from week: {{vm.data.weekNbr}}</h3>
+        <p>&nbsp;</p>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Player1</th>
+                <th>vs</th>
+                <th>Player2</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="matchup in vm.data.matchups">
+            <td>{{matchup.player1Name}}</td>
+            <td>vs</td>
+            <td>{{matchup.player2Name}}</td>
+        </tr>
+    </table>
+</div>

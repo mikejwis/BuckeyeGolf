@@ -153,6 +153,7 @@
     <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="Controllers\MatchupsController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\RandomController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\RoundsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -207,6 +208,7 @@
     <Content Include="App\leaderboard.controller.js" />
     <Content Include="App\matchups.controller.js" />
     <Content Include="App\player.controller.js" />
+    <Content Include="App\random.controller.js" />
     <Content Include="App\results.controller.js" />
     <Content Include="App\spinner.service.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -259,6 +261,7 @@
     <Content Include="Templates\leaderboard.html" />
     <Content Include="Templates\matchups.html" />
     <Content Include="Templates\player.html" />
+    <Content Include="Templates\random.html" />
     <Content Include="Templates\results.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

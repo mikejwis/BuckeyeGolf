@@ -15,7 +15,8 @@
             addMatchups: addMatchups,
             addResults: addResults,
             addPlayer: addPlayer,
-            getPlayerDetails: getPlayer
+            getPlayerDetails: getPlayer,
+            getRandomMatchups: getRandomMatchups
         };
 
         var cachedMatchups = [];
@@ -132,6 +133,17 @@
             $http.get('/api/Player/' + getParams).then(function (results) {
                 d.resolve(results.data);
             }, function (error) {
+                d.reject(error);
+            });
+            return d.promise;
+        }
+
+        function getRandomMatchups(weekParam) {
+            var d = $q.defer();
+            $http.get('/api/Matchups/Random/?weekNbr=' + weekParam).then(function (results) {
+                d.resolve(results.data);
+            }, function (error) {
+                //toastr.error(error, 'Error');
                 d.reject(error);
             });
             return d.promise;
