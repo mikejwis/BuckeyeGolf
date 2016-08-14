@@ -29,32 +29,36 @@
                 <span><input ng-model="vm.data.firstHalf" id="FirstHalf_second" name="FirstHalf" type="radio" value="Second" required /> Second</span>
         </div>
     </div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Player</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="result in vm.data.playerRounds">
-                <td>{{result.playerName}}</td>
-                <td ng-repeat="(i, score) in result.scores track by $index">
-                    <input class="scoreInput" type="number" ng-model="result.scores[i]" required />
-                </td>
-                <td>{{vm.sum(result.scores)}}</td>
-            </tr>
-        </tbody>
-    </table>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="result in vm.data.playerRounds">
+                    <td>{{result.playerName}}</td>
+                    <td ng-repeat="(i, score) in result.scores track by $index">
+                        <input class="scoreInput" type="number" ng-model="result.scores[i]" required />
+                    </td>
+                    <td>{{vm.sum(result.scores)}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        
     <div class="row">
         <div class="col-md-12">
             <p></p>
