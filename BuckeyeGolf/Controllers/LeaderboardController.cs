@@ -22,7 +22,7 @@ namespace BuckeyeGolf.Controllers
             if (leaderboardVM == null)
             {
                 leaderboardVM = await getModelData();
-                HttpRuntime.Cache.Insert("Leaderboard", leaderboardVM, null, DateTime.Now.AddMinutes(60), Cache.NoSlidingExpiration);
+                HttpRuntime.Cache.Insert("Leaderboard", leaderboardVM, null, DateTime.Now.AddMinutes(120), Cache.NoSlidingExpiration);
             }
             return leaderboardVM;
         }
