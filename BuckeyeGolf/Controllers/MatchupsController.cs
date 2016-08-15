@@ -23,7 +23,7 @@ namespace BuckeyeGolf.Controllers
             if (matchupVM == null)
             {
                 matchupVM = await getModelData();
-                HttpRuntime.Cache.Insert("MatchupSummary", matchupVM, null, DateTime.Now.AddMinutes(60), Cache.NoSlidingExpiration);
+                HttpRuntime.Cache.Insert("MatchupSummary", matchupVM, null, DateTime.Now.AddMinutes(120), Cache.NoSlidingExpiration);
             }
             return matchupVM;
             //return getSeedData();
