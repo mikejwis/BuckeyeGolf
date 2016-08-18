@@ -233,6 +233,9 @@
     <None Include="BuckeyeGolf.pubxml">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="gulpfile.js" />
+    <Content Include="package.json" />
+    <Content Include="Content\CustomSpinner.scss" />
     <None Include="Properties\PublishProfiles\BuckeyeGolf.pubxml" />
     <Content Include="Index.html" />
     <Content Include="Scripts\angular-mocks.js" />
