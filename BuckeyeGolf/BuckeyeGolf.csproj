@@ -201,7 +201,6 @@
     <Content Include="App\app.module.js" />
     <Content Include="App\bootstrapLoader.js" />
     <Content Include="App\chart.service.js" />
-    <Content Include="App\config.exceptions.js" />
     <Content Include="App\config.routes.js" />
     <Content Include="App\data.service.js" />
     <Content Include="App\home.controller.js" />
@@ -216,7 +215,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Buckeye.gif" />
-    <Content Include="Content\CustomSpinner.css" />
     <Content Include="Error.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -236,6 +234,8 @@
     <Content Include="gulpfile.js" />
     <Content Include="package.json" />
     <Content Include="Content\CustomSpinner.scss" />
+    <Content Include="gulp.config.js" />
+    <Content Include="Content\Site.scss" />
     <None Include="Properties\PublishProfiles\BuckeyeGolf.pubxml" />
     <Content Include="Index.html" />
     <Content Include="Scripts\angular-mocks.js" />
@@ -292,6 +292,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <PropertyGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />

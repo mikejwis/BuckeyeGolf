@@ -16,7 +16,7 @@
             spinnerservice.start();
             dataservice.getPlayerDetails($stateParams.pid).then(function (data) {
                 vm.list = data;
-                drawChart(vm.list.weeklyRounds)
+                drawChart(vm.list.weeklyRounds);
                 spinnerservice.stop();
             }, function (err) {
                 spinnerservice.stop();

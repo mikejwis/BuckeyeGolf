@@ -51,6 +51,6 @@
                     spinnerservice.stop();
                     toastr.error(error, "Error");
                 });
-        };
+        }
     }
 })();

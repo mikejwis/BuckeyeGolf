@@ -1,15 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>BuckeyeGolf</title>
-    <link href="Content/site.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link href="Content/CustomSpinner.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css">
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/Content/Site.css">
+    <!-- endinject -->
 </head>
 <body>
-    <div ng-app="app">
+    <div ng-app="app" strict-di-mode>
         <div id="spinner" class="hidden">Loading...</div>
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
@@ -48,22 +49,23 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.4.8/angular-messages.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!--App Specific files-->
-    <script src="app/app.module.js"></script>
-    <script src="app/app.constants.js"></script>
-    <script src="app/config.routes.js"></script>
-    <script src="app/home.controller.js"></script>
-    <script src="app/leaderboard.controller.js"></script>
-    <script src="app/addmatchups.controller.js"></script>
-    <script src="app/matchups.controller.js"></script>
-    <script src="app/addresults.controller.js"></script>
-    <script src="app/results.controller.js"></script>
-    <script src="App/player.controller.js"></script>
-    <script src="App/random.controller.js"></script>
-    <script src="app/data.service.js"></script>
-    <script src="app/spinner.service.js"></script>
-    <script src="App/chart.service.js"></script>
 
-    <script src="App/bootstrapLoader.js"></script>
+    <!-- inject:js -->
+    <script src="/App/app.module.js"></script>
+    <script src="/App/app.constants.js"></script>
+    <script src="/App/config.routes.js"></script>
+    <script src="/App/addmatchups.controller.js"></script>
+    <script src="/App/addresults.controller.js"></script>
+    <script src="/App/home.controller.js"></script>
+    <script src="/App/leaderboard.controller.js"></script>
+    <script src="/App/matchups.controller.js"></script>
+    <script src="/App/player.controller.js"></script>
+    <script src="/App/random.controller.js"></script>
+    <script src="/App/results.controller.js"></script>
+    <script src="/App/chart.service.js"></script>
+    <script src="/App/data.service.js"></script>
+    <script src="/App/spinner.service.js"></script>
+    <script src="/App/bootstrapLoader.js"></script>
+    <!-- endinject -->
 </body>
 </html>
