@@ -1,0 +1,13 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "class-name": true,
+    "quotemark": [
+      "single"
+    ],
+    "no-unused-variable": true,
+    "whitespace": [
+      "check-module"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+<div *ngFor="let week of matchups.weeks">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Matchups for Week #{{week.weekNbr}}</h2>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr *ngFor="let matchup of week.matchups">
+                <td>{{matchup.player1Name}} ({{matchup.player1Handicap}})</td>
+                <td>vs</td>
+                <td>{{matchup.player2Name}} ({{matchup.player2Handicap}})</td>
+            </tr>
+        </table>
+    </div>
+</div>

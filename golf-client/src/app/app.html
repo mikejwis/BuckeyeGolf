@@ -1,0 +1,31 @@
+<div ng-app="app" strict-di-mode>
+  <app-spinner></app-spinner>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" [routerLink]="['/']">Buckeye Golf League</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a [routerLink]="['/leaderboard']">Leaderboard</a></li>
+          <li><a [routerLink]="['/matchups']">Matchups</a></li>
+          <li><a [routerLink]="['/results']">Results</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container body-content">
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+    <hr />
+    <footer>
+      <p>&copy; 2016 - A MikeJWis Application</p>
+    </footer>
+  </div>
+</div>

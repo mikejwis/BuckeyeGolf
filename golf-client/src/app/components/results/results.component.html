@@ -1,0 +1,35 @@
+<div *ngFor="let week of results">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Results for Week #{{week.weekNbr}}</h2>
+            <p>Scores created on {{week.scoreCreateDate | date}}</p>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Score</th>
+                    <th>Points</th>
+                    <th>Birds</th>
+                    <th>Pars</th>
+                    <th>Bogeys</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let playerRound of week.playerRounds">
+                    <td><a [routerLink]="['/player', playerRound.playerId]">{{playerRound.name}}</a></td>
+                    <td>{{playerRound.totalScore}}</td>
+                    <td>{{playerRound.totalPoints}}</td>
+                    <td>{{playerRound.birdies}}</td>
+                    <td>{{playerRound.pars}}</td>
+                    <td>{{playerRound.bogeys}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

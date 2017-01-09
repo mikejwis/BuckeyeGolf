@@ -1,0 +1,33 @@
+<form (ngSubmit)="add(addMatchupsForm)" name="addMatchupsForm" #addMatchupsForm="ngForm">
+    <div class="col-md-12">
+        <h2>Add Matchups for Week #{{addMatchups.nextWeekNbr}}</h2>
+    </div>
+    <div *ngFor="let matchup of addMatchups.newMatchups" class="row">
+        <div class="col-md-4">
+            <p>
+                <select [(ngModel)]="matchup.player1Id" required>
+                    <option value=""></option>
+                    <option *ngFor="let person of addMatchups.players" value="{{person.id}}">{{person.name}}</option>
+                </select>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p>vs</p>
+        </div>
+        <div class="col-md-4">
+            <p>
+                <select [(ngModel)]="matchup.player2Id" required>
+                    <option value=""></option>
+                    <option *ngFor="let anotherPerson of addMatchups.players" value="{{anotherPerson.id}}">{{anotherPerson.name}}</option>
+                </select>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p></p>
+            <button type="submit" class="btn btn-primary" [disabled]="!addMatchupsForm.form.valid">Submit</button>
+        </div>
+    </div>
+</form>
+
