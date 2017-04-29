@@ -47,6 +47,9 @@ namespace BuckeyeGolf.Controllers
                     playerVM.Birds = repoProvider.RoundRepo.GetPlayerBirieTotal(player.PlayerId, true);
                     playerVM.Pars = repoProvider.RoundRepo.GetPlayerParTotal(player.PlayerId, true);
                     playerVM.Bogeys = repoProvider.RoundRepo.GetPlayerBogeyTotal(player.PlayerId, true);
+                    playerVM.Wins = repoProvider.RoundRepo.GetPlayerWins(player.PlayerId);
+                    playerVM.Losses = repoProvider.RoundRepo.GetPlayerLosses(player.PlayerId);
+                    playerVM.Ties = repoProvider.RoundRepo.GetPlayerTies(player.PlayerId);
 
                     firstHalfPlayerColl.Add(playerVM);
                 }

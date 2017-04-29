@@ -4,11 +4,11 @@
         <p> </p>
     </div>
 </div>
-<div class="row">
+<!--<div class="row">
     <div class="col-md-12">
         <h3>Season Second Half:</h3>
     </div>
-</div>
+</div>-->
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -37,6 +37,27 @@
                     </a>
                 </th>
                 <th>
+                    <a ng-click="vm.sortClick('wins')">
+                        Wins
+                        <span ng-show="vm.sortBy == 'wins' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                        <span ng-show="vm.sortBy == 'wins' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                    </a>
+                </th>
+                <th>
+                    <a ng-click="vm.sortClick('losses')">
+                        Losses
+                        <span ng-show="vm.sortBy == 'losses' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                        <span ng-show="vm.sortBy == 'losses' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                    </a>
+                </th>
+                <th>
+                    <a ng-click="vm.sortClick('ties')">
+                        Ties
+                        <span ng-show="vm.sortBy == 'ties' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                        <span ng-show="vm.sortBy == 'ties' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                    </a>
+                </th>
+                <th>
                     <a ng-click="vm.sortClick('birds')">
                         Total Birds
                         <span ng-show="vm.sortBy == 'birds' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
@@ -59,11 +80,14 @@
                 </th>
             </tr>
         </thead>
-        <tr ng-repeat="player in vm.data.secondHalfPlayerSummary | orderBy:vm.sortBy:vm.sortReverse">
+        <tr ng-repeat="player in vm.data.firstHalfPlayerSummary | orderBy:vm.sortBy:vm.sortReverse">
             <td>{{player.name}}</td>
             <td>{{player.totalPoints}}</td>
             <td>{{player.scoreAvg}}</td>
             <td>{{player.currentHandicap}}</td>
+            <td>{{player.wins}}</td>
+            <td>{{player.losses}}</td>
+            <td>{{player.ties}}</td>
             <td>{{player.birds}}</td>
             <td>{{player.pars}}</td>
             <td>{{player.bogeys}}</td>
@@ -71,7 +95,7 @@
     </table>
 </div>
 
-    <hr />
+<!--    <hr />
     <div class="row">
         <div class="col-md-12">
             <h3>Season First Half:</h3>
@@ -114,4 +138,5 @@
         </tr>
     </table>
 </div>
+    -->
 

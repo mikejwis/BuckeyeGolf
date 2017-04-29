@@ -24,6 +24,21 @@ namespace BuckeyeGolf.Repos
             return await DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0).ToListAsync();
         }
 
+        public int GetPlayerWins(Guid playerId)
+        {
+            return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.Result == MatchupResult.Win).Count();
+        }
+
+        public int GetPlayerLosses(Guid playerId)
+        {
+            return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.Result == MatchupResult.Loss).Count();
+        }
+
+        public int GetPlayerTies(Guid playerId)
+        {
+            return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.Result == MatchupResult.Tie).Count();
+        }
+
         public double GetPlayerScoreAverage(Guid playerId)
         {
             var tmpAvg = 0.0;

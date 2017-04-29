@@ -159,27 +159,19 @@ namespace BuckeyeGolf.Models
             repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w1.WeekId, Player1 = p1.PlayerId, Player2 = p15.PlayerId });
 
             //week 2 matchups
-            repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p14.PlayerId, Player2 = p2.PlayerId });
-            repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p8.PlayerId, Player2 = p9.PlayerId });
-            repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p6.PlayerId, Player2 = p16.PlayerId });
-            repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p12.PlayerId, Player2 = p10.PlayerId });
-            repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p3.PlayerId, Player2 = p5.PlayerId });
-            repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p11.PlayerId, Player2 = p7.PlayerId });
-            repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p4.PlayerId, Player2 = p15.PlayerId });
-            repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p1.PlayerId, Player2 = p13.PlayerId });
+            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p14.PlayerId, Player2 = p2.PlayerId });
+            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p8.PlayerId, Player2 = p9.PlayerId });
+            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p6.PlayerId, Player2 = p16.PlayerId });
+            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p12.PlayerId, Player2 = p10.PlayerId });
+            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p3.PlayerId, Player2 = p5.PlayerId });
+            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p11.PlayerId, Player2 = p7.PlayerId });
+            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p4.PlayerId, Player2 = p15.PlayerId });
+            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w2.WeekId, Player1 = p1.PlayerId, Player2 = p13.PlayerId });
 
             //week 3 matchups
-            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w3.WeekId, Player1 = p1.PlayerId, Player2 = p5.PlayerId });
-            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w3.WeekId, Player1 = p2.PlayerId, Player2 = p6.PlayerId });
-            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w3.WeekId, Player1 = p3.PlayerId, Player2 = p7.PlayerId });
-            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w3.WeekId, Player1 = p4.PlayerId, Player2 = p8.PlayerId });
-
+           
             //week 4 matchups
-            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w4.WeekId, Player1 = p1.PlayerId, Player2 = p3.PlayerId });
-            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w4.WeekId, Player1 = p2.PlayerId, Player2 = p4.PlayerId });
-            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w4.WeekId, Player1 = p5.PlayerId, Player2 = p7.PlayerId });
-            //repoProvider.MatchupRepo.Add(new MatchupModel() { MatchupId = Guid.NewGuid(), WeekId = w4.WeekId, Player1 = p6.PlayerId, Player2 = p8.PlayerId });
-
+           
             //Configuration
             var configObj = new ConfigurationModel() { LeagueId = Guid.NewGuid(), HandicapWeekCount = 99, RoundParFront=35, RoundParBack=36, RoundAdjustment = 0.90 };
             repoProvider.ConfigRepo.Add(configObj);
