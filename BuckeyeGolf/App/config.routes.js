@@ -46,6 +46,11 @@
                     templateUrl: "/templates/random.html",
                     controller: "Random as vm"
                 });
+                $stateProvider.state("rules", {
+                    url: "/rules",
+                    templateUrl: "/templates/rules.html",
+                    controller: "Rules as vm"
+                });
 
                 $urlRouterProvider.otherwise('/');
             }

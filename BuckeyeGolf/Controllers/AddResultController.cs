@@ -78,11 +78,12 @@ namespace BuckeyeGolf.Controllers
                             SeasonFirstHalf = half,
                             Handicap = p1Handicap,
                             TotalScore = ServiceProvider.ScoringInstance.RoundTotalScore(postedRoundPlayer1.Scores),
-                            TotalPoints = scoringResults[0].Points,
+                            TotalPoints = scoringResults[0].TotalPoints,
                             BirdieCnt = scoringResults[0].Birdies,
                             ParCnt = scoringResults[0].Pars,
                             EagleCnt = scoringResults[0].Eagles,
-                            BogeyCnt = scoringResults[0].Bogeys
+                            BogeyCnt = scoringResults[0].Bogeys,
+                            Result = scoringResults[0].MatchResult
                         };
                         var p2NewRound = new RoundModel()
                         {
@@ -94,11 +95,12 @@ namespace BuckeyeGolf.Controllers
                             SeasonFirstHalf = half,
                             Handicap = p2Handicap,
                             TotalScore = ServiceProvider.ScoringInstance.RoundTotalScore(postedRoundPlayer2.Scores),
-                            TotalPoints = scoringResults[1].Points,
+                            TotalPoints = scoringResults[1].TotalPoints,
                             BirdieCnt = scoringResults[1].Birdies,
                             ParCnt = scoringResults[1].Pars,
                             EagleCnt = scoringResults[1].Eagles,
-                            BogeyCnt = scoringResults[1].Bogeys
+                            BogeyCnt = scoringResults[1].Bogeys,
+                            Result = scoringResults[1].MatchResult
                         };
                         repoProvider.RoundRepo.Add(p1NewRound);
                         repoProvider.RoundRepo.Add(p2NewRound);

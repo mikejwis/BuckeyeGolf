@@ -220,12 +220,14 @@
     <Content Include="App\player.controller.js" />
     <Content Include="App\random.controller.js" />
     <Content Include="App\results.controller.js" />
+    <Content Include="App\rules.controller.js" />
     <Content Include="App\spinner.service.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Buckeye.gif" />
+    <Content Include="DownTest.html" />
     <Content Include="Error.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -239,9 +241,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="BuckeyeGolf.pubxml">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="gulpfile.js" />
     <Content Include="package.json" />
     <Content Include="Content\CustomSpinner.scss" />
@@ -278,6 +277,7 @@
     <Content Include="Templates\player.html" />
     <Content Include="Templates\random.html" />
     <Content Include="Templates\results.html" />
+    <Content Include="Templates\rules.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -33,9 +33,10 @@ export class AddMatchupsComponent implements OnInit {
 //    this.model = this.addMatchups;
 
   }
-
+/*
   add(form:NgForm):void {
     this.submitted = true;
 
   }
+*/
 }

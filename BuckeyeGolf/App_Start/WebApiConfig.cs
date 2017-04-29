@@ -11,8 +11,8 @@ namespace BuckeyeGolf
     {
         public static void Register(HttpConfiguration config)
         {
-            //var corsSettings = new EnableCorsAttribute("http://localhost:3000", "*", "*");
-            //config.EnableCors(corsSettings);
+            var corsSettings = new EnableCorsAttribute("http://localhost:3000,http://buckeyegolf.azurewebsites.net", "*", "*");
+            config.EnableCors(corsSettings);
 
             // Web API configuration and services
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

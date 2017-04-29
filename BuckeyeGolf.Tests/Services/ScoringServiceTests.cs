@@ -61,8 +61,8 @@ namespace BuckeyeGolf.Tests.Services
         public void ScoreMatchup_TieAllPars()
         {
             List<ScoringResultModel> result = _scoringService.ScoreMatchup(_pars, _p1Scores, _p2Scores, 10, 10);
-            Assert.AreEqual<double>(7, result[0].Points);
-            Assert.AreEqual<double>(7, result[1].Points);
+            Assert.AreEqual<double>(7, result[0].TotalPoints);
+            Assert.AreEqual<double>(7, result[1].TotalPoints);
             Assert.AreEqual<int>(3, result[0].Pars);
             Assert.AreEqual<int>(3, result[1].Pars);
             Assert.AreEqual<int>(0, result[0].Birdies);
@@ -76,8 +76,8 @@ namespace BuckeyeGolf.Tests.Services
         public void ScoreMatchup_BothNoShow()
         {
             List<ScoringResultModel> result = _scoringService.ScoreMatchup(_pars, _noScores, _noScores, 10, 10);
-            Assert.AreEqual<double>(2, result[0].Points);
-            Assert.AreEqual<double>(2, result[1].Points);
+            Assert.AreEqual<double>(2, result[0].TotalPoints);
+            Assert.AreEqual<double>(2, result[1].TotalPoints);
             Assert.AreEqual<int>(0, result[0].Pars);
             Assert.AreEqual<int>(0, result[1].Pars);
             Assert.AreEqual<int>(0, result[0].Birdies);
@@ -92,8 +92,8 @@ namespace BuckeyeGolf.Tests.Services
         public void ScoreMatchup_Player1NoShow()
         {
             List<ScoringResultModel> result = _scoringService.ScoreMatchup(_pars, _noScores, _p2Scores, 10, 10);
-            Assert.AreEqual<double>(1, result[0].Points);
-            Assert.AreEqual<double>(9, result[1].Points);
+            Assert.AreEqual<double>(1, result[0].TotalPoints);
+            Assert.AreEqual<double>(9, result[1].TotalPoints);
             Assert.AreEqual<int>(0, result[0].Pars);
             Assert.AreEqual<int>(3, result[1].Pars);
             Assert.AreEqual<int>(0, result[0].Birdies);
@@ -108,8 +108,8 @@ namespace BuckeyeGolf.Tests.Services
         public void ScoreMatchup_Player2NoShow()
         {
             List<ScoringResultModel> result = _scoringService.ScoreMatchup(_pars, _p1Scores, _noScores, 10, 10);
-            Assert.AreEqual<double>(9, result[0].Points);
-            Assert.AreEqual<double>(1, result[1].Points);
+            Assert.AreEqual<double>(9, result[0].TotalPoints);
+            Assert.AreEqual<double>(1, result[1].TotalPoints);
             Assert.AreEqual<int>(3, result[0].Pars);
             Assert.AreEqual<int>(0, result[1].Pars);
             Assert.AreEqual<int>(0, result[0].Birdies);
@@ -126,8 +126,8 @@ namespace BuckeyeGolf.Tests.Services
             var p1Scores = new List<int>() { 4,4,4, };
             var p2Scores = new List<int>() { 4, 4, 4, };
             List<ScoringResultModel> result = _scoringService.ScoreMatchup(_pars, p1Scores, p2Scores, 11, 10);
-            Assert.AreEqual<double>(9, result[0].Points);
-            Assert.AreEqual<double>(6, result[1].Points);
+            Assert.AreEqual<double>(9, result[0].TotalPoints);
+            Assert.AreEqual<double>(6, result[1].TotalPoints);
             Assert.AreEqual<int>(3, result[0].Pars);
             Assert.AreEqual<int>(3, result[1].Pars);
             Assert.AreEqual<int>(0, result[0].Birdies);
@@ -144,8 +144,8 @@ namespace BuckeyeGolf.Tests.Services
             var p1Scores = new List<int>() { 4, 4, 4, };
             var p2Scores = new List<int>() { 4, 4, 4, };
             List<ScoringResultModel> result = _scoringService.ScoreMatchup(_pars, p1Scores, p2Scores, 10, 11);
-            Assert.AreEqual<double>(6, result[0].Points);
-            Assert.AreEqual<double>(9, result[1].Points);
+            Assert.AreEqual<double>(6, result[0].TotalPoints);
+            Assert.AreEqual<double>(9, result[1].TotalPoints);
             Assert.AreEqual<int>(3, result[0].Pars);
             Assert.AreEqual<int>(3, result[1].Pars);
             Assert.AreEqual<int>(0, result[0].Birdies);
@@ -162,8 +162,8 @@ namespace BuckeyeGolf.Tests.Services
             var p1Scores = new List<int>() { 3, 4, 4, };
             var p2Scores = new List<int>() { 4, 4, 4, };
             List<ScoringResultModel> result = _scoringService.ScoreMatchup(_pars, p1Scores, p2Scores, 10, 10);
-            Assert.AreEqual<double>(11, result[0].Points);
-            Assert.AreEqual<double>(6, result[1].Points);
+            Assert.AreEqual<double>(11, result[0].TotalPoints);
+            Assert.AreEqual<double>(6, result[1].TotalPoints);
             Assert.AreEqual<int>(2, result[0].Pars);
             Assert.AreEqual<int>(3, result[1].Pars);
             Assert.AreEqual<int>(1, result[0].Birdies);
@@ -180,8 +180,8 @@ namespace BuckeyeGolf.Tests.Services
             var p1Scores = new List<int>() { 4, 4, 4, };
             var p2Scores = new List<int>() { 3, 4, 4, };
             List<ScoringResultModel> result = _scoringService.ScoreMatchup(_pars, p1Scores, p2Scores, 10, 10);
-            Assert.AreEqual<double>(6, result[0].Points);
-            Assert.AreEqual<double>(11, result[1].Points);
+            Assert.AreEqual<double>(6, result[0].TotalPoints);
+            Assert.AreEqual<double>(11, result[1].TotalPoints);
             Assert.AreEqual<int>(3, result[0].Pars);
             Assert.AreEqual<int>(2, result[1].Pars);
             Assert.AreEqual<int>(0, result[0].Birdies);
@@ -198,8 +198,8 @@ namespace BuckeyeGolf.Tests.Services
             var p1Scores = new List<int>() { 4, 4, 4, };
             var p2Scores = new List<int>() { 3, 4, 4, };
             List<ScoringResultModel> result = _scoringService.ScoreMatchup(_pars, p1Scores, p2Scores, 10, 9);
-            Assert.AreEqual<double>(7, result[0].Points);
-            Assert.AreEqual<double>(9, result[1].Points);
+            Assert.AreEqual<double>(7, result[0].TotalPoints);
+            Assert.AreEqual<double>(9, result[1].TotalPoints);
             Assert.AreEqual<int>(3, result[0].Pars);
             Assert.AreEqual<int>(2, result[1].Pars);
             Assert.AreEqual<int>(0, result[0].Birdies);
@@ -216,8 +216,8 @@ namespace BuckeyeGolf.Tests.Services
             var p1Scores = new List<int>() { 5, 4, 4, };
             var p2Scores = new List<int>() { 3, 4, 4, };
             List<ScoringResultModel> result = _scoringService.ScoreMatchup(_pars, p1Scores, p2Scores, 12, 9);
-            Assert.AreEqual<double>(8.5, result[0].Points);
-            Assert.AreEqual<double>(8, result[1].Points);
+            Assert.AreEqual<double>(8.5, result[0].TotalPoints);
+            Assert.AreEqual<double>(8, result[1].TotalPoints);
             Assert.AreEqual<int>(2, result[0].Pars);
             Assert.AreEqual<int>(2, result[1].Pars);
             Assert.AreEqual<int>(0, result[0].Birdies);
