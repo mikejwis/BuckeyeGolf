@@ -40,6 +40,7 @@ namespace BuckeyeGolf.Controllers
                 {
                     repoProvider.MatchupRepo.DeleteMatchups(highestWeek.WeekId);
                     repoProvider.WeekRepo.DeleteWeek(highestWeek);
+                    HttpRuntime.Cache.Remove("MatchupSummary");
                 }
                 await repoProvider.SaveAllRepoChangesAsync();
             }
