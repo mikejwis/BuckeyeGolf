@@ -26,6 +26,25 @@ namespace BuckeyeGolf.Repos
             return retVal;
         }
 
+        public WeekModel GetHighestWeek()
+        {
+            WeekModel retVal = null;
+            var weekNbr = this.GetHighestWeekNumber();
+            if (weekNbr != 0) retVal = DataSet.FirstOrDefault(w => w.WeekNbr == weekNbr && w.BeenPlayed == false);
+            return retVal;
+        }
+
+        public void DeleteWeek(Guid weekId)
+        {
+            var result = DataSet.FirstOrDefault(w=>w.WeekId.CompareTo(weekId) == 0);
+            if (result != null) DataSet.Remove(result);
+        }
+
+        public void DeleteWeek(WeekModel week)
+        {
+            DataSet.Remove(week);
+        }
+
         public async Task<List<WeekModel>> GetPlayedWeeks()
         {
             return await DataSet.Where(w => w.BeenPlayed == true).ToListAsync();

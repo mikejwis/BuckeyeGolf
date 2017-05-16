@@ -12,6 +12,7 @@
         vm.newMatchups = [];
         vm.nextWeekNbr = 0;
         vm.add = addNewMatchups;
+        vm.delete = deleteMatchups;
 
         Activate();
 
@@ -35,6 +36,19 @@
             spinnerservice.start();
             var newMatchupsInfo = { weekNbr: vm.nextWeekNbr, newPlayerMatchups: newMatchups };
             dataservice.addMatchups(newMatchupsInfo).then(
+                function (result) {
+                    spinnerservice.stop();
+                    $state.go('matchups');
+                }, function (err) {
+                    spinnerservice.stop();
+                    toastr.error(err, "Error");
+                });
+        }
+
+        function deleteMatchups() {
+            spinnerservice.start();
+            //var newMatchupsInfo = { weekNbr: vm.nextWeekNbr, newPlayerMatchups: newMatchups };
+            dataservice.deleteMatchups().then(
                 function (result) {
                     spinnerservice.stop();
                     $state.go('matchups');

@@ -16,7 +16,8 @@
             addResults: addResults,
             addPlayer: addPlayer,
             getPlayerDetails: getPlayer,
-            getRandomMatchups: getRandomMatchups
+            getRandomMatchups: getRandomMatchups,
+            deleteMatchups: deleteMatchups
         };
 
         var cachedMatchups = [];
@@ -94,6 +95,22 @@
             var d = $q.defer();
             postData = postData || {};
             $http.post('/api/Matchups/Add', postData).then(
+                function (r) {
+                    d.resolve(r.data);
+                },
+                function (e) {
+                    console.log(e);
+                    if (e.status === 400) {
+                        d.reject("Validation failed at the server");
+                    }
+                });
+            return d.promise;
+        }
+
+        function deleteMatchups(postData) {
+            var d = $q.defer();
+            postData = postData || {};
+            $http.delete('/api/Matchups/Add', postData).then(
                 function (r) {
                     d.resolve(r.data);
                 },

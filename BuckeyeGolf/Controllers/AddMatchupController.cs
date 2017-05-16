@@ -31,6 +31,21 @@ namespace BuckeyeGolf.Controllers
             return vm;
         }
 
+        public async Task<IHttpActionResult> Delete()
+        {
+            using (var repoProvider = new RepoProvider())
+            {
+                var highestWeek = repoProvider.WeekRepo.GetHighestWeek();
+                if (highestWeek != null)
+                {
+                    repoProvider.MatchupRepo.DeleteMatchups(highestWeek.WeekId);
+                    repoProvider.WeekRepo.DeleteWeek(highestWeek);
+                }
+                await repoProvider.SaveAllRepoChangesAsync();
+            }
+            return Ok();
+        }
+
         public async Task<IHttpActionResult> Post(AddNewPlayerMatchupViewModel vm)
         {
             if (ModelState.IsValid && vm.NewPlayerMatchups.Count > 0)

@@ -19,5 +19,10 @@ namespace BuckeyeGolf.Repos
             return await DataSet.Where(m => m.WeekId.CompareTo(weekId) == 0).ToListAsync();
         }
 
+        public async void DeleteMatchups(Guid weekId)
+        {
+            var weeks = DataSet.Where(m => m.WeekId.CompareTo(weekId) == 0);
+            DataSet.RemoveRange(weeks);
+        }
     }
 }
