@@ -26,11 +26,16 @@ namespace BuckeyeGolf.Repos
             return retVal;
         }
 
-        public WeekModel GetHighestWeek()
+        public WeekModel GetWeekByNumber(int weekNbr)
+        {
+            return DataSet.FirstOrDefault(w => w.WeekNbr == weekNbr);
+        }
+
+        public WeekModel GetHighestWeek(bool beenPlayed)
         {
             WeekModel retVal = null;
             var weekNbr = this.GetHighestWeekNumber();
-            if (weekNbr != 0) retVal = DataSet.FirstOrDefault(w => w.WeekNbr == weekNbr && w.BeenPlayed == false);
+            if (weekNbr != 0) retVal = DataSet.FirstOrDefault(w => w.WeekNbr == weekNbr && w.BeenPlayed == beenPlayed);
             return retVal;
         }
 

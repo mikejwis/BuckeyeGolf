@@ -41,6 +41,22 @@ namespace BuckeyeGolf.Controllers
             return vm;
         }
 
+        public async Task<IHttpActionResult> Delete()
+        {
+            //using (var repoProvider = new RepoProvider())
+            //{
+            //    var highestWeek = repoProvider.WeekRepo.GetHighestWeek(true);
+            //    if (highestWeek != null)
+            //    {
+            //        repoProvider.MatchupRepo.DeleteMatchups(highestWeek.WeekId);
+            //        repoProvider.WeekRepo.DeleteWeek(highestWeek);
+            //        HttpRuntime.Cache.Remove("MatchupSummary");
+            //    }
+            //    await repoProvider.SaveAllRepoChangesAsync();
+            //}
+            return Ok();
+        }
+
         public async Task<IHttpActionResult> Post(AddRoundWeekViewModel vm)
         {
             if (ModelState.IsValid)
@@ -66,7 +82,7 @@ namespace BuckeyeGolf.Controllers
                         var postedRoundPlayer2 = vm.PlayerRounds.First(r => r.PlayerId.CompareTo(matchup.Player2) == 0);
                         var p1Handicap = await ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player1);
                         var p2Handicap = await ServiceProvider.HandicapInstance.CalculateHandicap(matchup.Player2);
-                        List<ScoringResultModel> scoringResults = ServiceProvider.ScoringInstance.ScoreMatchup(parList, postedRoundPlayer1.Scores, postedRoundPlayer2.Scores, p1Handicap, p2Handicap);
+                        List<ScoringResultModel> scoringResults = ServiceProvider.ScoringInstance.ScoreMatchup(parList, postedRoundPlayer1.Scores, postedRoundPlayer2.Scores, p1Handicap, p2Handicap, postedRoundPlayer1.MakeUp, postedRoundPlayer2.MakeUp);
 
                         var p1NewRound = new RoundModel()
                         {

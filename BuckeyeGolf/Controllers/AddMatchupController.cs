@@ -35,7 +35,7 @@ namespace BuckeyeGolf.Controllers
         {
             using (var repoProvider = new RepoProvider())
             {
-                var highestWeek = repoProvider.WeekRepo.GetHighestWeek();
+                var highestWeek = repoProvider.WeekRepo.GetHighestWeek(false);
                 if (highestWeek != null)
                 {
                     repoProvider.MatchupRepo.DeleteMatchups(highestWeek.WeekId);

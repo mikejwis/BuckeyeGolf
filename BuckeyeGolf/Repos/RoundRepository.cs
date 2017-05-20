@@ -139,5 +139,6 @@ namespace BuckeyeGolf.Repos
         {
             return DataSet.Single(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.WeekId.CompareTo(weekId) == 0);
         }
+
     }
 }

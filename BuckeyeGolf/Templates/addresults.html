@@ -35,6 +35,7 @@
             <thead>
                 <tr>
                     <th>Player</th>
+                    <th>MakeUp</th>
                     <th>1</th>
                     <th>2</th>
                     <th>3</th>
@@ -50,6 +51,7 @@
             <tbody>
                 <tr ng-repeat="result in vm.data.playerRounds">
                     <td>{{result.playerName}}</td>
+                    <td><input type="checkbox" ng-model="result.makeUp" /></td>
                     <td ng-repeat="(i, score) in result.scores track by $index">
                         <input class="scoreInput" type="number" ng-model="result.scores[i]" required />
                     </td>

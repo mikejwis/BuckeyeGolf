@@ -23,5 +23,6 @@ namespace BuckeyeGolf.ViewModels
         public Guid PlayerId { get; set; }
         public string PlayerName { get; set; }
         public List<int> Scores { get; set; }
+        public bool MakeUp { get; set; }
     }
 }
