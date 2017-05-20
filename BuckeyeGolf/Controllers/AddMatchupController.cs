@@ -62,6 +62,7 @@ namespace BuckeyeGolf.Controllers
                         repoProvider.MatchupRepo.Add(matchupObj);
                     }
                     await repoProvider.SaveAllRepoChangesAsync();
+                    HttpRuntime.Cache.Remove("MatchupSummary");
                 }
                 return Ok();
             }

@@ -122,6 +122,7 @@ namespace BuckeyeGolf.Controllers
                         repoProvider.RoundRepo.Add(p2NewRound);
                     }
                     await repoProvider.SaveAllRepoChangesAsync();
+                    HttpRuntime.Cache.Remove("RoundResults");
                 }
                 return Ok();
             }
