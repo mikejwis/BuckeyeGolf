@@ -13,5 +13,6 @@ namespace BuckeyeGolf.ViewModels
         public int Bogeys { get; set; }
         public int Pars { get; set; }
         public int Birdies { get; set; }
+        public string MatchResult { get; set; }
     }
 }

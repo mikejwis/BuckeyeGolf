@@ -53,6 +53,7 @@
                     <tr>
                         <th>Week</th>
                         <th>Score</th>
+                        <th>Result</th>
                         <th>Points</th>
                         <th>Birds</th>
                         <th>Pars</th>
@@ -63,6 +64,7 @@
                     <tr ng-repeat="round in vm.list.weeklyRounds | orderBy:weekNbr:true">
                         <td>{{round.weekNbr}}</td>
                         <td>{{round.score}}</td>
+                        <td>{{round.matchResult}}</td>
                         <td>{{round.points}}</td>
                         <td>{{round.birdies}}</td>
                         <td>{{round.pars}}</td>

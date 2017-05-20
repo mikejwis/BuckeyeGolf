@@ -59,7 +59,8 @@ namespace BuckeyeGolf.Controllers
                             Bogeys = round.BogeyCnt,
                             Points = round.TotalPoints,
                             Score = round.TotalScore,
-                            WeekNbr = weekModel.WeekNbr
+                            WeekNbr = weekModel.WeekNbr,
+                            MatchResult = round.Result.ToString()
                         });
                     }
                     vm.WeeklyRounds = vm.WeeklyRounds.OrderBy(r => r.WeekNbr).ToList();

@@ -55,7 +55,8 @@ namespace BuckeyeGolf.Controllers
                             Birdies = round.BirdieCnt,
                             Pars = round.ParCnt,
                             Bogeys = round.BogeyCnt,
-                            PlayerId = round.PlayerRefId.ToString()
+                            PlayerId = round.PlayerRefId.ToString(),
+                            MatchResult = round.Result.ToString()
                         };
 
                         weekResultsVM.PlayerRounds.Add(playerRoundVM);

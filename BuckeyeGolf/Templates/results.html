@@ -12,6 +12,7 @@
                 <tr>
                     <th>Player</th>
                     <th>Score</th>
+                    <th>Result</th>
                     <th>Points</th>
                     <th>Birds</th>
                     <th>Pars</th>
@@ -22,6 +23,7 @@
                 <tr ng-repeat="playerRound in week.playerRounds">
                     <td><a ui-sref="player({pid:playerRound.playerId})">{{playerRound.name}}</a></td>
                     <td>{{playerRound.totalScore}}</td>
+                    <td>{{playerRound.matchResult}}</td>
                     <td>{{playerRound.totalPoints}}</td>
                     <td>{{playerRound.birdies}}</td>
                     <td>{{playerRound.pars}}</td>
