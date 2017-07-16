@@ -47,9 +47,9 @@ namespace BuckeyeGolf.Controllers
                     playerVM.Birds = repoProvider.RoundRepo.GetPlayerBirieTotal(player.PlayerId, true);
                     playerVM.Pars = repoProvider.RoundRepo.GetPlayerParTotal(player.PlayerId, true);
                     playerVM.Bogeys = repoProvider.RoundRepo.GetPlayerBogeyTotal(player.PlayerId, true);
-                    playerVM.Wins = repoProvider.RoundRepo.GetPlayerWins(player.PlayerId);
-                    playerVM.Losses = repoProvider.RoundRepo.GetPlayerLosses(player.PlayerId);
-                    playerVM.Ties = repoProvider.RoundRepo.GetPlayerTies(player.PlayerId);
+                    playerVM.Wins = repoProvider.RoundRepo.GetPlayerWins(player.PlayerId, true);
+                    playerVM.Losses = repoProvider.RoundRepo.GetPlayerLosses(player.PlayerId, true);
+                    playerVM.Ties = repoProvider.RoundRepo.GetPlayerTies(player.PlayerId, true);
 
                     firstHalfPlayerColl.Add(playerVM);
                 }
@@ -63,6 +63,9 @@ namespace BuckeyeGolf.Controllers
                     playerVM.Birds = repoProvider.RoundRepo.GetPlayerBirieTotal(player.PlayerId, false);
                     playerVM.Pars = repoProvider.RoundRepo.GetPlayerParTotal(player.PlayerId, false);
                     playerVM.Bogeys = repoProvider.RoundRepo.GetPlayerBogeyTotal(player.PlayerId, false);
+                    playerVM.Wins = repoProvider.RoundRepo.GetPlayerWins(player.PlayerId, false);
+                    playerVM.Losses = repoProvider.RoundRepo.GetPlayerLosses(player.PlayerId, false);
+                    playerVM.Ties = repoProvider.RoundRepo.GetPlayerTies(player.PlayerId, false);
 
                     secondHalfPlayerColl.Add(playerVM);
                 }

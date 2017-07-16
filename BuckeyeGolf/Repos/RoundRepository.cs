@@ -24,19 +24,19 @@ namespace BuckeyeGolf.Repos
             return await DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0).ToListAsync();
         }
 
-        public int GetPlayerWins(Guid playerId)
+        public int GetPlayerWins(Guid playerId, bool firstHalf)
         {
-            return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.Result == MatchupResult.Win).Count();
+            return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.Result == MatchupResult.Win && r.SeasonFirstHalf == firstHalf).Count();
         }
 
-        public int GetPlayerLosses(Guid playerId)
+        public int GetPlayerLosses(Guid playerId, bool firstHalf)
         {
-            return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.Result == MatchupResult.Loss).Count();
+            return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.Result == MatchupResult.Loss && r.SeasonFirstHalf == firstHalf).Count();
         }
 
-        public int GetPlayerTies(Guid playerId)
+        public int GetPlayerTies(Guid playerId, bool firstHalf)
         {
-            return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.Result == MatchupResult.Tie).Count();
+            return DataSet.Where(r => r.PlayerRefId.CompareTo(playerId) == 0 && r.Result == MatchupResult.Tie && r.SeasonFirstHalf == firstHalf).Count();
         }
 
         public double GetPlayerScoreAverage(Guid playerId)

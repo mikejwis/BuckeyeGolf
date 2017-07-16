@@ -4,11 +4,11 @@
         <p> </p>
     </div>
 </div>
-<!--<div class="row">
+<div class="row">
     <div class="col-md-12">
         <h3>Season Second Half:</h3>
     </div>
-</div>-->
+</div>
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -80,7 +80,7 @@
                 </th>
             </tr>
         </thead>
-        <tr ng-repeat="player in vm.data.firstHalfPlayerSummary | orderBy:vm.sortBy:vm.sortReverse">
+        <tr ng-repeat="player in vm.data.secondHalfPlayerSummary | orderBy:vm.sortBy:vm.sortReverse">
             <td>{{player.name}}</td>
             <td>{{player.totalPoints}}</td>
             <td>{{player.scoreAvg}}</td>
@@ -95,7 +95,7 @@
     </table>
 </div>
 
-<!--    <hr />
+    <hr />
     <div class="row">
         <div class="col-md-12">
             <h3>Season First Half:</h3>
@@ -116,6 +116,9 @@
                 <th>
                     Current Handicap
                 </th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Ties</th>
                 <th>
                     Total Birds
                 </th>
@@ -132,11 +135,13 @@
             <td>{{player.totalPoints}}</td>
             <td>{{player.scoreAvg}}</td>
             <td>{{player.currentHandicap}}</td>
+            <td>{{player.wins}}</td>
+            <td>{{player.losses}}</td>
+            <td>{{player.ties}}</td>
             <td>{{player.birds}}</td>
             <td>{{player.pars}}</td>
             <td>{{player.bogeys}}</td>
         </tr>
     </table>
 </div>
-    -->
 
