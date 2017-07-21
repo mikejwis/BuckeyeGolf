@@ -41,6 +41,7 @@ namespace BuckeyeGolf.Controllers
                 foreach (var player in await repoProvider.PlayerRepo.GetAll())
                 {
                     var playerVM = new PlayerLeaderboardViewModel() { Name = player.Name };
+                    playerVM.PlayerId = player.PlayerId.ToString();
                     playerVM.CurrentHandicap = await ServiceProvider.HandicapInstance.CalculateHandicap(player.PlayerId);
                     playerVM.ScoreAvg = repoProvider.RoundRepo.GetPlayerScoreAverage(player.PlayerId, true);
                     playerVM.TotalPoints = repoProvider.RoundRepo.GetPlayerTotalPoints(player.PlayerId, true);
@@ -57,6 +58,7 @@ namespace BuckeyeGolf.Controllers
                 foreach (var player in await repoProvider.PlayerRepo.GetAll())
                 {
                     var playerVM = new PlayerLeaderboardViewModel() { Name = player.Name };
+                    playerVM.PlayerId = player.PlayerId.ToString();
                     playerVM.CurrentHandicap = await ServiceProvider.HandicapInstance.CalculateHandicap(player.PlayerId);
                     playerVM.ScoreAvg = repoProvider.RoundRepo.GetPlayerScoreAverage(player.PlayerId, false);
                     playerVM.TotalPoints = repoProvider.RoundRepo.GetPlayerTotalPoints(player.PlayerId, false);

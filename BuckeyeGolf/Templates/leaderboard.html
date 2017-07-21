@@ -81,7 +81,7 @@
             </tr>
         </thead>
         <tr ng-repeat="player in vm.data.secondHalfPlayerSummary | orderBy:vm.sortBy:vm.sortReverse">
-            <td>{{player.name}}</td>
+            <td><a ui-sref="player({pid:player.playerId})">{{player.name}}</a></td>
             <td>{{player.totalPoints}}</td>
             <td>{{player.scoreAvg}}</td>
             <td>{{player.currentHandicap}}</td>
@@ -131,7 +131,7 @@
             </tr>
         </thead>
         <tr ng-repeat="player in vm.data.firstHalfPlayerSummary | orderBy:totalPoints">
-            <td>{{player.name}}</td>
+            <td><a ui-sref="player({pid:player.playerId})">{{player.name}}</a></td>
             <td>{{player.totalPoints}}</td>
             <td>{{player.scoreAvg}}</td>
             <td>{{player.currentHandicap}}</td>

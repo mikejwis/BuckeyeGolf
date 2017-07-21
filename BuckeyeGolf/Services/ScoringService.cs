@@ -101,8 +101,8 @@ namespace BuckeyeGolf.Services
             }
             if(p1RoundTotal == 0 && p2RoundTotal == 0)
             {
-                points[0] = 3;
-                points[1] = 3;
+                points[0] = 0;
+                points[1] = 0;
             }
 
             return points;
