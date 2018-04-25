@@ -28,9 +28,8 @@ namespace BuckeyeGolf.Models
     }
     //CreateDatabaseIfNotExists
     //DropCreateDatabaseAlways
-    public class GolfLeagueInitializer : CreateDatabaseIfNotExists<GolfDbContext>
+    public class GolfLeagueInitializer : DropCreateDatabaseAlways<GolfDbContext>
     {
-        //CreateDatabaseIfNotExists
         protected override void Seed(GolfDbContext context)
         {
             var repoProvider = new RepoProvider(context);
