@@ -42,99 +42,99 @@ namespace BuckeyeGolf.Models
             //var w4 = new WeekModel() { WeekId = Guid.NewGuid(), WeekNbr = 4, ScoreCreateDate = new DateTime(2015, 7, 29), BeenPlayed = false };
             //repoProvider.WeekRepo.Add(w4);
 
-            var p1 = new PlayerModel() { Name = "Brandon", PlayerId = Guid.NewGuid(), HandicapRound1 = 0, HandicapRound2 = 56 };
+            var p1 = new PlayerModel() { Name = "B Robinson", PlayerId = Guid.NewGuid(), HandicapRound1 = 52, HandicapRound2 = 0 };
             p1.Rounds = new List<RoundModel>();
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 6, TotalScore = 45, TotalPoints = 6, RoundId = Guid.NewGuid(), PlayerRefId = p1.PlayerId, WeekId = w1.WeekId });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 5, TotalScore = 49, TotalPoints = 3.5, RoundId = Guid.NewGuid(), PlayerRefId = p1.PlayerId, WeekId = w2.WeekId });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 7, TotalScore = 52, TotalPoints = 1, RoundId = Guid.NewGuid(), PlayerRefId = p1.PlayerId, WeekId = w3.WeekId });
             repoProvider.PlayerRepo.Add(p1);
 
-            var p2 = new PlayerModel() { Name = "Len", PlayerId = Guid.NewGuid(), HandicapRound1 = 51, HandicapRound2 = 49 };
+            var p2 = new PlayerModel() { Name = "Len", PlayerId = Guid.NewGuid(), HandicapRound1 = 45, HandicapRound2 = 0 };
             p2.Rounds = new List<RoundModel>();
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 8, TotalScore = 42, TotalPoints = 6, RoundId = Guid.NewGuid(), PlayerRefId = p2.PlayerId, WeekId = w1.WeekId });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 9, TotalScore = 45, TotalPoints = 3, RoundId = Guid.NewGuid(), PlayerRefId = p2.PlayerId, WeekId = w2.WeekId });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 6, TotalScore = 57, TotalPoints = 0, RoundId = Guid.NewGuid(), PlayerRefId = p2.PlayerId, WeekId = w3.WeekId });
             repoProvider.PlayerRepo.Add(p2);
 
-            var p3 = new PlayerModel() { Name = "Tom L", PlayerId = Guid.NewGuid(), HandicapRound1 = 58, HandicapRound2 = 46 };
+            var p3 = new PlayerModel() { Name = "Tom L", PlayerId = Guid.NewGuid(), HandicapRound1 = 0, HandicapRound2 = 0 };
             p3.Rounds = new List<RoundModel>();
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 6, TotalScore = 55, TotalPoints = 3, RoundId = Guid.NewGuid(), PlayerRefId = p3.PlayerId, WeekId = w1.WeekId });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 3, TotalScore = 59, TotalPoints = 2.5, RoundId = Guid.NewGuid(), PlayerRefId = p3.PlayerId, WeekId = w2.WeekId });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 7, TotalScore = 52, TotalPoints = 1, RoundId = Guid.NewGuid(), PlayerRefId = p3.PlayerId, WeekId = w3.WeekId });
             repoProvider.PlayerRepo.Add(p3);
 
-            var p4 = new PlayerModel() { Name = "Jack", PlayerId = Guid.NewGuid(), HandicapRound1 = 57, HandicapRound2 = 0 };
+            var p4 = new PlayerModel() { Name = "Todd", PlayerId = Guid.NewGuid(), HandicapRound1 = 60, HandicapRound2 = 0 };
             p4.Rounds = new List<RoundModel>();
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 5, TotalScore = 45, TotalPoints = 1, RoundId = Guid.NewGuid(), PlayerRefId = p4.PlayerId, WeekId = w1.WeekId, BirdieCnt = 0, ParCnt = 1, BogeyCnt = 3 });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 6, TotalScore = 60, TotalPoints = 3, RoundId = Guid.NewGuid(), PlayerRefId = p4.PlayerId, WeekId = w2.WeekId, BirdieCnt = 0, ParCnt = 1, BogeyCnt = 3 });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 6, TotalScore = 52, TotalPoints = 1, RoundId = Guid.NewGuid(), PlayerRefId = p4.PlayerId, WeekId = w3.WeekId, BirdieCnt = 1, ParCnt = 0, BogeyCnt = 4 });
             repoProvider.PlayerRepo.Add(p4);
 
-            var p5 = new PlayerModel() { Name = "Keith", PlayerId = Guid.NewGuid(), HandicapRound1 = 48, HandicapRound2 = 46 };
+            var p5 = new PlayerModel() { Name = "Keith", PlayerId = Guid.NewGuid(), HandicapRound1 = 44, HandicapRound2 = 0 };
             p5.Rounds = new List<RoundModel>();
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 6, TotalScore = 45, TotalPoints = 12, RoundId = Guid.NewGuid(), PlayerRefId = p5.PlayerId, WeekId = w1.WeekId, BirdieCnt = 0, ParCnt = 3, BogeyCnt = 1 });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 6, TotalScore = 43, TotalPoints = 3.5, RoundId = Guid.NewGuid(), PlayerRefId = p5.PlayerId, WeekId = w2.WeekId, BirdieCnt = 0, ParCnt = 2, BogeyCnt = 3 });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 4, TotalScore = 52, TotalPoints = 1, RoundId = Guid.NewGuid(), PlayerRefId = p5.PlayerId, WeekId = w3.WeekId, BirdieCnt = 0, ParCnt = 1, BogeyCnt = 0 });
             repoProvider.PlayerRepo.Add(p5);
 
-            var p6 = new PlayerModel() { Name = "Kevin", PlayerId = Guid.NewGuid(), HandicapRound1 = 53, HandicapRound2 = 52 };
+            var p6 = new PlayerModel() { Name = "Kevin", PlayerId = Guid.NewGuid(), HandicapRound1 = 43, HandicapRound2 = 0 };
             p6.Rounds = new List<RoundModel>();
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 6, TotalScore = 45, TotalPoints = 6, RoundId = Guid.NewGuid(), PlayerRefId = p6.PlayerId, WeekId = w1.WeekId, BirdieCnt = 0, ParCnt = 1, BogeyCnt = 1 });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 7, TotalScore = 44, TotalPoints = 4, RoundId = Guid.NewGuid(), PlayerRefId = p6.PlayerId, WeekId = w2.WeekId, BirdieCnt = 0, ParCnt = 1, BogeyCnt = 0 });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 5, TotalScore = 42, TotalPoints = 1, RoundId = Guid.NewGuid(), PlayerRefId = p6.PlayerId, WeekId = w3.WeekId, BirdieCnt = 1, ParCnt = 3, BogeyCnt = 1 });
             repoProvider.PlayerRepo.Add(p6);
 
-            var p7 = new PlayerModel() { Name = "Tom S", PlayerId = Guid.NewGuid(), HandicapRound1 = 0, HandicapRound2 = 47 };
+            var p7 = new PlayerModel() { Name = "Tom S", PlayerId = Guid.NewGuid(), HandicapRound1 = 48, HandicapRound2 = 0 };
             p7.Rounds = new List<RoundModel>();
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 10, TotalScore = 55, TotalPoints = 4, RoundId = Guid.NewGuid(), PlayerRefId = p7.PlayerId, WeekId = w1.WeekId, BirdieCnt = 0, ParCnt = 4, BogeyCnt = 2 });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 6, TotalScore = 59, TotalPoints = 3, RoundId = Guid.NewGuid(), PlayerRefId = p7.PlayerId, WeekId = w2.WeekId, BirdieCnt = 0, ParCnt = 0, BogeyCnt = 1 });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 6, TotalScore = 52, TotalPoints = 0, RoundId = Guid.NewGuid(), PlayerRefId = p7.PlayerId, WeekId = w3.WeekId, BirdieCnt = 0, ParCnt = 1, BogeyCnt = 2 });
             repoProvider.PlayerRepo.Add(p7);
 
-            var p8 = new PlayerModel() { Name = "Mike", PlayerId = Guid.NewGuid(), HandicapRound1 = 51, HandicapRound2 = 0 };
+            var p8 = new PlayerModel() { Name = "Mike", PlayerId = Guid.NewGuid(), HandicapRound1 = 0, HandicapRound2 = 0 };
             p8.Rounds = new List<RoundModel>();
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 6, TotalScore = 43, TotalPoints = 1, RoundId = Guid.NewGuid(), PlayerRefId = p8.PlayerId, WeekId = w1.WeekId, BirdieCnt = 0, ParCnt = 1, BogeyCnt = 1 });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 8, TotalScore = 47, TotalPoints = 1.5, RoundId = Guid.NewGuid(), PlayerRefId = p8.PlayerId, WeekId = w2.WeekId, BirdieCnt = 0, ParCnt = 0, BogeyCnt = 2 });
             //repoProvider.RoundRepo.Add(new RoundModel() { Handicap = 2, TotalScore = 55, TotalPoints = 10, RoundId = Guid.NewGuid(), PlayerRefId = p8.PlayerId, WeekId = w3.WeekId, BirdieCnt = 0, ParCnt = 0, BogeyCnt = 0 });
             repoProvider.PlayerRepo.Add(p8);
 
-            var p9 = new PlayerModel() { Name = "Mark", PlayerId = Guid.NewGuid(), HandicapRound1 = 52, HandicapRound2 = 55 };
+            var p9 = new PlayerModel() { Name = "Mark", PlayerId = Guid.NewGuid(), HandicapRound1 = 52, HandicapRound2 = 0 };
             p9.Rounds = new List<RoundModel>();
             repoProvider.PlayerRepo.Add(p9);
 
-            var p10 = new PlayerModel() { Name = "Emil", PlayerId = Guid.NewGuid(), HandicapRound1 = 76, HandicapRound2 = 67 };
+            var p10 = new PlayerModel() { Name = "Emil", PlayerId = Guid.NewGuid(), HandicapRound1 = 61, HandicapRound2 = 0 };
             p10.Rounds = new List<RoundModel>();
             repoProvider.PlayerRepo.Add(p10);
 
-            var p11 = new PlayerModel() { Name = "Bill H", PlayerId = Guid.NewGuid(), HandicapRound1 = 0, HandicapRound2 = 58 };
+            var p11 = new PlayerModel() { Name = "Bill H", PlayerId = Guid.NewGuid(), HandicapRound1 = 61, HandicapRound2 = 0 };
             p11.Rounds = new List<RoundModel>();
             repoProvider.PlayerRepo.Add(p11);
 
-            var p12 = new PlayerModel() { Name = "Vince", PlayerId = Guid.NewGuid(), HandicapRound1 = 69, HandicapRound2 = 64 };
+            var p12 = new PlayerModel() { Name = "Vince", PlayerId = Guid.NewGuid(), HandicapRound1 = 56, HandicapRound2 = 0 };
             p12.Rounds = new List<RoundModel>();
             repoProvider.PlayerRepo.Add(p12);
 
-            var p13 = new PlayerModel() { Name = "Bill B", PlayerId = Guid.NewGuid(), HandicapRound1 = 58, HandicapRound2 = 0 };
+            var p13 = new PlayerModel() { Name = "Bill B", PlayerId = Guid.NewGuid(), HandicapRound1 = 0, HandicapRound2 = 0 };
             p13.Rounds = new List<RoundModel>();
             repoProvider.PlayerRepo.Add(p13);
 
-            var p14 = new PlayerModel() { Name = "Dennis", PlayerId = Guid.NewGuid(), HandicapRound1 = 42, HandicapRound2 = 56 };
+            var p14 = new PlayerModel() { Name = "B Roberto", PlayerId = Guid.NewGuid(), HandicapRound1 = 52, HandicapRound2 = 0 };
             p14.Rounds = new List<RoundModel>();
             repoProvider.PlayerRepo.Add(p14);
 
-            var p15 = new PlayerModel() { Name = "Bill L", PlayerId = Guid.NewGuid(), HandicapRound1 = 54, HandicapRound2 = 47 };
+            var p15 = new PlayerModel() { Name = "Bill L", PlayerId = Guid.NewGuid(), HandicapRound1 = 0, HandicapRound2 = 0 };
             p15.Rounds = new List<RoundModel>();
             repoProvider.PlayerRepo.Add(p15);
 
-            var p16 = new PlayerModel() { Name = "John", PlayerId = Guid.NewGuid(), HandicapRound1 = 57, HandicapRound2 = 0 };
+            var p16 = new PlayerModel() { Name = "John", PlayerId = Guid.NewGuid(), HandicapRound1 = 49, HandicapRound2 = 0 };
             p16.Rounds = new List<RoundModel>();
             repoProvider.PlayerRepo.Add(p16);
 
             /*
-             1 - Brandon
+             1 - B Robinson
              2 - Len
              3 - Tom L
-             4 - Jack
+             4 - Todd
              5 - Keith
              6 - Kevin
              7 - Tom S
@@ -144,7 +144,7 @@ namespace BuckeyeGolf.Models
              11 - Bill H
              12 - Vince
              13- Bill B
-             14- Dennis
+             14- B Roberto
              15 - Bill L
              16 - John
              */
