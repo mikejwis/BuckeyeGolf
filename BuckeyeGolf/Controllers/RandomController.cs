@@ -24,7 +24,7 @@ namespace BuckeyeGolf.Controllers
                 var players = await repoProvider.PlayerRepo.GetAll();
                 var weeksUnordered = await repoProvider.WeekRepo.GetAll();
                 var weeks = weeksUnordered.OrderBy(w => w.WeekNbr);
-                foreach (var week in weeks.Where(w => w.WeekNbr > weekNbr))
+                foreach (var week in weeks.Where(w => w.WeekNbr < weekNbr))
                 {
                     var matchups = await repoProvider.MatchupRepo.GetAllWeeklyMatchups(week.WeekId);
                     globalExistingMatchups.AddRange(matchups);
