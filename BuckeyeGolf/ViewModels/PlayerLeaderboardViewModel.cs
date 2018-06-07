@@ -8,6 +8,7 @@ namespace BuckeyeGolf.ViewModels
     public class PlayerLeaderboardViewModel
     {
         public string PlayerId { get; set; }
+        public string Flight { get; set; }
         public double ScoreAvg { get; set; }
         public string Name { get; set; }
         public double TotalPoints { get; set; }

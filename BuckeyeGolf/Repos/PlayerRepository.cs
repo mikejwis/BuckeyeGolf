@@ -23,5 +23,6 @@ namespace BuckeyeGolf.Repos
         {
             return await DataSet.SingleOrDefaultAsync(p => p.Name.Trim().Equals(name));
         }
+
     }
 }

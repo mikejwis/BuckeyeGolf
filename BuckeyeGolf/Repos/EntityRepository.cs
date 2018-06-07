@@ -10,7 +10,7 @@ namespace BuckeyeGolf.Repos
 {
     public class EntityRepository<T> where T : class
     {
-        private GolfDbContext _context = null;
+        protected GolfDbContext _context = null;
         protected DbSet<T> DataSet { get; set; }
 
         public EntityRepository()
@@ -40,5 +40,9 @@ namespace BuckeyeGolf.Repos
             DataSet.AddRange(entityList);
         }
 
+        public void Update(T existingEntity, T updatedEntity)
+        {
+            _context.Entry(existingEntity).CurrentValues.SetValues(updatedEntity);
+        }
     }
 }

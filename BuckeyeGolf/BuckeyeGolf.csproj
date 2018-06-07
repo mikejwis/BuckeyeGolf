@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -179,6 +180,7 @@
     <Compile Include="Models\ScoringResultModel.cs" />
     <Compile Include="Repos\CourseRepository.cs" />
     <Compile Include="Repos\ParRespository.cs" />
+    <Compile Include="Services\FlightService.cs" />
     <Compile Include="Services\ScoringService.cs" />
     <Compile Include="ValidationAttributes\DuplicateNameValidationAttribute.cs" />
     <Compile Include="ViewModels\AddNewPlayerMatchupViewModel.cs" />

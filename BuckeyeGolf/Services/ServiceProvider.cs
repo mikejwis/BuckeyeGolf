@@ -5,12 +5,26 @@ using System.Web;
 
 namespace BuckeyeGolf.Services
 {
+    //need to refactor to use unity
     public class ServiceProvider
     {
         private static HandicapService _handicapInstance;
         private static ScoringService _scoringInstance;
+        private static FlightService _flightService;
 
         private ServiceProvider() { }
+
+        public static FlightService FlightService
+        {
+            get
+            {
+                if(_flightService == null)
+                {
+                    _flightService = new FlightService();
+                }
+                return _flightService;
+            }
+        }
 
         public static ScoringService ScoringInstance
         {

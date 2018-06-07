@@ -41,6 +41,7 @@ namespace BuckeyeGolf.Controllers
                 foreach (var player in await repoProvider.PlayerRepo.GetAll())
                 {
                     var playerVM = new PlayerLeaderboardViewModel() { Name = player.Name };
+                    playerVM.Flight = ServiceProvider.FlightService.GetAssignedFlight(playerVM.Name);
                     playerVM.PlayerId = player.PlayerId.ToString();
                     playerVM.CurrentHandicap = await ServiceProvider.HandicapInstance.CalculateHandicap(player.PlayerId);
                     playerVM.ScoreAvg = repoProvider.RoundRepo.GetPlayerScoreAverage(player.PlayerId, true);
@@ -58,6 +59,7 @@ namespace BuckeyeGolf.Controllers
                 foreach (var player in await repoProvider.PlayerRepo.GetAll())
                 {
                     var playerVM = new PlayerLeaderboardViewModel() { Name = player.Name };
+                    playerVM.Flight = ServiceProvider.FlightService.GetAssignedFlight(playerVM.Name);
                     playerVM.PlayerId = player.PlayerId.ToString();
                     playerVM.CurrentHandicap = await ServiceProvider.HandicapInstance.CalculateHandicap(player.PlayerId);
                     playerVM.ScoreAvg = repoProvider.RoundRepo.GetPlayerScoreAverage(player.PlayerId, false);
@@ -78,6 +80,5 @@ namespace BuckeyeGolf.Controllers
             playerSummaryVM.SecondHalfPlayerSummary = secondHalfPlayerColl.OrderByDescending(t => t.TotalPoints).ToList();
             return playerSummaryVM;
         }
-
     }
 }
