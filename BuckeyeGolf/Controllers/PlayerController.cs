@@ -35,89 +35,89 @@ namespace BuckeyeGolf.Controllers
             using (var repoProvider = new RepoProvider())
             {
                 
-                var player = await repoProvider.PlayerRepo.Get("Tom L");
-                var updatedPlayer = new PlayerModel();
-                updatedPlayer.Name = "Ron";
-                updatedPlayer.HandicapRound1 = 48;
-                updatedPlayer.HandicapRound2 = 49;
-                updatedPlayer.PlayerId = player.PlayerId;
-                updatedPlayer.Rounds = player.Rounds;
-                var round = updatedPlayer.Rounds.First(r => r.TotalScore == 67);
-                var roundW3 = updatedPlayer.Rounds.First(r => r.TotalScore == 49);
-                repoProvider.PlayerRepo.Update(player, updatedPlayer);
+                var player = await repoProvider.PlayerRepo.Get("John");
+                //var updatedPlayer = new PlayerModel();
+                //updatedPlayer.Name = "Ron";
+                //updatedPlayer.HandicapRound1 = 48;
+                //updatedPlayer.HandicapRound2 = 49;
+                //updatedPlayer.PlayerId = player.PlayerId;
+                //updatedPlayer.Rounds = player.Rounds;
+                var round = player.Rounds.First(r => r.TotalScore == 0);
+                //var roundW3 = updatedPlayer.Rounds.First(r => r.TotalScore == 49);
+                //repoProvider.PlayerRepo.Update(player, updatedPlayer);
 
                 var oldRound = repoProvider.RoundRepo.GetWeeklyRound(player.PlayerId,round.WeekId);
                 var newRound = new RoundModel();
-                newRound.AttendancePoints = 0;
+                newRound.AttendancePoints = 1;
                 newRound.BirdieCnt = 0;
-                newRound.BogeyCnt = 0;
+                newRound.BogeyCnt = 2;
                 newRound.EagleCnt = 0;
                 newRound.Front = oldRound.Front;
                 newRound.Handicap = oldRound.Handicap;
                 newRound.MatchupPoints = 0;
-                newRound.ParCnt = 0;
+                newRound.ParCnt = 1;
                 newRound.PlayerRef = oldRound.PlayerRef;
                 newRound.PlayerRefId = oldRound.PlayerRefId;
                 newRound.Result = oldRound.Result;
                 newRound.Scores = oldRound.Scores;
                 newRound.SeasonFirstHalf = oldRound.SeasonFirstHalf;
-                newRound.TotalPoints = 0;
-                newRound.TotalScore = 0;
+                newRound.TotalPoints = 3;
+                newRound.TotalScore = 51;
                 newRound.WeekId = oldRound.WeekId;
                 newRound.RoundId = oldRound.RoundId;
 
                 repoProvider.RoundRepo.Update(oldRound, newRound);
 
 
-                var newRoundW3 = new RoundModel();
+                //var newRoundW3 = new RoundModel();
 
-                var oldRoundW3 = repoProvider.RoundRepo.GetWeeklyRound(player.PlayerId, roundW3.WeekId);
-                newRoundW3.AttendancePoints = oldRoundW3.AttendancePoints;
-                newRoundW3.BirdieCnt = oldRoundW3.BirdieCnt;
-                newRoundW3.BogeyCnt = oldRoundW3.BogeyCnt;
-                newRoundW3.EagleCnt = oldRoundW3.EagleCnt;
-                newRoundW3.Front = oldRoundW3.Front;
-                newRoundW3.Handicap = oldRoundW3.Handicap;
-                newRoundW3.MatchupPoints = 0;
-                newRoundW3.ParCnt = oldRoundW3.ParCnt;
-                newRoundW3.PlayerRef = oldRoundW3.PlayerRef;
-                newRoundW3.PlayerRefId = oldRoundW3.PlayerRefId;
-                newRoundW3.Result = MatchupResult.Loss;
-                newRoundW3.Scores = oldRoundW3.Scores;
-                newRoundW3.SeasonFirstHalf = oldRoundW3.SeasonFirstHalf;
-                newRoundW3.TotalPoints = 5;
-                newRoundW3.TotalScore = oldRoundW3.TotalScore;
-                newRoundW3.WeekId = oldRoundW3.WeekId;
-                newRoundW3.RoundId = oldRoundW3.RoundId;
+                //var oldRoundW3 = repoProvider.RoundRepo.GetWeeklyRound(player.PlayerId, roundW3.WeekId);
+                //newRoundW3.AttendancePoints = oldRoundW3.AttendancePoints;
+                //newRoundW3.BirdieCnt = oldRoundW3.BirdieCnt;
+                //newRoundW3.BogeyCnt = oldRoundW3.BogeyCnt;
+                //newRoundW3.EagleCnt = oldRoundW3.EagleCnt;
+                //newRoundW3.Front = oldRoundW3.Front;
+                //newRoundW3.Handicap = oldRoundW3.Handicap;
+                //newRoundW3.MatchupPoints = 0;
+                //newRoundW3.ParCnt = oldRoundW3.ParCnt;
+                //newRoundW3.PlayerRef = oldRoundW3.PlayerRef;
+                //newRoundW3.PlayerRefId = oldRoundW3.PlayerRefId;
+                //newRoundW3.Result = MatchupResult.Loss;
+                //newRoundW3.Scores = oldRoundW3.Scores;
+                //newRoundW3.SeasonFirstHalf = oldRoundW3.SeasonFirstHalf;
+                //newRoundW3.TotalPoints = 5;
+                //newRoundW3.TotalScore = oldRoundW3.TotalScore;
+                //newRoundW3.WeekId = oldRoundW3.WeekId;
+                //newRoundW3.RoundId = oldRoundW3.RoundId;
 
-                repoProvider.RoundRepo.Update(oldRoundW3, newRoundW3);
+                //repoProvider.RoundRepo.Update(oldRoundW3, newRoundW3);
 
 
-                var tplayer = await repoProvider.PlayerRepo.Get("Tom S");
-                var tround = tplayer.Rounds.First(r => r.TotalScore == 46);
+                //var tplayer = await repoProvider.PlayerRepo.Get("Tom S");
+                //var tround = tplayer.Rounds.First(r => r.TotalScore == 46);
 
-                var newTRound = new RoundModel();
+                //var newTRound = new RoundModel();
 
-                var oldTRound = repoProvider.RoundRepo.GetWeeklyRound(tplayer.PlayerId, tround.WeekId);
-                newTRound.AttendancePoints = oldTRound.AttendancePoints;
-                newTRound.BirdieCnt = oldTRound.BirdieCnt;
-                newTRound.BogeyCnt = oldTRound.BogeyCnt;
-                newTRound.EagleCnt = oldTRound.EagleCnt;
-                newTRound.Front = oldTRound.Front;
-                newTRound.Handicap = oldTRound.Handicap;
-                newTRound.MatchupPoints = 6;
-                newTRound.ParCnt = oldTRound.ParCnt;
-                newTRound.PlayerRef = oldTRound.PlayerRef;
-                newTRound.PlayerRefId = oldTRound.PlayerRefId;
-                newTRound.Result = MatchupResult.Win;
-                newTRound.Scores = oldTRound.Scores;
-                newTRound.SeasonFirstHalf = oldTRound.SeasonFirstHalf;
-                newTRound.TotalPoints = 12.5;
-                newTRound.TotalScore = oldTRound.TotalScore;
-                newTRound.WeekId = oldTRound.WeekId;
-                newTRound.RoundId = oldTRound.RoundId;
+                //var oldTRound = repoProvider.RoundRepo.GetWeeklyRound(tplayer.PlayerId, tround.WeekId);
+                //newTRound.AttendancePoints = oldTRound.AttendancePoints;
+                //newTRound.BirdieCnt = oldTRound.BirdieCnt;
+                //newTRound.BogeyCnt = oldTRound.BogeyCnt;
+                //newTRound.EagleCnt = oldTRound.EagleCnt;
+                //newTRound.Front = oldTRound.Front;
+                //newTRound.Handicap = oldTRound.Handicap;
+                //newTRound.MatchupPoints = 6;
+                //newTRound.ParCnt = oldTRound.ParCnt;
+                //newTRound.PlayerRef = oldTRound.PlayerRef;
+                //newTRound.PlayerRefId = oldTRound.PlayerRefId;
+                //newTRound.Result = MatchupResult.Win;
+                //newTRound.Scores = oldTRound.Scores;
+                //newTRound.SeasonFirstHalf = oldTRound.SeasonFirstHalf;
+                //newTRound.TotalPoints = 12.5;
+                //newTRound.TotalScore = oldTRound.TotalScore;
+                //newTRound.WeekId = oldTRound.WeekId;
+                //newTRound.RoundId = oldTRound.RoundId;
 
-                repoProvider.RoundRepo.Update(oldTRound, newTRound);
+                //repoProvider.RoundRepo.Update(oldTRound, newTRound);
 
 
 

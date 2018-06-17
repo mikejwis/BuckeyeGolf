@@ -23,8 +23,8 @@ export class LeaderboardComponent implements OnInit {
     this._spinnerService.start(); 
     this._leaderboardService.getLeaderboard()
       .subscribe(
-        leaderboard => this.updateLeaderboard(leaderboard),
-        error => this.errorMessage = <any>error,
+        function(leaderboard:any) {this.updateLeaderboard(leaderboard)},
+        function(err:Error) {this.errorMessage = err},
         ()=> this._spinnerService.stop()
       );
   }

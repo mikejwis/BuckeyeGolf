@@ -21,9 +21,9 @@ export class AddMatchupsComponent implements OnInit {
   ngOnInit() {
     this._spinnerService.start(); 
     this._addmatchupService.getAddMatchups()
-      .subscribe(
-        addMatchups => this.updateAddMatchup(addMatchups),
-        error => this.errorMessage = <any>error,
+      .subscribe( 
+        function(addMatchups:any) { this.updateAddMatchup(addMatchups)},
+        function(err:Error) {this.errorMessage = err},
         ()=> this._spinnerService.stop()
       );
   }
