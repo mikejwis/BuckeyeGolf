@@ -149,6 +149,8 @@ namespace BuckeyeGolf.Controllers
 
                 await repoProvider.SaveAllRepoChangesAsync();
             }
+            if(HttpRuntime.Cache["RoundResults"] != null)  HttpRuntime.Cache.Remove("RoundResults");
+            if (HttpRuntime.Cache["Leaderboard"] != null) HttpRuntime.Cache.Remove("Leaderboard");
             return Ok();
         }
 
