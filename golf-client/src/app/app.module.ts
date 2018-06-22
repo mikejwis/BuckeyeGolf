@@ -4,7 +4,7 @@ import { rootRouterConfig } from "./app.routes";
 import { AppComponent } from "./app";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
-import { HttpModule } from "@angular/http";
+import { HttpClientModule } from "@angular/common/http";
 
 import { HomeComponent} from './components/home/home.component';
 import { LeaderboardComponent} from './components/leaderboard/leaderboard.component';
@@ -14,8 +14,10 @@ import { AddMatchupsComponent} from './components/addmatchups/addmatchups.compon
 import { PlayerComponent } from './components/player/player.component';
 import { SpinnerComponent } from './components/shared/spinner.component';
 
-import { MatchupsService } from './components/matchups/matchups.service'; 
+
 import { AddMatchupsService } from './components/addmatchups/addmatchups.service'; 
+import { ConfigService } from './components/shared/config.service';
+import { MatchupsService } from './components/matchups/matchups.service'; 
 import { ResultsService } from './components/results/results.service';
 import { LeaderboardService } from './components/leaderboard/leaderboard.service'; 
 import { PlayerService } from './components/player/player.service';
@@ -32,10 +34,10 @@ import { Store, StoreModule } from '@ngrx/store';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(rootRouterConfig)
   ],
-  providers: [LeaderboardService, SpinnerService, MatchupsService, ResultsService, 
+  providers: [ConfigService, LeaderboardService, SpinnerService, MatchupsService, ResultsService, 
     AddMatchupsService, PlayerService],
   bootstrap: [AppComponent]
 })

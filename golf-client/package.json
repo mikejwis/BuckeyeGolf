@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --inline --colors --progress",
     "watch": "npm run build --watch",
-    "server": "webpack-dev-server --dev-tool=inline-source-map --inline --colors --progress --port 3000  --content-base src",
+    "server": "webpack-dev-server --dev-tool=inline-source-map --inline --hot --colors --progress --port 3000  --content-base src",
     "start": "npm run server",
     "start-express": "node app.js"
   },
@@ -22,7 +22,6 @@
     "@angular/platform-browser-dynamic": "~6.0.5",
     "@angular/platform-server": "~6.0.5",
     "@angular/router": "~6.0.5",
-    "@angular/upgrade": "~6.0.5",
     "core-js": "~2.5.1",
     "es6-shim": "~0.35.1",
     "reflect-metadata": "~0.1.12",
@@ -41,7 +40,6 @@
   },
   "devDependencies": {
     "concurrently": "~3.5.0",
-    "gulp": "~3.9.1",
     "awesome-typescript-loader": "~4.0.1",
     "angular2-template-loader": "~0.6.2",
     "css-loader": "~0.28.1",

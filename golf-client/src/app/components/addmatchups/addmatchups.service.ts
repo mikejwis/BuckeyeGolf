@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
-import { Http,  Response, Headers } from '@angular/http';
+import { Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IAddMatchups } from './addmatchups.model';
@@ -10,12 +11,10 @@ export class AddMatchupsService {
     //need to move this to a config file
     private _apiUrl: string = 'http://localhost:50404/api/Matchups/add';
 
-    constructor(private _http: Http) { }
+    constructor(private _http: HttpClient) { }
 
     public getAddMatchups() : Observable<IAddMatchups> {
-        return this._http.get(this._apiUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this._http.get<IAddMatchups>(this._apiUrl);
     }
 
     public addNewMatchups(postData: any) : void {

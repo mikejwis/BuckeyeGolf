@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { Http,  Response, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { ILeaderboard } from './leaderboard.model';
 
@@ -12,20 +12,10 @@ export class LeaderboardService {
     //need to move this to a config file
     private _leaderboardApiUrl: string = 'http://localhost:50404/api/Leaderboard';
 
-    constructor(private _http: Http) { }
+    constructor(private _http: HttpClient) { }
 
     public getLeaderboard() : Observable<ILeaderboard> {
-        return this._http.get(this._leaderboardApiUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }    
+        return this._http.get<ILeaderboard>(this._leaderboardApiUrl);
 
-    private extractData(res: Response) {
-        return res.json() || {};
-    }
-    
-    private handleError(error: Response) {
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
-    }
+    }    
 }

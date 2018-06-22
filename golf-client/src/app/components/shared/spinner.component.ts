@@ -18,10 +18,10 @@ export class SpinnerComponent implements OnInit{
 
     ngOnInit() {
         this.subscriptionStart = this._spinnerService.spinnerStart
-            .subscribe(item => this.spinnerStartChange(null));
+            .subscribe(()=> this.spinnerStartChange(null));
 
         this.subscriptionStop = this._spinnerService.spinnerStop
-            .subscribe(item => this.spinnerStopChange(null));
+            .subscribe(() => this.spinnerStopChange(null));
     }
 
     spinnerStartChange(item: any) {

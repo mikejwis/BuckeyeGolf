@@ -22,7 +22,7 @@ namespace BuckeyeGolf
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            
+
             var dbContext = new GolfDbContext();
             var configSettings = new ConfigRepository(dbContext).Get();
             Application.Add("HandicapWeeks", configSettings.HandicapWeekCount);

@@ -162,6 +162,7 @@
     <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="Controllers\MatchupsController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\RandomController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\RoundsController.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="ViewModels\AddPlayersViewModel.cs" />
     <Compile Include="ViewModels\BasicPlayerViewModel.cs" />
     <Compile Include="ViewModels\PlayercardViewModel.cs" />
+    <Compile Include="ViewModels\PlayerViewModel.cs" />
     <Compile Include="ViewModels\RoundDataViewModel.cs" />
     <Compile Include="Models\RoundModel.cs" />
     <Compile Include="Models\WeekModel.cs" />

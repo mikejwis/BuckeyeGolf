@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http,  Response, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { IMatchups } from './matchups.model';
 
@@ -11,20 +11,9 @@ export class MatchupsService {
     //need to move this to a config file
     private _apiUrl: string = 'http://localhost:50404/api/Matchups';
     
-    constructor(private _http: Http) { }
+    constructor(private _http: HttpClient) { }
 
     getMatchups() : Observable<IMatchups> {
-        return this._http.get(this._apiUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this._http.get<IMatchups>(this._apiUrl);
     }    
-
-    private extractData(res: Response) {
-        return res.json() || {};
-    }
-    
-    private handleError(error: Response) {
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
-    }
 }
