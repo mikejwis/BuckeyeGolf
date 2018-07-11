@@ -4,9 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { ILeaderboard } from './leaderboard.model';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-
 @Injectable()
 export class LeaderboardService {
     //need to move this to a config file

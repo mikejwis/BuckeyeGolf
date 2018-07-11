@@ -3,9 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { IResults } from './results.model';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-
 @Injectable()
 export class ResultsService {
     //need to move this to a config file

@@ -9,7 +9,7 @@ import { ILeaderboard } from './leaderboard.model';
 })
 export class LeaderboardComponent implements OnInit {
   
-  leaderboard: ILeaderboard = {"weeksPlayed":0, "firstHalfPlayerSummary": [], "secondHalfPlayerSummary": []};
+  leaderboard: ILeaderboard = {weeksPlayed:0, firstHalfPlayerSummary: [], secondHalfPlayerSummary: []};
   errorMessage: string;
   sortBy: string;
   sortReverse: boolean;
@@ -23,7 +23,7 @@ export class LeaderboardComponent implements OnInit {
     this._spinnerService.start(); 
     this._leaderboardService.getLeaderboard()
       .subscribe(
-        function(leaderboard:any) {this.updateLeaderboard(leaderboard)},
+        this.updateLeaderboard,
         function(err:Error) {this.errorMessage = err},
         ()=> this._spinnerService.stop()
       );

@@ -14,9 +14,22 @@ module.exports = {
   module:{
       rules: [
           {
-              test: /.ts$/,
-              use: 'ts-loader'
+              test: /\.ts$/,
+              use: [
+                { loader: 'ts-loader' },
+                { loader: 'angular2-template-loader'}
+              ]
+          },
+          { 
+            test: /\.css$/, loaders: ['to-string-loader', 'css-loader'] 
+          },
+          { 
+            test: /\.html$/, 
+            use: 'raw-loader' 
           }
       ]
+  },
+  resolve:{
+    extensions:['.ts','.js']
   }
 }
