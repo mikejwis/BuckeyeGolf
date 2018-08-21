@@ -35,7 +35,7 @@ namespace BuckeyeGolf.Controllers
             using (var repoProvider = new RepoProvider())
             {
                 
-                var player = await repoProvider.PlayerRepo.Get("B Roberto");
+                var player = await repoProvider.PlayerRepo.Get("Vince");
                 //var updatedPlayer = new PlayerModel();
                 //updatedPlayer.Name = "Ron";
                 //updatedPlayer.HandicapRound1 = 48;
@@ -46,32 +46,32 @@ namespace BuckeyeGolf.Controllers
                 //var roundW3 = updatedPlayer.Rounds.First(r => r.TotalScore == 49);
                 //repoProvider.PlayerRepo.Update(player, updatedPlayer);
 
-                var weekId = repoProvider.WeekRepo.GetWeekByNumber(8).WeekId;
+                var weekId = repoProvider.WeekRepo.GetWeekByNumber(14).WeekId;
 
                 var oldRound = repoProvider.RoundRepo.GetWeeklyRound(player.PlayerId,weekId);
                 var newRound = new RoundModel();
                 newRound.AttendancePoints = 1;
-                newRound.BirdieCnt = 1;
-                newRound.BogeyCnt = 3;
+                newRound.BirdieCnt = 0;
+                newRound.BogeyCnt = 4;
                 newRound.EagleCnt = 0;
                 newRound.Front = oldRound.Front;
                 newRound.Handicap = oldRound.Handicap;
-                newRound.MatchupPoints = 6;
-                newRound.ParCnt = 3;
+                newRound.MatchupPoints = 3;
+                newRound.ParCnt = 1;
                 newRound.PlayerRef = oldRound.PlayerRef;
                 newRound.PlayerRefId = oldRound.PlayerRefId;
-                newRound.Result = MatchupResult.Win;
+                newRound.Result = MatchupResult.Tie;
                 newRound.Scores = oldRound.Scores;
                 newRound.SeasonFirstHalf = oldRound.SeasonFirstHalf;
-                newRound.TotalPoints = 14.5;
-                newRound.TotalScore = 43;
+                newRound.TotalPoints = 7;
+                newRound.TotalScore = 52;
                 newRound.WeekId = oldRound.WeekId;
                 newRound.RoundId = oldRound.RoundId;
 
                 repoProvider.RoundRepo.Update(oldRound, newRound);
 
 
-                var player2 = await repoProvider.PlayerRepo.Get("Bill H");
+                var player2 = await repoProvider.PlayerRepo.Get("Bill L");
 
                 var oldRound2 = repoProvider.RoundRepo.GetWeeklyRound(player2.PlayerId, weekId);
                 var newRound2 = new RoundModel();
@@ -81,14 +81,14 @@ namespace BuckeyeGolf.Controllers
                 newRound2.EagleCnt = 0;
                 newRound2.Front = oldRound2.Front;
                 newRound2.Handicap = oldRound2.Handicap;
-                newRound2.MatchupPoints = 0;
+                newRound2.MatchupPoints = 3;
                 newRound2.ParCnt = oldRound2.ParCnt;
                 newRound2.PlayerRef = oldRound2.PlayerRef;
                 newRound2.PlayerRefId = oldRound2.PlayerRefId;
-                newRound2.Result = MatchupResult.Loss;
+                newRound2.Result = MatchupResult.Tie;
                 newRound2.Scores = oldRound2.Scores;
                 newRound2.SeasonFirstHalf = oldRound2.SeasonFirstHalf;
-                newRound2.TotalPoints = 3.5;
+                newRound2.TotalPoints = 8.5;
                 newRound2.TotalScore = oldRound2.TotalScore;
                 newRound2.WeekId = oldRound2.WeekId;
                 newRound2.RoundId = oldRound2.RoundId;
