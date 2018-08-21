@@ -81,14 +81,14 @@ namespace BuckeyeGolf.Controllers
                 newRound2.EagleCnt = 0;
                 newRound2.Front = oldRound2.Front;
                 newRound2.Handicap = oldRound2.Handicap;
-                newRound2.MatchupPoints = 3;
+                newRound2.MatchupPoints = 6;
                 newRound2.ParCnt = oldRound2.ParCnt;
                 newRound2.PlayerRef = oldRound2.PlayerRef;
                 newRound2.PlayerRefId = oldRound2.PlayerRefId;
-                newRound2.Result = MatchupResult.Tie;
+                newRound2.Result = MatchupResult.Win;
                 newRound2.Scores = oldRound2.Scores;
                 newRound2.SeasonFirstHalf = oldRound2.SeasonFirstHalf;
-                newRound2.TotalPoints = 8.5;
+                newRound2.TotalPoints = 11.5;
                 newRound2.TotalScore = oldRound2.TotalScore;
                 newRound2.WeekId = oldRound2.WeekId;
                 newRound2.RoundId = oldRound2.RoundId;
